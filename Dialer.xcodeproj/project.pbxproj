@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
+		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
+		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
+		AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1878DA14ECD4350033A7C3 /* InfoPlist.strings */; };
+		AF1878DE14ECD4350033A7C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878DD14ECD4350033A7C3 /* main.m */; };
+		AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878E114ECD4350033A7C3 /* AppDelegate.m */; };
+		AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878E414ECD4350033A7C3 /* ViewController.m */; };
+		AF1878E814ECD4350033A7C3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1878E614ECD4350033A7C3 /* ViewController.xib */; };
+		AF1878F014ECD4350033A7C3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878EF14ECD4350033A7C3 /* SenTestingKit.framework */; };
+		AF1878F114ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
+		AF1878F214ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
+		AF1878FA14ECD4350033A7C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1878F814ECD4350033A7C3 /* InfoPlist.strings */; };
+		AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878FC14ECD4350033A7C3 /* DialerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF1878F314ECD4350033A7C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF1878C414ECD4350033A7C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF1878CC14ECD4350033A7C3;
+			remoteInfo = Dialer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AF1878D914ECD4350033A7C3 /* Dialer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dialer-Info.plist"; sourceTree = "<group>"; };
+		AF1878DB14ECD4350033A7C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AF1878DD14ECD4350033A7C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AF1878DF14ECD4350033A7C3 /* Dialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dialer-Prefix.pch"; sourceTree = "<group>"; };
+		AF1878E014ECD4350033A7C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AF1878E114ECD4350033A7C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AF1878E314ECD4350033A7C3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AF1878E414ECD4350033A7C3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AF1878E714ECD4350033A7C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		AF1878EE14ECD4350033A7C3 /* DialerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF1878EF14ECD4350033A7C3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		AF1878F714ECD4350033A7C3 /* DialerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DialerTests-Info.plist"; sourceTree = "<group>"; };
+		AF1878F914ECD4350033A7C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AF1878FB14ECD4350033A7C3 /* DialerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialerTests.h; sourceTree = "<group>"; };
+		AF1878FC14ECD4350033A7C3 /* DialerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF1878CA14ECD4350033A7C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
+				AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */,
+				AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF1878EA14ECD4350033A7C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878F014ECD4350033A7C3 /* SenTestingKit.framework in Frameworks */,
+				AF1878F114ECD4350033A7C3 /* UIKit.framework in Frameworks */,
+				AF1878F214ECD4350033A7C3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF1878C214ECD4350033A7C3 = {
+			isa = PBXGroup;
+			children = (
+				AF1878D714ECD4350033A7C3 /* Dialer */,
+				AF1878F514ECD4350033A7C3 /* DialerTests */,
+				AF1878D014ECD4350033A7C3 /* Frameworks */,
+				AF1878CE14ECD4350033A7C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF1878CE14ECD4350033A7C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878CD14ECD4350033A7C3 /* Dialer.app */,
+				AF1878EE14ECD4350033A7C3 /* DialerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878D114ECD4350033A7C3 /* UIKit.framework */,
+				AF1878D314ECD4350033A7C3 /* Foundation.framework */,
+				AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */,
+				AF1878EF14ECD4350033A7C3 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF1878D714ECD4350033A7C3 /* Dialer */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
+				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
+				AF1878E314ECD4350033A7C3 /* ViewController.h */,
+				AF1878E414ECD4350033A7C3 /* ViewController.m */,
+				AF1878E614ECD4350033A7C3 /* ViewController.xib */,
+				AF1878D814ECD4350033A7C3 /* Supporting Files */,
+			);
+			path = Dialer;
+			sourceTree = "<group>";
+		};
+		AF1878D814ECD4350033A7C3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878D914ECD4350033A7C3 /* Dialer-Info.plist */,
+				AF1878DA14ECD4350033A7C3 /* InfoPlist.strings */,
+				AF1878DD14ECD4350033A7C3 /* main.m */,
+				AF1878DF14ECD4350033A7C3 /* Dialer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF1878F514ECD4350033A7C3 /* DialerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878FB14ECD4350033A7C3 /* DialerTests.h */,
+				AF1878FC14ECD4350033A7C3 /* DialerTests.m */,
+				AF1878F614ECD4350033A7C3 /* Supporting Files */,
+			);
+			path = DialerTests;
+			sourceTree = "<group>";
+		};
+		AF1878F614ECD4350033A7C3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF1878F714ECD4350033A7C3 /* DialerTests-Info.plist */,
+				AF1878F814ECD4350033A7C3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF1878CC14ECD4350033A7C3 /* Dialer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "Dialer" */;
+			buildPhases = (
+				AF1878C914ECD4350033A7C3 /* Sources */,
+				AF1878CA14ECD4350033A7C3 /* Frameworks */,
+				AF1878CB14ECD4350033A7C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dialer;
+			productName = Dialer;
+			productReference = AF1878CD14ECD4350033A7C3 /* Dialer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AF1878ED14ECD4350033A7C3 /* DialerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF18790314ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "DialerTests" */;
+			buildPhases = (
+				AF1878E914ECD4350033A7C3 /* Sources */,
+				AF1878EA14ECD4350033A7C3 /* Frameworks */,
+				AF1878EB14ECD4350033A7C3 /* Resources */,
+				AF1878EC14ECD4350033A7C3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF1878F414ECD4350033A7C3 /* PBXTargetDependency */,
+			);
+			name = DialerTests;
+			productName = DialerTests;
+			productReference = AF1878EE14ECD4350033A7C3 /* DialerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF1878C414ECD4350033A7C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = AF1878C714ECD4350033A7C3 /* Build configuration list for PBXProject "Dialer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AF1878C214ECD4350033A7C3;
+			productRefGroup = AF1878CE14ECD4350033A7C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF1878CC14ECD4350033A7C3 /* Dialer */,
+				AF1878ED14ECD4350033A7C3 /* DialerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF1878CB14ECD4350033A7C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
+				AF1878E814ECD4350033A7C3 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF1878EB14ECD4350033A7C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878FA14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AF1878EC14ECD4350033A7C3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF1878C914ECD4350033A7C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878DE14ECD4350033A7C3 /* main.m in Sources */,
+				AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */,
+				AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF1878E914ECD4350033A7C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF1878F414ECD4350033A7C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF1878CC14ECD4350033A7C3 /* Dialer */;
+			targetProxy = AF1878F314ECD4350033A7C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AF1878DA14ECD4350033A7C3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF1878DB14ECD4350033A7C3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AF1878E614ECD4350033A7C3 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF1878E714ECD4350033A7C3 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		AF1878F814ECD4350033A7C3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF1878F914ECD4350033A7C3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AF1878FE14ECD4350033A7C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AF1878FF14ECD4350033A7C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF18790114ECD4350033A7C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AF18790214ECD4350033A7C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AF18790414ECD4350033A7C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Dialer.app/Dialer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				INFOPLIST_FILE = "DialerTests/DialerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		AF18790514ECD4350033A7C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Dialer.app/Dialer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				INFOPLIST_FILE = "DialerTests/DialerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF1878C714ECD4350033A7C3 /* Build configuration list for PBXProject "Dialer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF1878FE14ECD4350033A7C3 /* Debug */,
+				AF1878FF14ECD4350033A7C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "Dialer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF18790114ECD4350033A7C3 /* Debug */,
+				AF18790214ECD4350033A7C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AF18790314ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "DialerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF18790414ECD4350033A7C3 /* Debug */,
+				AF18790514ECD4350033A7C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF1878C414ECD4350033A7C3 /* Project object */;
+}
