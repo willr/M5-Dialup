@@ -21,9 +21,15 @@
 		AF1878FA14ECD4350033A7C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1878F814ECD4350033A7C3 /* InfoPlist.strings */; };
 		AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878FC14ECD4350033A7C3 /* DialerTests.m */; };
 		AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */; };
-		AF18791A14ECDB040033A7C3 /* IndividualContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */; };
-		AF18791D14ECE08B0033A7C3 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */; };
 		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
+		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
+		AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */; };
+		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
+		AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */; };
+		AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */; };
+		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
+		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
+		AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,11 +64,21 @@
 		AF1878FC14ECD4350033A7C3 /* DialerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialerTests.m; sourceTree = "<group>"; };
 		AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
-		AF18791814ECDB040033A7C3 /* IndividualContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndividualContactViewController.h; path = ../IndividualContactViewController.h; sourceTree = "<group>"; };
-		AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndividualContactViewController.m; path = ../IndividualContactViewController.m; sourceTree = "<group>"; };
-		AF18791B14ECE08B0033A7C3 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressBookContainer.h; path = ../AddressBookContainer.h; sourceTree = "<group>"; };
-		AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressBookContainer.m; path = ../AddressBookContainer.m; sourceTree = "<group>"; };
 		AF18792114ECE8AB0033A7C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		AF2EC0C514EE180D00E21302 /* PersonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonContainer.h; sourceTree = "<group>"; };
+		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
+		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
+		AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallButtonDelegate.m; sourceTree = "<group>"; };
+		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
+		AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleImageControl.m; sourceTree = "<group>"; };
+		AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContainer.h; sourceTree = "<group>"; };
+		AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookContainer.m; sourceTree = "<group>"; };
+		AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListContainer.h; sourceTree = "<group>"; };
+		AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListContainer.m; sourceTree = "<group>"; };
+		AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
+		AF8D29B014EE574A006FF1C9 /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
+		AF8D29B514EE59E7006FF1C9 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
+		AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WithCheckMark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +140,15 @@
 		AF1878D714ECD4350033A7C3 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
-				AF18791B14ECE08B0033A7C3 /* AddressBookContainer.h */,
-				AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */,
+				AF8D29B414EE59D6006FF1C9 /* images */,
+				AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */,
+				AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */,
+				AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */,
+				AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */,
+				AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */,
+				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
+				AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */,
+				AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */,
 				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
 				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
 				AF1878E314ECD4350033A7C3 /* ViewController.h */,
@@ -133,8 +156,10 @@
 				AF1878E614ECD4350033A7C3 /* ViewController.xib */,
 				AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */,
 				AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */,
-				AF18791814ECDB040033A7C3 /* IndividualContactViewController.h */,
-				AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */,
+				AF2EC0C514EE180D00E21302 /* PersonContainer.h */,
+				AF2EC0C614EE180D00E21302 /* PersonContainer.m */,
+				AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */,
+				AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */,
 				AF1878D814ECD4350033A7C3 /* Supporting Files */,
 			);
 			path = Dialer;
@@ -168,6 +193,15 @@
 				AF1878F814ECD4350033A7C3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF8D29B414EE59D6006FF1C9 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */,
+				AF8D29B514EE59E7006FF1C9 /* box.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +277,8 @@
 			files = (
 				AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
 				AF1878E814ECD4350033A7C3 /* ViewController.xib in Resources */,
+				AF8D29B714EE59E7006FF1C9 /* box.png in Resources */,
+				AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +317,12 @@
 				AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */,
 				AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */,
 				AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */,
-				AF18791A14ECDB040033A7C3 /* IndividualContactViewController.m in Sources */,
-				AF18791D14ECE08B0033A7C3 /* AddressBookContainer.m in Sources */,
+				AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */,
+				AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */,
+				AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */,
+				AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */,
+				AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */,
+				AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

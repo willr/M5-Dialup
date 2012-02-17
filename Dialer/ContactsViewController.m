@@ -7,10 +7,11 @@
 //
 
 #import "ContactsViewController.h"
+#import "PersonViewController.h"
 
 @implementation ContactsViewController
 
-@synthesize addresses = _addresses;
+@synthesize addresses = _addresses, tableView = _tableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,38 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - CallButtonDelegate
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *name = @"Bang!";
+    NSString *phoneNumber = @"1234";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Initiating call" 
+                                                    message:[NSString stringWithFormat:@"Calling %@ with phone number %@", name, phoneNumber]
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
+- (void)checkButtonTapped:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+    
+    // UIButton *button = (UIButton *)sender;
+    // UITableViewCell *cell = (UITableViewCell *)[button superview];
+    // NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath != nil)
+    {
+        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -47,11 +80,15 @@
     table.delegate = self;
     
     if (self.addresses == nil) {
-        self.addresses = [[AddressBookContainer alloc] init];
+        self.addresses = [[ContactListContainer alloc] init];
     }
     
     [self.addresses collectAddressBookInfo];
     table.dataSource = self.addresses;
+    self.addresses.delegate = self;
+    
+    // save the tableView variable, cause we will need it for call button
+    self.tableView = table;
     
     // cause the table to load
     [table reloadData];
@@ -84,7 +121,16 @@
     // cause the cell to deselect animated, nicely when released
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    PersonViewController *personController = [[PersonViewController alloc] init];
     
+    PersonContainer *person = [[PersonContainer alloc] init];
+    person.person = [self.addresses getPersonForPath:indexPath];
+    personController.personContainer = person;
+    person.delegate = personController;
+    
+    [self.navigationController pushViewController:personController animated:YES];
+    
+    [personController release];
 }
 
 @end

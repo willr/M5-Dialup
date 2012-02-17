@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AddressBookContainer : NSObject <UITableViewDataSource>
+#import "AddressBookContainer.h"
+#import "CallButtonDelegate.h"
+
+@interface ContactListContainer : AddressBookContainer <UITableViewDataSource>
 {
-    NSDictionary *_tableViewData;
     NSMutableArray *_contactList;
 }
 
-@property (strong, nonatomic) NSDictionary *tableViewData;
 @property (strong, nonatomic) NSMutableArray *contactList;
 
 - (void)collectAddressBookInfo;

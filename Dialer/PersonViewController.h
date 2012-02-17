@@ -1,5 +1,5 @@
 //
-//  ContactsViewController.h
+//  IndividualContactViewController.h
 //  Dialer
 //
 //  Created by William Richardson on 2/16/12.
@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "ContactListContainer.h"
+#import "PersonContainer.h"
 #import "CallButtonDelegate.h"
 
-@interface ContactsViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
+@interface PersonViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
 {
-    ContactListContainer *_addresses;
+    PersonContainer *_personContainer;
     UITableView *_tableView;
 }
 
-@property (strong, nonatomic) ContactListContainer *addresses;
+@property (strong, nonatomic) PersonContainer *personContainer;
 @property (strong, nonatomic) UITableView *tableView;
 
 @end

@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 CodeSpan Technologies. All rights reserved.
 //
 
-#import "AddressBookContainer.h"
+#import "ContactListContainer.h"
 
 #import <AddressBook/AddressBook.h>
 
-@implementation AddressBookContainer
+@implementation ContactListContainer
 
-@synthesize tableViewData = _tableViewData, contactList = _contactList;
+@synthesize contactList = _contactList;
 
 #pragma mark - init
 
@@ -22,9 +22,11 @@
     if (self) {
         // Custom initialization
         
+        /*
         NSArray *section1 = [NSArray arrayWithObjects:@"Straight Lines", @"Curves", @"Shapes", nil];
         NSArray *section2 = [NSArray arrayWithObjects:@"Solid Fills", @"Gradient Fills", @"Image & Pattern Fills", nil];
         self.tableViewData = [NSDictionary dictionaryWithObjectsAndKeys:section1, @"Section1", section2, @"Section2", nil];
+         */
     }
     return self;
 }
@@ -118,61 +120,9 @@
     // CFRelease(addressBook);
 }
 
-- (void)temp
+- (NSDictionary *)getPersonForPath:(NSIndexPath *)indexPath
 {
-    /*
-     //For Email ids
-     ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
-     if(ABMultiValueGetCount(eMail) > 0) {
-     [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
-     }
-     */
-    
-    /*
-    if([mobileLabel isEqualToString:(NSString *)kABWorkLabel])
-    {
-        static NSString *mobilePhone = nil;
-        if(mobilePhone == nil) mobilePhone = (NSString *)kABWorkLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:mobilePhone];
-    }
-    else if([mobileLabel isEqualToString:(NSString *)kABHomeLabel])
-    {
-        static NSString *mobilePhone = nil;
-        if(mobilePhone == nil) mobilePhone = (NSString *)kABHomeLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:mobilePhone];
-    }
-    else if([mobileLabel isEqualToString:(NSString *)kABOtherLabel])
-    {
-        static NSString *mobilePhone = nil;
-        if(mobilePhone == nil) mobilePhone = (NSString *)kABOtherLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:mobilePhone];
-    }
-    else if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-    {
-        static NSString *mobilePhone = nil;
-        if(mobilePhone == nil) mobilePhone = (NSString *)kABPersonPhoneMobileLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:mobilePhone];
-    }
-    else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-    {
-        static NSString *iPhone = nil;
-        if(iPhone == nil) iPhone = (NSString *)kABPersonPhoneIPhoneLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:iPhone];
-        break ;
-    } else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneMainLabel])
-    {
-        static NSString *mainPhone = nil;
-        if(mainPhone == nil) mainPhone = (NSString *)kABPersonPhoneMainLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:mainPhone];
-        break ;
-    } else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneWorkFAXLabel])
-    {
-        static NSString *workPhone = nil;
-        if(workPhone == nil) workPhone = (NSString *)kABPersonPhoneWorkFAXLabel;
-        [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:workPhone];
-        break ;
-    }
-     */
+    return [self.contactList objectAtIndex:indexPath.row];
 }
 
 #pragma mark - TableViewDataSourceDelegate
@@ -228,35 +178,6 @@
     return cell;
 }
 
-- (NSString *)getPhoneLabelForDisplay:(NSString *)label
-{
-    NSRange foundRange = [label rangeOfString:@"work"
-                                            options:NSCaseInsensitiveSearch];
-    if (foundRange.location != NSNotFound) {
-        return @"Work";
-    }
-    
-    foundRange = [label rangeOfString:@"mobile"
-                              options:NSCaseInsensitiveSearch];
-    if (foundRange.location != NSNotFound) {
-        return @"Mobile";
-    }
-    
-    foundRange = [label rangeOfString:@"iphone"
-                              options:NSCaseInsensitiveSearch];
-    if (foundRange.location != NSNotFound) {
-        return @"iPhone";
-    }
-    
-    foundRange = [label rangeOfString:@"home"
-                              options:NSCaseInsensitiveSearch];
-    if (foundRange.location != NSNotFound) {
-        return @"Home";
-    }
-    
-    return nil;
-}
-
 - (UITableViewCell *)configureFavoritesContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
 {
     static NSString *FavoriteCellIdentifier = @"FavoriteCell";
@@ -287,8 +208,12 @@
                                              }];
     
     
-    // cell.detailTextLabel.font = [cell.detailTextLabel.font fontWithSize:12];
+    UIButton *callButton;
+    callButton = [self createCallButton];
     
+    cell.accessoryView = callButton;
+    
+    [callButton release];    
     return cell;
 }
 
