@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  IndividualContactViewController.h
 //  Dialer
 //
 //  Created by William Richardson on 2/16/12.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class ViewController;
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface IndividualContactViewController : UIViewController
 
 @end

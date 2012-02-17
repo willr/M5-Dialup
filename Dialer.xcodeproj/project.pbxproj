@@ -20,6 +20,10 @@
 		AF1878F214ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878FA14ECD4350033A7C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1878F814ECD4350033A7C3 /* InfoPlist.strings */; };
 		AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878FC14ECD4350033A7C3 /* DialerTests.m */; };
+		AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */; };
+		AF18791A14ECDB040033A7C3 /* IndividualContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */; };
+		AF18791D14ECE08B0033A7C3 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */; };
+		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,13 @@
 		AF1878F914ECD4350033A7C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AF1878FB14ECD4350033A7C3 /* DialerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialerTests.h; sourceTree = "<group>"; };
 		AF1878FC14ECD4350033A7C3 /* DialerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialerTests.m; sourceTree = "<group>"; };
+		AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		AF18791814ECDB040033A7C3 /* IndividualContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndividualContactViewController.h; path = ../IndividualContactViewController.h; sourceTree = "<group>"; };
+		AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IndividualContactViewController.m; path = ../IndividualContactViewController.m; sourceTree = "<group>"; };
+		AF18791B14ECE08B0033A7C3 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressBookContainer.h; path = ../AddressBookContainer.h; sourceTree = "<group>"; };
+		AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressBookContainer.m; path = ../AddressBookContainer.m; sourceTree = "<group>"; };
+		AF18792114ECE8AB0033A7C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
 				AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */,
 				AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */,
@@ -100,6 +112,7 @@
 		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF18792114ECE8AB0033A7C3 /* AddressBook.framework */,
 				AF1878D114ECD4350033A7C3 /* UIKit.framework */,
 				AF1878D314ECD4350033A7C3 /* Foundation.framework */,
 				AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */,
@@ -111,11 +124,17 @@
 		AF1878D714ECD4350033A7C3 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
+				AF18791B14ECE08B0033A7C3 /* AddressBookContainer.h */,
+				AF18791C14ECE08B0033A7C3 /* AddressBookContainer.m */,
 				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
 				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
 				AF1878E314ECD4350033A7C3 /* ViewController.h */,
 				AF1878E414ECD4350033A7C3 /* ViewController.m */,
 				AF1878E614ECD4350033A7C3 /* ViewController.xib */,
+				AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */,
+				AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */,
+				AF18791814ECDB040033A7C3 /* IndividualContactViewController.h */,
+				AF18791914ECDB040033A7C3 /* IndividualContactViewController.m */,
 				AF1878D814ECD4350033A7C3 /* Supporting Files */,
 			);
 			path = Dialer;
@@ -197,6 +216,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "CodeSpan Technologies";
 			};
 			buildConfigurationList = AF1878C714ECD4350033A7C3 /* Build configuration list for PBXProject "Dialer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -260,6 +280,9 @@
 				AF1878DE14ECD4350033A7C3 /* main.m in Sources */,
 				AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */,
 				AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */,
+				AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */,
+				AF18791A14ECDB040033A7C3 /* IndividualContactViewController.m in Sources */,
+				AF18791D14ECE08B0033A7C3 /* AddressBookContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +450,7 @@
 				AF18790214ECD4350033A7C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF18790314ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "DialerTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +459,7 @@
 				AF18790514ECD4350033A7C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
