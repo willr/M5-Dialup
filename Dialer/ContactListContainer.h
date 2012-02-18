@@ -10,13 +10,18 @@
 
 #import "AddressBookContainer.h"
 #import "CallButtonDelegate.h"
+#import "FavoritesListDelegate.h"
 
-@interface ContactListContainer : AddressBookContainer <UITableViewDataSource>
+@interface ContactListContainer : AddressBookContainer <UITableViewDataSource, FavoritesListDelegate>
 {
     NSMutableArray *_contactList;
+    NSMutableArray *_favoriteList;
+    
+    BOOL _favoritesModified;
 }
 
 @property (strong, nonatomic) NSMutableArray *contactList;
+@property (nonatomic) BOOL favoritesModified;
 
 - (void)collectAddressBookInfo;
 

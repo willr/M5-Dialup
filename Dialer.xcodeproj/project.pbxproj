@@ -13,8 +13,6 @@
 		AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF1878DA14ECD4350033A7C3 /* InfoPlist.strings */; };
 		AF1878DE14ECD4350033A7C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878DD14ECD4350033A7C3 /* main.m */; };
 		AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878E114ECD4350033A7C3 /* AppDelegate.m */; };
-		AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878E414ECD4350033A7C3 /* ViewController.m */; };
-		AF1878E814ECD4350033A7C3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1878E614ECD4350033A7C3 /* ViewController.xib */; };
 		AF1878F014ECD4350033A7C3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878EF14ECD4350033A7C3 /* SenTestingKit.framework */; };
 		AF1878F114ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878F214ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
@@ -30,6 +28,8 @@
 		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
 		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
 		AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */; };
+		AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */; };
+		AF8D29C014EEDD18006FF1C9 /* FavoritesListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +53,6 @@
 		AF1878DF14ECD4350033A7C3 /* Dialer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dialer-Prefix.pch"; sourceTree = "<group>"; };
 		AF1878E014ECD4350033A7C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF1878E114ECD4350033A7C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AF1878E314ECD4350033A7C3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AF1878E414ECD4350033A7C3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AF1878E714ECD4350033A7C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		AF1878EE14ECD4350033A7C3 /* DialerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878EF14ECD4350033A7C3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AF1878F714ECD4350033A7C3 /* DialerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DialerTests-Info.plist"; sourceTree = "<group>"; };
@@ -79,6 +76,10 @@
 		AF8D29B014EE574A006FF1C9 /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		AF8D29B514EE59E7006FF1C9 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
 		AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WithCheckMark.png; sourceTree = "<group>"; };
+		AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleDelegate.h; sourceTree = "<group>"; };
+		AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleDelegate.m; sourceTree = "<group>"; };
+		AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListDelegate.h; sourceTree = "<group>"; };
+		AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesListDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,24 +141,15 @@
 		AF1878D714ECD4350033A7C3 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
+				AF8D29C214EEDD56006FF1C9 /* Containers */,
+				AF8D29C114EEDD2A006FF1C9 /* Delegates */,
 				AF8D29B414EE59D6006FF1C9 /* images */,
-				AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */,
-				AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */,
-				AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */,
-				AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */,
-				AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */,
-				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
-				AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */,
-				AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */,
 				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
 				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
-				AF1878E314ECD4350033A7C3 /* ViewController.h */,
-				AF1878E414ECD4350033A7C3 /* ViewController.m */,
-				AF1878E614ECD4350033A7C3 /* ViewController.xib */,
 				AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */,
 				AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */,
-				AF2EC0C514EE180D00E21302 /* PersonContainer.h */,
-				AF2EC0C614EE180D00E21302 /* PersonContainer.m */,
+				AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */,
+				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
 				AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */,
 				AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */,
 				AF1878D814ECD4350033A7C3 /* Supporting Files */,
@@ -202,6 +194,32 @@
 				AF8D29B514EE59E7006FF1C9 /* box.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		AF8D29C114EEDD2A006FF1C9 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */,
+				AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */,
+				AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */,
+				AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */,
+				AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */,
+				AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		AF8D29C214EEDD56006FF1C9 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */,
+				AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */,
+				AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */,
+				AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */,
+				AF2EC0C514EE180D00E21302 /* PersonContainer.h */,
+				AF2EC0C614EE180D00E21302 /* PersonContainer.m */,
+			);
+			name = Containers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
-				AF1878E814ECD4350033A7C3 /* ViewController.xib in Resources */,
 				AF8D29B714EE59E7006FF1C9 /* box.png in Resources */,
 				AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */,
 			);
@@ -315,7 +332,6 @@
 			files = (
 				AF1878DE14ECD4350033A7C3 /* main.m in Sources */,
 				AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */,
-				AF1878E514ECD4350033A7C3 /* ViewController.m in Sources */,
 				AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */,
 				AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */,
 				AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */,
@@ -323,6 +339,8 @@
 				AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */,
 				AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */,
 				AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */,
+				AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */,
+				AF8D29C014EEDD18006FF1C9 /* FavoritesListDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,14 +369,6 @@
 				AF1878DB14ECD4350033A7C3 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AF1878E614ECD4350033A7C3 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AF1878E714ECD4350033A7C3 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 		AF1878F814ECD4350033A7C3 /* InfoPlist.strings */ = {

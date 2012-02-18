@@ -12,7 +12,7 @@
 
 @implementation ContactListContainer
 
-@synthesize contactList = _contactList;
+@synthesize contactList = _contactList, favoritesModified = _favoritesModified;
 
 #pragma mark - init
 
@@ -22,23 +22,82 @@
     if (self) {
         // Custom initialization
         
-        /*
-        NSArray *section1 = [NSArray arrayWithObjects:@"Straight Lines", @"Curves", @"Shapes", nil];
-        NSArray *section2 = [NSArray arrayWithObjects:@"Solid Fills", @"Gradient Fills", @"Image & Pattern Fills", nil];
-        self.tableViewData = [NSDictionary dictionaryWithObjectsAndKeys:section1, @"Section1", section2, @"Section2", nil];
-         */
     }
     return self;
 }
 
+#pragma mark - FavoritesListDelegate methods
+
+- (void)removeFavorite:(NSNumber *)phoneId
+{
+    // [_favoriteList removeObjectAtIndex:[index intValue]];
+    
+    [self modifyFavoriteStatus:_favoriteList phoneId:phoneId status:NO];
+    [self modifyFavoriteStatus:_contactList phoneId:phoneId status:NO];
+    
+    _favoritesModified = true;
+}
+
+
+- (void)addFavorite:(NSDictionary *)personPhone
+{
+    [_favoriteList addObject:personPhone];
+    
+    NSNumber *phoneId;
+    
+    phoneId = [self getFirstFoundPhoneId:personPhone];    
+    assert(phoneId != nil);
+    
+    [self modifyFavoriteStatus:_favoriteList phoneId:phoneId status:NO];
+    [self modifyFavoriteStatus:_contactList phoneId:phoneId status:NO];
+    
+    _favoritesModified = true;
+}
+
+
+- (BOOL)isFavorite:(NSNumber *) favoriteId
+{
+    BOOL found = false;
+    
+    for (NSDictionary *person in _favoriteList) {
+        NSDictionary *phoneList = [person objectForKey:@"phoneList"];
+        NSArray *phoneEntries = [phoneList allValues];
+        NSNumber *phoneId;
+        for (NSDictionary *phoneEntry in phoneEntries) {
+            phoneId = [phoneEntry objectForKey:@"phoneId"];
+            found = [phoneId isEqualToNumber:favoriteId];
+            if (found) {
+                break;
+            }
+        }
+        
+        if (found) {
+            break;
+        }
+    }
+    
+    return found;
+}
+
+
 #pragma mark - AddressBook collection methods
 
-- (void)getCopyFrom:(ABMultiValueRef)phones withKey:(const CFStringRef)key atIndex:(CFIndex)index placeInto:(NSMutableDictionary *)dict 
+- (void)getCopyFrom:(ABMultiValueRef)phones 
+            withKey:(const CFStringRef)key 
+            atIndex:(CFIndex)index 
+          placeInto:(NSMutableDictionary *)dict 
+      havingPhoneId:(int)phoneId
 {
     NSString * phoneLabel = (NSString *)key;
+    NSMutableDictionary *phoneAttribs = [[NSMutableDictionary alloc] init];
+    
     NSLog(@"key: %@, index: %ld", phoneLabel, index);
     NSString *copy = (NSString*)ABMultiValueCopyValueAtIndex(phones, index);
-    [dict setObject:copy forKey:[NSString stringWithFormat:@"%@_%ld", phoneLabel, index]];
+    [dict setObject:phoneAttribs forKey:[NSString stringWithFormat:@"%@_%ld", phoneLabel, index]];
+    [phoneAttribs setObject:copy forKey:@"phoneNumber"];
+    [phoneAttribs setObject:[NSNumber numberWithInteger:phoneId] forKey:@"phoneId"];
+    
+    [phoneAttribs release];
     [copy release];
     [phoneLabel release];
 }
@@ -70,14 +129,30 @@
     return true;
 }
 
+
+- (NSDictionary *)createFavoriteFromContactList:(NSArray *)contactList 
+                                   contactIndex:(int)contactIndex 
+                                     phoneIndex:(int)phoneIndex
+{
+    NSDictionary *contact = [self.contactList objectAtIndex:contactIndex];
+    
+    return [self createNewFavoriteFromContact:contact 
+                                 contactIndex:contactIndex 
+                                   phoneIndex:phoneIndex];
+}
+
 - (void)collectAddressBookInfo
 {
-    self.contactList = [[NSMutableArray alloc] init];
+    self.contactList = [[[NSMutableArray alloc] init] autorelease];
     
     ABAddressBookRef addressBook =  ABAddressBookCreate();
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
+    
+    // id of the phoneNumber for selecting, deselecting as favorite
+    int phoneId = 0;
+    phoneId++;
     
     for (int i=0;i < nPeople;i++) {
         NSMutableDictionary *dOfPerson = [NSMutableDictionary dictionary];
@@ -106,7 +181,7 @@
             for(CFIndex i = 0; i < phonesCount; i++) {
                 CFStringRef phoneLabel = ABMultiValueCopyLabelAtIndex(phones, i);
                 NSLog(@"label: %@", phoneLabel);
-                [self getCopyFrom:phones withKey:phoneLabel atIndex:i placeInto:phoneList];
+                [self getCopyFrom:phones withKey:phoneLabel atIndex:i placeInto:phoneList havingPhoneId:phoneId++];
                 CFRelease(phoneLabel);
             }
             [dOfPerson setObject:phoneList forKey:@"phoneList"];
@@ -117,7 +192,12 @@
     NSLog(@"array is %@", self.contactList);
     
     CFRelease(allPeople);
-    // CFRelease(addressBook);
+    // CFRelease(addressBook);  // Dont know why if I release this, it crashes... 
+    
+    _favoriteList = [[NSMutableArray alloc] init];
+    [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:0 phoneIndex:1]];
+    [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:1 phoneIndex:0]];
+    
 }
 
 - (NSDictionary *)getPersonForPath:(NSIndexPath *)indexPath
@@ -141,10 +221,10 @@
     // will return the number of rows per section
     switch (section) {
 		case 0:
-			return 2;
+			return [_favoriteList count];
 			break;
 		case 1:
-			return [self.contactList count];;
+			return [self.contactList count];
             // return 2;
 			break;
 		default:
@@ -153,7 +233,7 @@
 	}
 }
 
-- (UITableViewCell *)configureGeneralContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
+- (UITableViewCell *)createGeneralContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
 {
     static NSString *GeneralCellIdentifier = @"GeneralCell";
     
@@ -161,24 +241,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GeneralCellIdentifier];
     if (cell == nil) {
 		// Common to all cells
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:GeneralCellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:GeneralCellIdentifier] autorelease];
     }
     
-    // id section = [self.tableViewData objectForKey:[NSString stringWithFormat:@"Section%d", indexPath.section + 1]];
-    
     // set the data for the cell
-	// NSString *rowLabel = [section objectAtIndex:indexPath.row];
-    NSDictionary *person = [self.contactList objectAtIndex:indexPath.row];
+	NSDictionary *person = [self.contactList objectAtIndex:indexPath.row];
     NSString *rowLabel = [person objectForKey:@"name"];
 	cell.textLabel.text = rowLabel;
-    // cell.textLabel.font = [cell.textLabel.font fontWithSize:12 ];
-    cell.detailTextLabel.text = @"1";
-    // cell.detailTextLabel.font = [cell.detailTextLabel.font fontWithSize:12];
     
     return cell;
 }
 
-- (UITableViewCell *)configureFavoritesContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
+- (UITableViewCell *)createFavoritesContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
 {
     static NSString *FavoriteCellIdentifier = @"FavoriteCell";
     
@@ -186,49 +260,45 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FavoriteCellIdentifier];
     if (cell == nil) {
 		// Common to all cells
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FavoriteCellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FavoriteCellIdentifier] autorelease];
     }
     
-    // id section = [self.tableViewData objectForKey:[NSString stringWithFormat:@"Section%d", indexPath.section + 1]];
-    
     // set the data for the cell
-	// NSString *rowLabel = [section objectAtIndex:indexPath.row];
-    NSDictionary *person = [self.contactList objectAtIndex:indexPath.row];
+    NSDictionary *person = [_favoriteList objectAtIndex:indexPath.row];
     NSString *rowLabel = [person objectForKey:@"name"];
 	cell.textLabel.text = rowLabel;
-    // cell.textLabel.font = [cell.textLabel.font fontWithSize:12 ];
-    NSDictionary *phones = [person objectForKey:@"phoneList"];
     
+    NSDictionary *phones = [person objectForKey:@"phoneList"];
     [phones enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
                                              {
                                                  NSLog(@"%@ has number %@", key, obj);
-                                                 
+                                                 NSString *phoneNum = [obj objectForKey:@"phoneNumber"];
                                                  cell.detailTextLabel.text = [NSString stringWithFormat:@"(%@) %@", 
-                                                                              [self getPhoneLabelForDisplay:key], obj];
+                                                                              [self getPhoneLabelForDisplay:key], phoneNum];
+                                                 *stop = YES;
                                              }];
     
-    
     UIButton *callButton;
-    callButton = [self createCallButton];
-    
+    callButton = [self configureCallButton];
     cell.accessoryView = callButton;
     
-    [callButton release];    
+    // [callButton release];    // button was auto-released
     return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _favoritesModified = false;
     
     UITableViewCell *cell = nil;
     
     // Configure individual cells
 	switch (indexPath.section) {
         case 0:
-            cell = [self configureFavoritesContactsCell:tableView cellForRowAt:indexPath];
+            cell = [self createFavoritesContactsCell:tableView cellForRowAt:indexPath];
             break;
         case 1:
-            cell = [self configureGeneralContactsCell:tableView cellForRowAt:indexPath];
+            cell = [self createGeneralContactsCell:tableView cellForRowAt:indexPath];
             break;
         default:
             break;
@@ -246,10 +316,8 @@
     switch (section) {
 		case 0:
 			return @"Favorites";
-			break;
 		case 1:
 			return @"Contact List";
-			break;
 		default:
 			return nil;
 			break;

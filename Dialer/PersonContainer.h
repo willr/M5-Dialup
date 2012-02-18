@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
 
 #import "AddressBookContainer.h"
+#import "FavoritesListDelegate.h"
+#import "ToggleDelegate.h"
 
-
-@interface PersonContainer : AddressBookContainer <UITableViewDataSource>
+@interface PersonContainer : AddressBookContainer <UITableViewDataSource, ToggleDelegate>
 {
     NSDictionary *_person;
+    id<FavoritesListDelegate> _favoritesListDelegate;
 }
 
 @property (strong, nonatomic) NSDictionary *person;
 @property (strong, nonatomic, readonly) NSString *name;
-
+@property (strong, nonatomic) id<FavoritesListDelegate> favoritesListDelegate;
 
 @end

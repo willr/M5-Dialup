@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
 #import "ContactsViewController.h"
 
 @implementation AppDelegate

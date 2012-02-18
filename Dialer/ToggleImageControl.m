@@ -10,6 +10,8 @@
 
 @implementation ToggleImageControl
 
+@synthesize selectedState = _selected, toggleDelegate = _toggleDelegate, activated = _activated;
+
 - (id)initWithFrame:(CGRect)frame 
 {
     if ( self = [super initWithFrame: frame] ){
@@ -36,9 +38,12 @@
     
     // Use NSNotification or other method to notify data model about state change.
     // Notification example:
-    NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInt: self.tag] forKey: @"CellCheckToggled"];
-    [[NSNotificationCenter defaultCenter] postNotificationName: @"CellCheckToggled" object: self userInfo: dict];
-                          
+    // NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInt: self.tag] forKey: @"CellCheckToggled"];
+    // [[NSNotificationCenter defaultCenter] postNotificationName: @"CellCheckToggled" object: self userInfo: dict];
+    
+    if (_activated) {
+        [self.toggleDelegate toggled:self];
+    }
 }
                           
 @end

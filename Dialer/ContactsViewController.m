@@ -80,7 +80,7 @@
     table.delegate = self;
     
     if (self.addresses == nil) {
-        self.addresses = [[ContactListContainer alloc] init];
+        self.addresses = [[[ContactListContainer alloc] init] autorelease];
     }
     
     [self.addresses collectAddressBookInfo];
@@ -108,6 +108,15 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.addresses.favoritesModified) {
+        [self.tableView reloadData];
+    }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -127,6 +136,7 @@
     person.person = [self.addresses getPersonForPath:indexPath];
     personController.personContainer = person;
     person.delegate = personController;
+    person.favoritesListDelegate = self.addresses;
     
     [self.navigationController pushViewController:personController animated:YES];
     

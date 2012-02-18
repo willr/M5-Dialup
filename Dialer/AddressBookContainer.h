@@ -16,10 +16,23 @@
 
 @property (strong, nonatomic) id<CallButtonDelegate> delegate;
 
-- (NSString *) getPhoneLabelForDisplay: (NSString*) label;
+- (NSString *) getPhoneLabelForDisplay: (NSString *) label;
 
-- (UIButton *) createCallButton;
+- (UIButton *) configureCallButton;
 
 - (UIButton *) createFavoriteButton;
+
+- (NSDictionary *) createNewFavoriteFromContact: (NSDictionary *) person  
+                                contactIndex: (int) contactIndex 
+                                  phoneIndex: (int) phoneIndex ;
+
+- (NSNumber*) getFirstFoundPhoneId: (NSDictionary*) person ;
+
+- (BOOL) modifyFavoriteStatusOnPerson: (NSDictionary*) person 
+                               status: (BOOL) status ;
+
+- (void) modifyFavoriteStatus: (NSArray*) list 
+                      phoneId: (NSNumber*) phoneId 
+                       status: (BOOL) status ;
 
 @end

@@ -17,7 +17,7 @@
     UITableView *_tableView;
 }
 
-@property (strong, nonatomic) ContactListContainer *addresses;
-@property (strong, nonatomic) UITableView *tableView;
+@property (retain, strong, nonatomic) ContactListContainer *addresses;
+@property (retain, strong, nonatomic) UITableView *tableView;
 
 @end
