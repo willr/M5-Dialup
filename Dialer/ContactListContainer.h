@@ -15,12 +15,14 @@
 @interface ContactListContainer : AddressBookContainer <UITableViewDataSource, FavoritesListDelegate>
 {
     NSMutableArray *_contactList;
+    NSMutableDictionary *_contactLookup;
     NSMutableArray *_favoriteList;
     
     BOOL _favoritesModified;
 }
 
 @property (strong, nonatomic) NSMutableArray *contactList;
+@property (strong, nonatomic) NSMutableDictionary *contactLookup;
 @property (nonatomic) BOOL favoritesModified;
 
 - (void)collectAddressBookInfo;

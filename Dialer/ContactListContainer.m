@@ -7,12 +7,13 @@
 //
 
 #import "ContactListContainer.h"
+#import "Constants.h"
 
 #import <AddressBook/AddressBook.h>
 
 @implementation ContactListContainer
 
-@synthesize contactList = _contactList, favoritesModified = _favoritesModified;
+@synthesize contactList = _contactList, favoritesModified = _favoritesModified, contactLookup = _contactLookup;
 
 #pragma mark - init
 
@@ -60,11 +61,11 @@
     BOOL found = false;
     
     for (NSDictionary *person in _favoriteList) {
-        NSDictionary *phoneList = [person objectForKey:@"phoneList"];
+        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
         NSArray *phoneEntries = [phoneList allValues];
         NSNumber *phoneId;
         for (NSDictionary *phoneEntry in phoneEntries) {
-            phoneId = [phoneEntry objectForKey:@"phoneId"];
+            phoneId = [phoneEntry objectForKey:PersonPhoneId];
             found = [phoneId isEqualToNumber:favoriteId];
             if (found) {
                 break;
@@ -93,9 +94,9 @@
     
     NSLog(@"key: %@, index: %ld", phoneLabel, index);
     NSString *copy = (NSString*)ABMultiValueCopyValueAtIndex(phones, index);
-    [dict setObject:phoneAttribs forKey:[NSString stringWithFormat:@"%@_%ld", phoneLabel, index]];
-    [phoneAttribs setObject:copy forKey:@"phoneNumber"];
-    [phoneAttribs setObject:[NSNumber numberWithInteger:phoneId] forKey:@"phoneId"];
+    [dict setObject:phoneAttribs forKey:[NSString stringWithFormat:UniquePhoneIdentifierFormat, phoneLabel, index]];
+    [phoneAttribs setObject:copy forKey:PersonPhoneNumber];
+    [phoneAttribs setObject:[NSNumber numberWithInteger:phoneId] forKey:PersonPhoneId];
     
     [phoneAttribs release];
     [copy release];
@@ -122,13 +123,12 @@
         return false;
     }
     
-    [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+    [dOfPerson setObject:[NSString stringWithFormat:PersonNameFormat, firstName, lastName] forKey:PersonName];
     CFRelease(firstName);
     CFRelease(lastName);
     
     return true;
 }
-
 
 - (NSDictionary *)createFavoriteFromContactList:(NSArray *)contactList 
                                    contactIndex:(int)contactIndex 
@@ -144,6 +144,7 @@
 - (void)collectAddressBookInfo
 {
     self.contactList = [[[NSMutableArray alloc] init] autorelease];
+    self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
     
     ABAddressBookRef addressBook =  ABAddressBookCreate();
     
@@ -153,7 +154,7 @@
     // id of the phoneNumber for selecting, deselecting as favorite
     int phoneId = 0;
     phoneId++;
-    
+    int addrCount = nPeople;
     for (int i=0;i < nPeople;i++) {
         NSMutableDictionary *dOfPerson = [NSMutableDictionary dictionary];
         
@@ -184,25 +185,52 @@
                 [self getCopyFrom:phones withKey:phoneLabel atIndex:i placeInto:phoneList havingPhoneId:phoneId++];
                 CFRelease(phoneLabel);
             }
-            [dOfPerson setObject:phoneList forKey:@"phoneList"];
-            [self.contactList addObject:dOfPerson];
+            [dOfPerson setObject:phoneList forKey:PersonPhoneList];
+            // [self.contactList addObject:dOfPerson];
+            [self addDistinctUserToList:self.contactList 
+                                 lookup:self.contactLookup 
+                                 person:dOfPerson];
         }
         CFRelease(phones);
     }
-    NSLog(@"array is %@", self.contactList);
-    
-    CFRelease(allPeople);
-    // CFRelease(addressBook);  // Dont know why if I release this, it crashes... 
-    
+    NSAssert(addrCount > 0, @"Failed to find any people in the current address book");
     _favoriteList = [[NSMutableArray alloc] init];
     [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:0 phoneIndex:1]];
     [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:1 phoneIndex:0]];
+    
+    // The results are likely to be shown to a user
+    // Note the use of the localizedCaseInsensitiveCompare: selector
+    NSSortDescriptor *nameDescriptor =
+        [[[NSSortDescriptor alloc] initWithKey:PersonName
+                                     ascending:YES
+                                      selector:@selector(localizedCaseInsensitiveCompare:)] autorelease];
+    NSArray *descriptors = [NSArray arrayWithObjects:nameDescriptor, nil];
+    [self.contactList sortUsingDescriptors:descriptors];
+    
+    NSLog(@"array is %@", self.contactList);
+    
+    CFRelease(allPeople);
+    // CFRelease(addressBook);
     
 }
 
 - (NSDictionary *)getPersonForPath:(NSIndexPath *)indexPath
 {
-    return [self.contactList objectAtIndex:indexPath.row];
+    NSDictionary *person;
+    
+    NSLog(@"Section: %d, Row: %d", indexPath.section, indexPath.row);
+    switch (indexPath.section) {
+        case 0:
+            person = [_favoriteList objectAtIndex:indexPath.row];
+            break;
+        case 1:
+            person = [self.contactList objectAtIndex:indexPath.row];
+            break;
+        default:
+            assert(false);
+            break;
+    }
+    return person;
 }
 
 #pragma mark - TableViewDataSourceDelegate
@@ -235,7 +263,7 @@
 
 - (UITableViewCell *)createGeneralContactsCell:(UITableView *)tableView cellForRowAt:(NSIndexPath *)indexPath
 {
-    static NSString *GeneralCellIdentifier = @"GeneralCell";
+    NSString *GeneralCellIdentifier = ContactListTableViewCellId;
     
     // get the next cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GeneralCellIdentifier];
@@ -246,7 +274,7 @@
     
     // set the data for the cell
 	NSDictionary *person = [self.contactList objectAtIndex:indexPath.row];
-    NSString *rowLabel = [person objectForKey:@"name"];
+    NSString *rowLabel = [person objectForKey:PersonName];
 	cell.textLabel.text = rowLabel;
     
     return cell;
@@ -265,15 +293,15 @@
     
     // set the data for the cell
     NSDictionary *person = [_favoriteList objectAtIndex:indexPath.row];
-    NSString *rowLabel = [person objectForKey:@"name"];
+    NSString *rowLabel = [person objectForKey:PersonName];
 	cell.textLabel.text = rowLabel;
     
-    NSDictionary *phones = [person objectForKey:@"phoneList"];
+    NSDictionary *phones = [person objectForKey:PersonPhoneList];
     [phones enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
                                              {
                                                  NSLog(@"%@ has number %@", key, obj);
-                                                 NSString *phoneNum = [obj objectForKey:@"phoneNumber"];
-                                                 cell.detailTextLabel.text = [NSString stringWithFormat:@"(%@) %@", 
+                                                 NSString *phoneNum = [obj objectForKey:PersonPhoneNumber];
+                                                 cell.detailTextLabel.text = [NSString stringWithFormat:PhoneNumberDisplayFormat, 
                                                                               [self getPhoneLabelForDisplay:key], phoneNum];
                                                  *stop = YES;
                                              }];
@@ -315,9 +343,9 @@
     // return the titles of each section
     switch (section) {
 		case 0:
-			return @"Favorites";
+			return FavoritesSectionName;
 		case 1:
-			return @"Contact List";
+			return GeneralContactsSectionName;
 		default:
 			return nil;
 			break;

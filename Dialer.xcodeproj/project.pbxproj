@@ -22,6 +22,15 @@
 		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
 		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
 		AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */; };
+		AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF472EE4151EAC980058E7A5 /* DialingViewController.m */; };
+		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
+		AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5A0BED1519A04400A6B3A9 /* Security.framework */; };
+		AF5A0BF11519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */; };
+		AF5A0BF21519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */; };
+		AF5A0BF51519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
+		AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
+		AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
+		AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
 		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
 		AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */; };
 		AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */; };
@@ -66,6 +75,17 @@
 		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
 		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
 		AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallButtonDelegate.m; sourceTree = "<group>"; };
+		AF472EE3151EAC980058E7A5 /* DialingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingViewController.h; sourceTree = "<group>"; };
+		AF472EE4151EAC980058E7A5 /* DialingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingViewController.m; sourceTree = "<group>"; };
+		AF5A0B911516B48000A6B3A9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		AF5A0B921516B48000A6B3A9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		AF5A0BED1519A04400A6B3A9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AF5A0BEF1519A43900A6B3A9 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		AF5A0BF31519B15000A6B3A9 /* SecureData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecureData.h; sourceTree = "<group>"; };
+		AF5A0BF41519B15000A6B3A9 /* SecureData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureData.m; sourceTree = "<group>"; };
+		AF5A0BF81519B52900A6B3A9 /* LoginInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfoViewController.h; sourceTree = "<group>"; };
+		AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfoViewController.m; sourceTree = "<group>"; };
 		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
 		AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleImageControl.m; sourceTree = "<group>"; };
 		AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContainer.h; sourceTree = "<group>"; };
@@ -87,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */,
 				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
 				AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */,
@@ -129,6 +150,7 @@
 		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF5A0BED1519A04400A6B3A9 /* Security.framework */,
 				AF18792114ECE8AB0033A7C3 /* AddressBook.framework */,
 				AF1878D114ECD4350033A7C3 /* UIKit.framework */,
 				AF1878D314ECD4350033A7C3 /* Foundation.framework */,
@@ -141,6 +163,8 @@
 		AF1878D714ECD4350033A7C3 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
+				AF472EE1151EAA920058E7A5 /* Communication */,
+				AF5A0BF71519B4C400A6B3A9 /* Security */,
 				AF8D29C214EEDD56006FF1C9 /* Containers */,
 				AF8D29C114EEDD2A006FF1C9 /* Delegates */,
 				AF8D29B414EE59D6006FF1C9 /* images */,
@@ -152,6 +176,8 @@
 				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
 				AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */,
 				AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */,
+				AF5A0B911516B48000A6B3A9 /* Constants.h */,
+				AF5A0B921516B48000A6B3A9 /* Constants.m */,
 				AF1878D814ECD4350033A7C3 /* Supporting Files */,
 			);
 			path = Dialer;
@@ -185,6 +211,28 @@
 				AF1878F814ECD4350033A7C3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF472EE1151EAA920058E7A5 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				AF472EE3151EAC980058E7A5 /* DialingViewController.h */,
+				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
+			);
+			name = Communication;
+			sourceTree = "<group>";
+		};
+		AF5A0BF71519B4C400A6B3A9 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				AF5A0BEF1519A43900A6B3A9 /* KeychainItemWrapper.h */,
+				AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */,
+				AF5A0BF31519B15000A6B3A9 /* SecureData.h */,
+				AF5A0BF41519B15000A6B3A9 /* SecureData.m */,
+				AF5A0BF81519B52900A6B3A9 /* LoginInfoViewController.h */,
+				AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */,
+			);
+			name = Security;
 			sourceTree = "<group>";
 		};
 		AF8D29B414EE59D6006FF1C9 /* images */ = {
@@ -267,7 +315,7 @@
 		AF1878C414ECD4350033A7C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "CodeSpan Technologies";
 			};
 			buildConfigurationList = AF1878C714ECD4350033A7C3 /* Build configuration list for PBXProject "Dialer" */;
@@ -341,6 +389,11 @@
 				AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */,
 				AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */,
 				AF8D29C014EEDD18006FF1C9 /* FavoritesListDelegate.m in Sources */,
+				AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */,
+				AF5A0BF11519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */,
+				AF5A0BF51519B15100A6B3A9 /* SecureData.m in Sources */,
+				AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
+				AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +402,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */,
+				AF5A0BF21519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */,
+				AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */,
+				AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

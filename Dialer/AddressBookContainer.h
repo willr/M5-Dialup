@@ -35,4 +35,8 @@
                       phoneId: (NSNumber*) phoneId 
                        status: (BOOL) status ;
 
+- (void)addDistinctUserToList:(NSMutableArray *)list 
+                       lookup:(NSMutableDictionary *)hashedList 
+                       person:(NSDictionary *)person;
+
 @end

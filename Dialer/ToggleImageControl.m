@@ -7,6 +7,7 @@
 //
 
 #import "ToggleImageControl.h"
+#import "Constants.h"
 
 @implementation ToggleImageControl
 
@@ -15,8 +16,8 @@
 - (id)initWithFrame:(CGRect)frame 
 {
     if ( self = [super initWithFrame: frame] ){
-        _normalImage = [UIImage imageNamed: @"box"];
-        _selectedImage = [UIImage imageNamed: @"WithCheckMark"];
+        _normalImage = [UIImage imageNamed: EmptyBoxImageTitle];
+        _selectedImage = [UIImage imageNamed: BoxWithCheckmarkImageTitle];
         CGRect frame = CGRectMake(5.0, 0.0, 35.0, 35.0);
         _imageView = [[UIImageView alloc] initWithImage: _normalImage];
         _imageView.frame = frame;

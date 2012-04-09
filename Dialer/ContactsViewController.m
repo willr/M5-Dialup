@@ -8,6 +8,7 @@
 
 #import "ContactsViewController.h"
 #import "PersonViewController.h"
+#import "Constants.h"
 
 @implementation ContactsViewController
 
@@ -34,6 +35,7 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    
     NSString *name = @"Bang!";
     NSString *phoneNumber = @"1234";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Initiating call" 
@@ -69,7 +71,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"Dialer";
+    self.title = InitialWindowTitle;
     
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
@@ -130,6 +132,9 @@
     // cause the cell to deselect animated, nicely when released
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // NSArray *subViews = [self.navigationController viewControllers];
+    // NSLog(@"Num viewControllers: %@", [[self.navigationController viewControllers] count]);
+    
     PersonViewController *personController = [[PersonViewController alloc] init];
     
     PersonContainer *person = [[PersonContainer alloc] init];
@@ -137,6 +142,8 @@
     personController.personContainer = person;
     person.delegate = personController;
     person.favoritesListDelegate = self.addresses;
+    
+    NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
     
     [self.navigationController pushViewController:personController animated:YES];
     

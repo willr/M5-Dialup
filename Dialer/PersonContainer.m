@@ -8,6 +8,7 @@
 
 #import "PersonContainer.h"
 #import "ToggleImageControl.h"
+#import "Constants.h"
 
 @implementation PersonContainer
 
@@ -15,7 +16,7 @@
 
 - (NSString *)name
 {
-    return [self.person objectForKey:@"name"];
+    return [self.person objectForKey:PersonName];
 }
 
 #pragma mark - ToggleDelegate
@@ -25,11 +26,11 @@
     ToggleImageControl *toggler = (ToggleImageControl *)sender;
     int section = toggler.tag;
     
-    NSDictionary *phoneList = [self.person objectForKey:@"phoneList"];
+    NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
     NSArray *phoneEntries = [phoneList allValues];
     NSMutableDictionary *phoneEntry = [phoneEntries objectAtIndex:section];
-    NSNumber *phoneId = [phoneEntry valueForKey:@"phoneId"];
-    NSNumber *isFavorite = [phoneEntry valueForKey:@"isFavorite"];
+    NSNumber *phoneId = [phoneEntry valueForKey:PersonPhoneId];
+    NSNumber *isFavorite = [phoneEntry valueForKey:PersonIsFavorite];
     
     // determine current state of the phoneNumber
     if ([isFavorite boolValue]) {
@@ -44,7 +45,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // return the number of sections
-    return [[self.person objectForKey:@"phoneList"] count];
+    return [[self.person objectForKey:PersonPhoneList] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -55,7 +56,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *GeneralCellIdentifier = @"GeneralCell";
+    NSString *GeneralCellIdentifier = DetailListTableViewCellId;
     
     // get the next cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GeneralCellIdentifier];
@@ -66,9 +67,9 @@
     
     // set the data for the cell
     CGRect textFrame = CGRectMake(45.0, 3.0, 240.0, 40.0);
-    NSDictionary *phoneList = [self.person objectForKey:@"phoneList"];
+    NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
     NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:indexPath.section];
-    NSString *phoneTxt = [phoneEntry objectForKey:@"phoneNumber"];
+    NSString *phoneTxt = [phoneEntry objectForKey:PersonPhoneNumber];
 	// cell.textLabel.text = [[phoneList allValues] objectAtIndex:indexPath.section];
     UILabel *txtView = [[UILabel alloc] initWithFrame:textFrame];
     txtView.text = phoneTxt;
@@ -90,12 +91,12 @@
     
     // determine if number is a favorite or not.
     // if so toggle
-    NSNumber *phoneId = [phoneEntry objectForKey:@"phoneId"];
+    NSNumber *phoneId = [phoneEntry objectForKey:PersonPhoneId];
     BOOL isFavorite = [self.favoritesListDelegate isFavorite:phoneId];
     if (isFavorite) {
         toggleControl.activated = false;
         [toggleControl toggleImage];
-        [phoneEntry setObject:[NSNumber numberWithBool:YES] forKey:@"isFavorite"];
+        [phoneEntry setObject:[NSNumber numberWithBool:YES] forKey:PersonIsFavorite];
     }
     toggleControl.activated = true;
     
@@ -107,7 +108,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSDictionary *phoneList = [self.person objectForKey:@"phoneList"];
+    NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
     
     return [self getPhoneLabelForDisplay:[[phoneList allKeys] objectAtIndex:section]];
 }

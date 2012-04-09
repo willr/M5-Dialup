@@ -7,6 +7,7 @@
 //
 
 #import "AddressBookContainer.h"
+#import "Constants.h"
 
 @implementation AddressBookContainer
 
@@ -14,28 +15,28 @@
 
 - (NSString *)getPhoneLabelForDisplay:(NSString *)label
 {
-    NSRange foundRange = [label rangeOfString:@"work"
+    NSRange foundRange = [label rangeOfString:WorkPhoneLabelSubStringCheck
                                       options:NSCaseInsensitiveSearch];
     if (foundRange.location != NSNotFound) {
-        return @"Work";
+        return WorkPhoneLabel;
     }
     
-    foundRange = [label rangeOfString:@"mobile"
+    foundRange = [label rangeOfString:MobilePhoneLabelSubStringCheck
                               options:NSCaseInsensitiveSearch];
     if (foundRange.location != NSNotFound) {
-        return @"Mobile";
+        return MobilePhoneLabel;
     }
     
-    foundRange = [label rangeOfString:@"iphone"
+    foundRange = [label rangeOfString:IPhonePhoneLabelSubStringCheck
                               options:NSCaseInsensitiveSearch];
     if (foundRange.location != NSNotFound) {
-        return @"iPhone";
+        return IPhonePhoneLabel;
     }
     
-    foundRange = [label rangeOfString:@"home"
+    foundRange = [label rangeOfString:HomePhoneLabelSubStringCheck
                               options:NSCaseInsensitiveSearch];
     if (foundRange.location != NSNotFound) {
-        return @"Home";
+        return HomePhoneLabel;
     }
     
     return nil;
@@ -52,7 +53,7 @@
     CGRect frame = CGRectMake(0.0, 0.0, 60.0, 30.0);
     callButton.frame = frame;
     
-    [callButton setTitle:@"Call" forState:UIControlStateNormal];
+    [callButton setTitle:CallButtonTitle forState:UIControlStateNormal];
     [callButton addTarget:self action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     return callButton;
 }
@@ -63,7 +64,7 @@
     CGRect frame = CGRectMake(165.0, 7.0, 65.0, 30.0);
     callButton.frame = frame;
     
-    [callButton setTitle:@"Favorite" forState:UIControlStateNormal];
+    [callButton setTitle:FavoriteButtonTitle forState:UIControlStateNormal];
     [callButton addTarget:self action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     return callButton;
 }
@@ -73,14 +74,14 @@
                        phoneIndex:(int)phoneIndex
 {
     NSMutableDictionary *fav = [[[NSMutableDictionary alloc] init] autorelease];
-    NSString * favName = [person objectForKey:@"name"];
+    NSString * favName = [person objectForKey:PersonName];
     NSMutableDictionary *favPhoneList = [[NSMutableDictionary alloc] init];
     
-    [fav setObject:favName forKey:@"name"];
-    [fav setObject:favPhoneList forKey:@"phoneList"];
+    [fav setObject:favName forKey:PersonName];
+    [fav setObject:favPhoneList forKey:PersonPhoneList];
     
-    [favPhoneList setObject:[[[person objectForKey:@"phoneList"] allValues] objectAtIndex:phoneIndex]                     
-                     forKey:[[[person objectForKey:@"phoneList"] allKeys] objectAtIndex:phoneIndex]];
+    [favPhoneList setObject:[[[person objectForKey:PersonPhoneList] allValues] objectAtIndex:phoneIndex]                     
+                     forKey:[[[person objectForKey:PersonPhoneList] allKeys] objectAtIndex:phoneIndex]];
     
     [favPhoneList release];
 
@@ -92,10 +93,10 @@
     NSNumber *phoneId = nil;
     BOOL found = false;
     
-    NSDictionary *phoneList = [person objectForKey:@"phoneList"];
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
     NSArray *phoneEntries = [phoneList allValues];
     for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        phoneId = [phoneEntry objectForKey:@"phoneId"];
+        phoneId = [phoneEntry objectForKey:PersonPhoneId];
         found = [phoneId isEqualToNumber:phoneId];
         
         if (found) {
@@ -109,13 +110,13 @@
 - (BOOL)modifyFavoriteStatusOnPerson:(NSDictionary *)person status:(BOOL)status
 {
     BOOL found = false;
-    NSDictionary *phoneList = [person objectForKey:@"phoneList"];
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
     NSArray *phoneEntries = [phoneList allValues];
     NSNumber *phoneId;
     for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        phoneId = [phoneEntry objectForKey:@"phoneId"];
+        phoneId = [phoneEntry objectForKey:PersonPhoneId];
         found = [phoneId isEqualToNumber:phoneId];
-        [phoneEntry setObject:[NSNumber numberWithBool:status] forKey:@"isFavorite"];
+        [phoneEntry setObject:[NSNumber numberWithBool:status] forKey:PersonIsFavorite];
         if (found) {
             break;
         }
@@ -144,13 +145,13 @@
     NSNumber *yesFavorite = [NSNumber numberWithBool:YES];
     
     for (NSDictionary *person in list) {
-        NSDictionary *phoneList = [person objectForKey:@"phoneList"];
+        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
         NSArray *phoneEntries = [phoneList allValues];
         for (NSDictionary *phoneEntry in phoneEntries) {
-            NSNumber *storedPhoneId = [phoneEntry objectForKey:@"phoneId"];
+            NSNumber *storedPhoneId = [phoneEntry objectForKey:PersonPhoneId];
             found = [phoneId isEqualToNumber:storedPhoneId];
             if (found) {
-                NSNumber *isFavoriteStored = [phoneEntry objectForKey:@"isFavorite"];
+                NSNumber *isFavoriteStored = [phoneEntry objectForKey:PersonIsFavorite];
                 isFavorite = [isFavoriteStored isEqualToNumber:yesFavorite];;
                 break;
             }
@@ -162,6 +163,90 @@
     }
     
     return isFavorite;
+}
+
+- (NSString *)getPhoneNumberDigitsRegex:(NSString *)phoneNumber
+{
+    // Setup an NSError object to catch any failures
+	NSError *error = NULL;
+    
+    // create the NSRegularExpression object and initialize it with a pattern
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:PhoneNumberDigitsPattern 
+                                                                           options:NSRegularExpressionCaseInsensitive 
+                                                                             error:&error];
+    
+    NSArray *results = [regex matchesInString:phoneNumber options:0 range:NSMakeRange(0, [phoneNumber length])];
+
+    NSString *digits = @"";
+    if (results != nil) {
+        for (NSTextCheckingResult *result in results) {
+            NSRange range = [result rangeAtIndex:0];
+            /*
+            NSLog(@"%d,%d group #%d %@", range.location, range.length, 0,
+                (range.length == 0 ? @"--" : [phoneNumber substringWithRange:range]));
+             */
+            if (range.length == 0) {
+                continue;
+            }
+
+            digits = [digits stringByAppendingString:[phoneNumber substringWithRange:range]];
+        }
+    }
+
+    // NSLog(@"digits: %@", digits);
+    return digits;
+}
+
+- (void)addDistinctPhoneNumbers:(NSDictionary *)person foundPerson:(NSDictionary *)foundPerson
+{
+    // ok we found a matching name, check all the phoneNumbers for this contact, and add if not exist
+    
+    BOOL found = false;
+    
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    
+    for (NSDictionary *phoneEntryKey in phoneList) {
+        found = false;
+        NSString *newPhoneNum = [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneNumber];
+        // NSLog(@"newPhoneNum: %@", newPhoneNum);
+        NSString *newPhoneDigits = [self getPhoneNumberDigitsRegex:newPhoneNum];
+        
+        NSMutableDictionary *storedPhoneList = [foundPerson objectForKey:PersonPhoneList];
+        for (NSMutableDictionary *storedPhoneEntryKey in storedPhoneList) {
+            NSMutableDictionary *storedPhoneEntry = [storedPhoneList objectForKey:storedPhoneEntryKey];
+            NSString *storedPhoneDigits = [storedPhoneEntry objectForKey:PersonPhoneNumberDigits];
+            if (storedPhoneDigits == nil) {
+                storedPhoneDigits = [self getPhoneNumberDigitsRegex:[storedPhoneEntry objectForKey:PersonPhoneNumber]];
+                [storedPhoneEntry setObject:storedPhoneDigits forKey:PersonPhoneNumberDigits];
+            }
+            BOOL foundPhoneNum = [storedPhoneDigits isEqualToString:newPhoneDigits];
+            if (foundPhoneNum) {
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            [storedPhoneList setObject:[phoneList objectForKey:phoneEntryKey] forKey:phoneEntryKey];
+        }
+    }
+}
+
+- (void)addDistinctUserToList:(NSMutableArray *)list lookup:(NSMutableDictionary *)hashedList person:(NSDictionary *)person
+{
+    NSString *name = [person objectForKey:PersonName];
+    NSDictionary *foundPerson = [hashedList objectForKey:name];
+    
+    if (nil == foundPerson) {
+        [list addObject:person];
+        [hashedList setObject:person forKey:name];
+        
+        // TODO: filter out multiple copies here too... 
+        
+    } else {
+        [self addDistinctPhoneNumbers:person foundPerson:foundPerson];
+        // NSLog(@"foundPerson %@", foundPerson);
+    }
 }
 
 @end
