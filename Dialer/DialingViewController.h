@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DialingViewController : UIViewController
+#import "SecureData.h"
+#import "DialContactDelegate.h"
+
+@interface DialingViewController : UIViewController <UITextFieldDelegate, DialContactDelegate>
+{
+    UILabel         *message;
+    UILabel         *contactDialed;
+    UILabel         *progress;
+    
+    NSString        *userName;
+    NSString        *password;
+    
+    UIButton        *cancelButton;
+    
+    SecureData      *secureData;
+}
 
 @end

@@ -19,6 +19,27 @@
     return [self.person objectForKey:PersonName];
 }
 
+- (NSDictionary *)getNameAndPhoneNumFor:(NSIndexPath *)indexPath
+{
+    NSMutableDictionary *phoneEntry = [self getPhoneEntryFor:indexPath];
+    NSString *phoneTxt = [phoneEntry objectForKey:PersonPhoneNumber];
+    
+    NSDictionary *copy = [[[NSDictionary alloc] initWithObjectsAndKeys:
+                           [self name], PersonName, 
+                           phoneTxt, PersonPhoneNumber, 
+                           nil] autorelease];
+    
+    return copy;
+}
+
+- (NSMutableDictionary *)getPhoneEntryFor:(NSIndexPath *)indexPath
+{
+    NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
+    NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:indexPath.section];
+    
+    return phoneEntry;
+}
+
 #pragma mark - ToggleDelegate
 
 - (void)toggled:(id)sender
@@ -67,12 +88,10 @@
     
     // set the data for the cell
     CGRect textFrame = CGRectMake(45.0, 3.0, 240.0, 40.0);
-    NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
-    NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:indexPath.section];
-    NSString *phoneTxt = [phoneEntry objectForKey:PersonPhoneNumber];
+    NSDictionary *namePhone = [self getNameAndPhoneNumFor:indexPath];
 	// cell.textLabel.text = [[phoneList allValues] objectAtIndex:indexPath.section];
     UILabel *txtView = [[UILabel alloc] initWithFrame:textFrame];
-    txtView.text = phoneTxt;
+    txtView.text = [namePhone objectForKey:PersonPhoneNumber];
     txtView.font = [UIFont boldSystemFontOfSize:19];
 
     [cell.contentView addSubview:txtView];
@@ -91,6 +110,7 @@
     
     // determine if number is a favorite or not.
     // if so toggle
+    NSMutableDictionary *phoneEntry = [self getPhoneEntryFor:indexPath];
     NSNumber *phoneId = [phoneEntry objectForKey:PersonPhoneId];
     BOOL isFavorite = [self.favoritesListDelegate isFavorite:phoneId];
     if (isFavorite) {

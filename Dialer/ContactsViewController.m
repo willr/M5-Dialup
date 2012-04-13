@@ -12,7 +12,7 @@
 
 @implementation ContactsViewController
 
-@synthesize addresses = _addresses, tableView = _tableView;
+@synthesize addresses = _addresses, tableView = _tableView, dialerDelegate = _dialerDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,16 +35,14 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+
+    NSDictionary *person = [self.addresses getPersonForPath:indexPath];
     
-    NSString *name = @"Bang!";
-    NSString *phoneNumber = @"1234";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Initiating call" 
-                                                    message:[NSString stringWithFormat:@"Calling %@ with phone number %@", name, phoneNumber]
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    NSString *contactName = [person objectForKey:PersonName];
+    NSString *phoneNumber = [person objectForKey:PersonPhoneNumber];
+    
+    [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
+    
 }
 
 - (void)checkButtonTapped:(id)sender event:(id)event

@@ -11,13 +11,13 @@
 
 @interface LoginInfoViewController : UIViewController <UITextFieldDelegate>
 {
-    UITextField         *username;
-    UITextField         *password;
+    UITextField     *username;
+    UITextField     *password;
 	
-    UIButton            *testButton;
-    UIButton            *resetButton;
+    UIButton        *testButton;
+    UIButton        *resetButton;
     
-    SecureData          *secureData;
+    SecureData      *secureData;
 }
 
 @end

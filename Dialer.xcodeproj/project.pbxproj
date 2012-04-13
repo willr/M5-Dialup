@@ -31,6 +31,8 @@
 		AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
 		AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
 		AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
+		AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
+		AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
 		AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */; };
 		AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */; };
@@ -86,6 +88,8 @@
 		AF5A0BF41519B15000A6B3A9 /* SecureData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureData.m; sourceTree = "<group>"; };
 		AF5A0BF81519B52900A6B3A9 /* LoginInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfoViewController.h; sourceTree = "<group>"; };
 		AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfoViewController.m; sourceTree = "<group>"; };
+		AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialContactDelegate.h; sourceTree = "<group>"; };
+		AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialContactDelegate.m; sourceTree = "<group>"; };
 		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
 		AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleImageControl.m; sourceTree = "<group>"; };
 		AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContainer.h; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			children = (
 				AF472EE3151EAC980058E7A5 /* DialingViewController.h */,
 				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
+				AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */,
+				AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 				AF5A0BF51519B15100A6B3A9 /* SecureData.m in Sources */,
 				AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 				AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */,
+				AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +412,7 @@
 				AF5A0BF21519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */,
 				AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */,
 				AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
+				AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +465,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -474,7 +482,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

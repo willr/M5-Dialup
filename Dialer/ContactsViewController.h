@@ -10,14 +10,19 @@
 
 #import "ContactListContainer.h"
 #import "CallButtonDelegate.h"
+#import "DialContactDelegate.h"
 
 @interface ContactsViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
 {
     ContactListContainer *_addresses;
     UITableView *_tableView;
+    
+    id<DialContactDelegate> _dialerDelegate;
 }
 
-@property (retain, strong, nonatomic) ContactListContainer *addresses;
-@property (retain, strong, nonatomic) UITableView *tableView;
+@property (retain, strong, nonatomic) ContactListContainer  *addresses;
+@property (retain, strong, nonatomic) UITableView           *tableView;
+@property (strong, nonatomic) id<DialContactDelegate>       dialerDelegate;
+
 
 @end

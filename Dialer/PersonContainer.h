@@ -22,4 +22,6 @@
 @property (strong, nonatomic, readonly) NSString *name;
 @property (strong, nonatomic) id<FavoritesListDelegate> favoritesListDelegate;
 
+- (NSDictionary *)getNameAndPhoneNumFor:(NSIndexPath *)indexPath;
+
 @end
