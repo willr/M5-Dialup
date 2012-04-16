@@ -31,6 +31,8 @@
 		AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
 		AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
 		AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
+		AF643A94153BAC350041B7D1 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */; };
+		AF643A97153BAC620041B7D1 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A96153BAC620041B7D1 /* libOCMock.a */; };
 		AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
@@ -88,6 +90,8 @@
 		AF5A0BF41519B15000A6B3A9 /* SecureData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureData.m; sourceTree = "<group>"; };
 		AF5A0BF81519B52900A6B3A9 /* LoginInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfoViewController.h; sourceTree = "<group>"; };
 		AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfoViewController.m; sourceTree = "<group>"; };
+		AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrestIOS.framework; path = Frameworks/OCHamcrestIOS.framework; sourceTree = "<group>"; };
+		AF643A96153BAC620041B7D1 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
 		AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialContactDelegate.h; sourceTree = "<group>"; };
 		AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialContactDelegate.m; sourceTree = "<group>"; };
 		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF643A97153BAC620041B7D1 /* libOCMock.a in Frameworks */,
+				AF643A94153BAC350041B7D1 /* OCHamcrestIOS.framework in Frameworks */,
 				AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */,
 				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
@@ -135,6 +141,8 @@
 		AF1878C214ECD4350033A7C3 = {
 			isa = PBXGroup;
 			children = (
+				AF643A96153BAC620041B7D1 /* libOCMock.a */,
+				AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */,
 				AF1878D714ECD4350033A7C3 /* Dialer */,
 				AF1878F514ECD4350033A7C3 /* DialerTests */,
 				AF1878D014ECD4350033A7C3 /* Frameworks */,
@@ -492,9 +500,25 @@
 		AF18790114ECD4350033A7C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -503,9 +527,25 @@
 		AF18790214ECD4350033A7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
