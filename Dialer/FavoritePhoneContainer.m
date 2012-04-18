@@ -44,7 +44,6 @@
     [self.favorites addObject:phoneEntry];
     
     // phoneId = [self getFirstFoundPhoneId:personPhone];    
-    assert(phoneId != nil);
     
     [self modifyFavoriteStatus:self.favorites phoneId:phoneId status:NO];
     // [self modifyFavoriteStatus:_contactList phoneId:phoneId status:NO];

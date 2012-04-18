@@ -27,7 +27,7 @@
             person = [self.contacts personAtIndex:indexPath.row];
             break;
         default:
-            assert(false);
+            NSAssert(false, @"Invalid section number");
             break;
     }
     return person;

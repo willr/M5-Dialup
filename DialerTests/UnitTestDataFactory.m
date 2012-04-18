@@ -54,7 +54,7 @@
     // add the user name to the person object
     [person setObject:name forKey:PersonName];
     
-    assert([formats count] == [values count]);
+    NSAssert([formats count] == [values count], @"Arrays should be equal as they are processed together");
     
     NSMutableDictionary *phoneEntriesList = [[NSMutableDictionary alloc] init];
     for (int i = 0; i < [formats count]; i++) {
@@ -156,8 +156,8 @@
     
     NSArray *contactList = [[NSArray alloc] initWithContentsOfFile:filePath];
     
-    assert(contactList != nil);
-    assert([contactList count] > 1);
+    NSAssert(contactList != nil, "Should not be null");
+    NSAssert([contactList count] > 1, @"Should have at least on contact in the list");
     
     NSMutableDictionary *contactLookup = [[NSMutableDictionary alloc] init];
     for (NSDictionary *entry in contactList) {
