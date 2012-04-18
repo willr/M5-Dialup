@@ -31,12 +31,26 @@
 		AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
 		AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
 		AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
-		AF643A94153BAC350041B7D1 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */; };
-		AF643A97153BAC620041B7D1 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A96153BAC620041B7D1 /* libOCMock.a */; };
+		AF643A9A153BC1EE0041B7D1 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643A99153BC1EE0041B7D1 /* AddressBookContainer.m */; };
+		AF643AA0153CA5AC0041B7D1 /* PersonContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643A9F153CA5AC0041B7D1 /* PersonContainerTests.m */; };
+		AF643AA3153CA6280041B7D1 /* UnitTestDataFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AA2153CA6280041B7D1 /* UnitTestDataFactory.m */; };
+		AF643AA6153CA7950041B7D1 /* UnitTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AA5153CA7950041B7D1 /* UnitTestConstants.m */; };
+		AF643AAA153CAEE30041B7D1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
+		AF643AAB153CAEF50041B7D1 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */; };
+		AF643AAC153CAF000041B7D1 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643A96153BAC620041B7D1 /* libOCMock.a */; };
+		AF643AAD153CD2720041B7D1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5A0BED1519A04400A6B3A9 /* Security.framework */; };
+		AF643AAF153CD6950041B7D1 /* UnitTestDataFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AAE153CD6950041B7D1 /* UnitTestDataFactoryTests.m */; };
+		AF643AB2153CECC50041B7D1 /* TestContactListContents.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF643AB1153CECC50041B7D1 /* TestContactListContents.plist */; };
+		AF643AB9153CF5B00041B7D1 /* TestContactListContents.txt in Resources */ = {isa = PBXBuildFile; fileRef = AF643AB8153CF5B00041B7D1 /* TestContactListContents.txt */; };
+		AF643ABE153E27950041B7D1 /* PersonDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643ABD153E27950041B7D1 /* PersonDataSource.m */; };
+		AF643AC2153E28BF0041B7D1 /* PersonDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AC1153E28BE0041B7D1 /* PersonDataSourceTests.m */; };
+		AF643ACD153E32C20041B7D1 /* ContactsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643ACC153E32C20041B7D1 /* ContactsDataSource.m */; };
+		AF643AD0153E32E50041B7D1 /* ContactsBaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643ACF153E32E50041B7D1 /* ContactsBaseDataSource.m */; };
+		AF643AD6153E3B950041B7D1 /* FavoritePhoneContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AD5153E3B940041B7D1 /* FavoritePhoneContainer.m */; };
 		AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
-		AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */; };
+		AF8D29B114EE574A006FF1C9 /* ContactBaseContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* ContactBaseContainer.m */; };
 		AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */; };
 		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
 		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
@@ -92,12 +106,35 @@
 		AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfoViewController.m; sourceTree = "<group>"; };
 		AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrestIOS.framework; path = Frameworks/OCHamcrestIOS.framework; sourceTree = "<group>"; };
 		AF643A96153BAC620041B7D1 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
+		AF643A98153BC1EE0041B7D1 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContainer.h; sourceTree = "<group>"; };
+		AF643A99153BC1EE0041B7D1 /* AddressBookContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookContainer.m; sourceTree = "<group>"; };
+		AF643A9F153CA5AC0041B7D1 /* PersonContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainerTests.m; sourceTree = "<group>"; };
+		AF643AA1153CA6280041B7D1 /* UnitTestDataFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestDataFactory.h; sourceTree = "<group>"; };
+		AF643AA2153CA6280041B7D1 /* UnitTestDataFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestDataFactory.m; sourceTree = "<group>"; };
+		AF643AA4153CA7950041B7D1 /* UnitTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestConstants.h; sourceTree = "<group>"; };
+		AF643AA5153CA7950041B7D1 /* UnitTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestConstants.m; sourceTree = "<group>"; };
+		AF643AAE153CD6950041B7D1 /* UnitTestDataFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestDataFactoryTests.m; sourceTree = "<group>"; };
+		AF643AB0153CE90C0041B7D1 /* PersonContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PersonContainer+PrivateMethods.h"; sourceTree = "<group>"; };
+		AF643AB1153CECC50041B7D1 /* TestContactListContents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestContactListContents.plist; sourceTree = "<group>"; };
+		AF643AB8153CF5B00041B7D1 /* TestContactListContents.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestContactListContents.txt; sourceTree = "<group>"; };
+		AF643ABC153E27950041B7D1 /* PersonDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataSource.h; sourceTree = "<group>"; };
+		AF643ABD153E27950041B7D1 /* PersonDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataSource.m; sourceTree = "<group>"; };
+		AF643AC1153E28BE0041B7D1 /* PersonDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataSourceTests.m; sourceTree = "<group>"; };
+		AF643AC3153E28FB0041B7D1 /* PersonDataSource+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PersonDataSource+PrivateMethods.h"; sourceTree = "<group>"; };
+		AF643ACB153E32C20041B7D1 /* ContactsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsDataSource.h; sourceTree = "<group>"; };
+		AF643ACC153E32C20041B7D1 /* ContactsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsDataSource.m; sourceTree = "<group>"; };
+		AF643ACE153E32E50041B7D1 /* ContactsBaseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsBaseDataSource.h; sourceTree = "<group>"; };
+		AF643ACF153E32E50041B7D1 /* ContactsBaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsBaseDataSource.m; sourceTree = "<group>"; };
+		AF643AD1153E37690041B7D1 /* ContactsBaseDataSource+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContactsBaseDataSource+PrivateMethods.h"; sourceTree = "<group>"; };
+		AF643AD4153E3B940041B7D1 /* FavoritePhoneContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritePhoneContainer.h; sourceTree = "<group>"; };
+		AF643AD5153E3B940041B7D1 /* FavoritePhoneContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhoneContainer.m; sourceTree = "<group>"; };
+		AF643AD7153E4D940041B7D1 /* FavoritePhoneContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoritePhoneContainer+PrivateMethods.h"; sourceTree = "<group>"; };
 		AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialContactDelegate.h; sourceTree = "<group>"; };
 		AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialContactDelegate.m; sourceTree = "<group>"; };
 		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
 		AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleImageControl.m; sourceTree = "<group>"; };
-		AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookContainer.h; sourceTree = "<group>"; };
-		AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookContainer.m; sourceTree = "<group>"; };
+		AF8D29AB14EE5749006FF1C9 /* ContactBaseContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactBaseContainer.h; sourceTree = "<group>"; };
+		AF8D29AC14EE574A006FF1C9 /* ContactBaseContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactBaseContainer.m; sourceTree = "<group>"; };
 		AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListContainer.h; sourceTree = "<group>"; };
 		AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListContainer.m; sourceTree = "<group>"; };
 		AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
@@ -115,8 +152,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF643A97153BAC620041B7D1 /* libOCMock.a in Frameworks */,
-				AF643A94153BAC350041B7D1 /* OCHamcrestIOS.framework in Frameworks */,
 				AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */,
 				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
@@ -129,6 +164,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF643AAD153CD2720041B7D1 /* Security.framework in Frameworks */,
+				AF643AAC153CAF000041B7D1 /* libOCMock.a in Frameworks */,
+				AF643AAB153CAEF50041B7D1 /* OCHamcrestIOS.framework in Frameworks */,
+				AF643AAA153CAEE30041B7D1 /* AddressBook.framework in Frameworks */,
 				AF1878F014ECD4350033A7C3 /* SenTestingKit.framework in Frameworks */,
 				AF1878F114ECD4350033A7C3 /* UIKit.framework in Frameworks */,
 				AF1878F214ECD4350033A7C3 /* Foundation.framework in Frameworks */,
@@ -141,8 +180,6 @@
 		AF1878C214ECD4350033A7C3 = {
 			isa = PBXGroup;
 			children = (
-				AF643A96153BAC620041B7D1 /* libOCMock.a */,
-				AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */,
 				AF1878D714ECD4350033A7C3 /* Dialer */,
 				AF1878F514ECD4350033A7C3 /* DialerTests */,
 				AF1878D014ECD4350033A7C3 /* Frameworks */,
@@ -162,6 +199,8 @@
 		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF643A96153BAC620041B7D1 /* libOCMock.a */,
+				AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */,
 				AF5A0BED1519A04400A6B3A9 /* Security.framework */,
 				AF18792114ECE8AB0033A7C3 /* AddressBook.framework */,
 				AF1878D114ECD4350033A7C3 /* UIKit.framework */,
@@ -175,6 +214,8 @@
 		AF1878D714ECD4350033A7C3 /* Dialer */ = {
 			isa = PBXGroup;
 			children = (
+				AF643ABB153E27590041B7D1 /* Controls */,
+				AF643ABA153E27430041B7D1 /* Controllers */,
 				AF472EE1151EAA920058E7A5 /* Communication */,
 				AF5A0BF71519B4C400A6B3A9 /* Security */,
 				AF8D29C214EEDD56006FF1C9 /* Containers */,
@@ -182,12 +223,6 @@
 				AF8D29B414EE59D6006FF1C9 /* images */,
 				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
 				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
-				AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */,
-				AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */,
-				AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */,
-				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
-				AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */,
-				AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */,
 				AF5A0B911516B48000A6B3A9 /* Constants.h */,
 				AF5A0B921516B48000A6B3A9 /* Constants.m */,
 				AF1878D814ECD4350033A7C3 /* Supporting Files */,
@@ -212,6 +247,13 @@
 				AF1878FB14ECD4350033A7C3 /* DialerTests.h */,
 				AF1878FC14ECD4350033A7C3 /* DialerTests.m */,
 				AF1878F614ECD4350033A7C3 /* Supporting Files */,
+				AF643A9F153CA5AC0041B7D1 /* PersonContainerTests.m */,
+				AF643AC1153E28BE0041B7D1 /* PersonDataSourceTests.m */,
+				AF643AA1153CA6280041B7D1 /* UnitTestDataFactory.h */,
+				AF643AA2153CA6280041B7D1 /* UnitTestDataFactory.m */,
+				AF643AA4153CA7950041B7D1 /* UnitTestConstants.h */,
+				AF643AA5153CA7950041B7D1 /* UnitTestConstants.m */,
+				AF643AAE153CD6950041B7D1 /* UnitTestDataFactoryTests.m */,
 			);
 			path = DialerTests;
 			sourceTree = "<group>";
@@ -221,6 +263,8 @@
 			children = (
 				AF1878F714ECD4350033A7C3 /* DialerTests-Info.plist */,
 				AF1878F814ECD4350033A7C3 /* InfoPlist.strings */,
+				AF643AB1153CECC50041B7D1 /* TestContactListContents.plist */,
+				AF643AB8153CF5B00041B7D1 /* TestContactListContents.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,6 +293,34 @@
 			name = Security;
 			sourceTree = "<group>";
 		};
+		AF643ABA153E27430041B7D1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AF643ACE153E32E50041B7D1 /* ContactsBaseDataSource.h */,
+				AF643ACF153E32E50041B7D1 /* ContactsBaseDataSource.m */,
+				AF643AD1153E37690041B7D1 /* ContactsBaseDataSource+PrivateMethods.h */,
+				AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */,
+				AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */,
+				AF643ACB153E32C20041B7D1 /* ContactsDataSource.h */,
+				AF643ACC153E32C20041B7D1 /* ContactsDataSource.m */,
+				AF8D29AF14EE574A006FF1C9 /* PersonViewController.h */,
+				AF8D29B014EE574A006FF1C9 /* PersonViewController.m */,
+				AF643ABC153E27950041B7D1 /* PersonDataSource.h */,
+				AF643ABD153E27950041B7D1 /* PersonDataSource.m */,
+				AF643AC3153E28FB0041B7D1 /* PersonDataSource+PrivateMethods.h */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		AF643ABB153E27590041B7D1 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */,
+				AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
 		AF8D29B414EE59D6006FF1C9 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,12 +346,18 @@
 		AF8D29C214EEDD56006FF1C9 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				AF8D29AB14EE5749006FF1C9 /* AddressBookContainer.h */,
-				AF8D29AC14EE574A006FF1C9 /* AddressBookContainer.m */,
+				AF8D29AB14EE5749006FF1C9 /* ContactBaseContainer.h */,
+				AF8D29AC14EE574A006FF1C9 /* ContactBaseContainer.m */,
 				AF8D29AD14EE574A006FF1C9 /* ContactListContainer.h */,
 				AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */,
 				AF2EC0C514EE180D00E21302 /* PersonContainer.h */,
 				AF2EC0C614EE180D00E21302 /* PersonContainer.m */,
+				AF643AB0153CE90C0041B7D1 /* PersonContainer+PrivateMethods.h */,
+				AF643A98153BC1EE0041B7D1 /* AddressBookContainer.h */,
+				AF643A99153BC1EE0041B7D1 /* AddressBookContainer.m */,
+				AF643AD4153E3B940041B7D1 /* FavoritePhoneContainer.h */,
+				AF643AD5153E3B940041B7D1 /* FavoritePhoneContainer.m */,
+				AF643AD7153E4D940041B7D1 /* FavoritePhoneContainer+PrivateMethods.h */,
 			);
 			name = Containers;
 			sourceTree = "<group>";
@@ -366,6 +444,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1878FA14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
+				AF643AB2153CECC50041B7D1 /* TestContactListContents.plist in Resources */,
+				AF643AB9153CF5B00041B7D1 /* TestContactListContents.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +478,7 @@
 				AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */,
 				AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */,
 				AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */,
-				AF8D29B114EE574A006FF1C9 /* AddressBookContainer.m in Sources */,
+				AF8D29B114EE574A006FF1C9 /* ContactBaseContainer.m in Sources */,
 				AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */,
 				AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */,
 				AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */,
@@ -409,6 +489,11 @@
 				AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 				AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */,
 				AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
+				AF643A9A153BC1EE0041B7D1 /* AddressBookContainer.m in Sources */,
+				AF643ABE153E27950041B7D1 /* PersonDataSource.m in Sources */,
+				AF643ACD153E32C20041B7D1 /* ContactsDataSource.m in Sources */,
+				AF643AD0153E32E50041B7D1 /* ContactsBaseDataSource.m in Sources */,
+				AF643AD6153E3B950041B7D1 /* FavoritePhoneContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +506,11 @@
 				AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */,
 				AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 				AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
+				AF643AA0153CA5AC0041B7D1 /* PersonContainerTests.m in Sources */,
+				AF643AA3153CA6280041B7D1 /* UnitTestDataFactory.m in Sources */,
+				AF643AA6153CA7950041B7D1 /* UnitTestConstants.m in Sources */,
+				AF643AAF153CD6950041B7D1 /* UnitTestDataFactoryTests.m in Sources */,
+				AF643AC2153E28BF0041B7D1 /* PersonDataSourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,19 +596,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
 				);
-				OTHER_LDFLAGS = (
-					"-force_load",
-					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
-					"-ObjC",
-					"-lstdc++",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -533,19 +617,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
 				);
-				OTHER_LDFLAGS = (
-					"-force_load",
-					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
-					"-ObjC",
-					"-lstdc++",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -558,10 +636,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
 				INFOPLIST_FILE = "DialerTests/DialerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -575,10 +666,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/usr/include\"/**";
 				INFOPLIST_FILE = "DialerTests/DialerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/usr/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/usr/lib/libOCMock.a\"",
+					"-ObjC",
+					"-lstdc++",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

@@ -8,21 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ContactListContainer.h"
+#import "ContactsDataSource.h"
+
 #import "CallButtonDelegate.h"
+#import "FavoritePhoneContainer.h"
+
 #import "DialContactDelegate.h"
+
 
 @interface ContactsViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
 {
-    ContactListContainer *_addresses;
+    ContactsDataSource *_contacts;
+    
     UITableView *_tableView;
     
     id<DialContactDelegate> _dialerDelegate;
 }
 
-@property (retain, strong, nonatomic) ContactListContainer  *addresses;
-@property (retain, strong, nonatomic) UITableView           *tableView;
-@property (strong, nonatomic) id<DialContactDelegate>       dialerDelegate;
+@property (strong, nonatomic) ContactsDataSource        *contacts;
+
+@property (strong, nonatomic) UITableView               *tableView;
+@property (strong, nonatomic) id<DialContactDelegate>   dialerDelegate;
 
 
 @end

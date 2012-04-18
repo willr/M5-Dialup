@@ -7,16 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PersonContainer.h"
+
+#import "PersonDataSource.h"
 #import "CallButtonDelegate.h"
 
 @interface PersonViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
 {
-    PersonContainer *_personContainer;
-    UITableView *_tableView;
+    PersonDataSource             *_person;
+    
+    id<UITableViewDataSource>   _personDataSource;
+    UITableView                 *_tableView;
 }
 
-@property (strong, nonatomic) PersonContainer *personContainer;
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) PersonDataSource          *person;
+
+@property (strong, nonatomic) id<UITableViewDataSource> personDataSource;
+@property (strong, nonatomic) UITableView               *tableView;
+
+- (void)checkButtonTapped:(id)sender event:(id)event;
 
 @end

@@ -1,0 +1,63 @@
+(
+    {
+        name = "Jack Doe";
+        phoneList =         {
+            "_$!<Home>!$__2" =             {
+                phoneId = 9;
+                phoneNumber = "(512) 999-9999";
+            };
+            "_$!<Mobile>!$__0" =             {
+                phoneId = 7;
+                phoneNumber = "(512) 777-7777";
+            };
+            "iPhone_1" =             {
+                phoneId = 8;
+                phoneNumber = "(512) 888-8888";
+            };
+        };
+    },
+        {
+        name = "James Joyce";
+        phoneList =         {
+            "_$!<Mobile>!$__0" =             {
+                phoneId = 3;
+                phoneNumber = "(512) 333-3333";
+            };
+        };
+    },
+        {
+        name = "Jim Jackson";
+        phoneList =         {
+            "_$!<Mobile>!$__0" =             {
+                phoneId = 6;
+                phoneNumber = "(512) 666-6666";
+            };
+        };
+    },
+        {
+        name = "Joe User";
+        phoneList =         {
+            "_$!<Mobile>!$__0" =             {
+                phoneId = 1;
+                phoneNumber = "(512) 111-1111";
+            };
+            "iPhone_1" =             {
+                phoneId = 2;
+                phoneNumber = "(512) 222-2222";
+            };
+        };
+    },
+        {
+        name = "John Smith";
+        phoneList =         {
+            "_$!<Mobile>!$__0" =             {
+                phoneId = 4;
+                phoneNumber = "(512) 444-4444";
+            };
+            "iPhone_1" =             {
+                phoneId = 5;
+                phoneNumber = "(512) 555-5555";
+            };
+        };
+    }
+)

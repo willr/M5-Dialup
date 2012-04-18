@@ -8,25 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AddressBookContainer.h"
+#import "ContactBaseContainer.h"
 #import "CallButtonDelegate.h"
-#import "FavoritesListDelegate.h"
+#import "AddressBookContainer.h"
 
-@interface ContactListContainer : AddressBookContainer <UITableViewDataSource, FavoritesListDelegate>
+@interface ContactListContainer : ContactBaseContainer
 {
-    NSMutableArray *_contactList;
-    NSMutableDictionary *_contactLookup;
-    NSMutableArray *_favoriteList;
+    NSMutableArray          *_contactList;
+    NSMutableDictionary     *_contactLookup;
     
-    BOOL _favoritesModified;
+    AddressBookContainer    *_abContainer;
 }
 
-@property (strong, nonatomic) NSMutableArray *contactList;
-@property (strong, nonatomic) NSMutableDictionary *contactLookup;
-@property (nonatomic) BOOL favoritesModified;
+@property (strong, nonatomic) NSMutableArray            *contactList;
+@property (strong, nonatomic) NSMutableDictionary       *contactLookup;
+@property (strong, nonatomic) AddressBookContainer      *abContainer;
 
 - (void)collectAddressBookInfo;
 
-- (NSDictionary *)getPersonForPath:(NSIndexPath *)indexPath;
+- (NSDictionary *) personAtIndex:(NSUInteger)index;
+
+- (NSUInteger)count;
 
 @end

@@ -1,42 +1,26 @@
 //
 //  AddressBookContainer.h
-//  
+//  Dialer
 //
-//  Created by William Richardson on 2/16/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by William Richardson on 4/15/12.
+//  Copyright (c) 2012 CodeSpan Technologies. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <AddressBook/AddressBook.h>
 
-#import "CallButtonDelegate.h"
+@interface AddressBookContainer : NSObject
 
-@interface AddressBookContainer : NSObject {
-    id _delegate;
-}
+- (ABAddressBookRef) AddressBookCreate;
 
-@property (strong, nonatomic) id<CallButtonDelegate> delegate;
+- (CFArrayRef) AddressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook;
 
-- (NSString *) getPhoneLabelForDisplay: (NSString *) label;
+- (CFIndex) AddressBookGetPersonCount:(ABAddressBookRef)addressBook;
 
-- (UIButton *) configureCallButton;
+- (ABMultiValueRef) RecordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
 
-- (UIButton *) createFavoriteButton;
+- (CFIndex) MultiValueGetCount:(ABMultiValueRef)phones;
 
-- (NSDictionary *) createNewFavoriteFromContact: (NSDictionary *) person  
-                                contactIndex: (int) contactIndex 
-                                  phoneIndex: (int) phoneIndex ;
-
-- (NSNumber*) getFirstFoundPhoneId: (NSDictionary*) person ;
-
-- (BOOL) modifyFavoriteStatusOnPerson: (NSDictionary*) person 
-                               status: (BOOL) status ;
-
-- (void) modifyFavoriteStatus: (NSArray*) list 
-                      phoneId: (NSNumber*) phoneId 
-                       status: (BOOL) status ;
-
-- (void)addDistinctUserToList:(NSMutableArray *)list 
-                       lookup:(NSMutableDictionary *)hashedList 
-                       person:(NSDictionary *)person;
+- (CFStringRef) MultiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
 
 @end

@@ -10,7 +10,9 @@
 
 @implementation PersonViewController
 
-@synthesize personContainer = _personContainer, tableView = _tableView;
+@synthesize person = _person;
+@synthesize tableView = _tableView;
+@synthesize personDataSource = _personDataSource;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +46,7 @@
 {
     [super viewDidLoad];
     
-    self.title = self.personContainer.name;
+    self.title = self.person.person.name;
     
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
@@ -55,7 +57,7 @@
     table.delegate = self;
     self.tableView = table;
 
-    table.dataSource = self.personContainer;
+    table.dataSource = self.personDataSource;
     
     // cause the table to load
     [table reloadData];
@@ -81,31 +83,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - CallButtonDelegate
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *person = self.personContainer.person;
-    /*
-    NSString *contactName = [person objectForKey:PersonName];
-    NSString *phoneNumber = [person objectForKey:PersonPhoneNumber];
-    
-    [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
-     
-     */
-}
-
-- (void)checkButtonTapped:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
-    if (indexPath != nil)
-    {
-        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-    }
-}
 
 #pragma mark - TableViewDelegate
 
@@ -114,6 +92,12 @@
     // cause the cell to deselect animated, nicely when released
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+}
+
+#pragma mark - CallButtonDelegate
+- (void)checkButtonTapped:(id)sender event:(id)event
+{
+    [self.person checkButtonTapped:sender event:event tableView:self.tableView];;
 }
 
 @end

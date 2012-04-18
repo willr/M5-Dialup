@@ -8,20 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AddressBookContainer.h"
+#import "ContactBaseContainer.h"
 #import "FavoritesListDelegate.h"
 #import "ToggleDelegate.h"
 
-@interface PersonContainer : AddressBookContainer <UITableViewDataSource, ToggleDelegate>
+@interface PersonContainer : ContactBaseContainer
 {
     NSDictionary *_person;
-    id<FavoritesListDelegate> _favoritesListDelegate;
 }
 
 @property (strong, nonatomic) NSDictionary *person;
 @property (strong, nonatomic, readonly) NSString *name;
-@property (strong, nonatomic) id<FavoritesListDelegate> favoritesListDelegate;
 
-- (NSDictionary *)getNameAndPhoneNumFor:(NSIndexPath *)indexPath;
+- (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;
+
+- (NSNumber *) phoneIdAtIndex:(NSUInteger)index;
+
+- (NSString *) phoneTypeAtIndex:(NSUInteger)index;
+
+- (NSUInteger) count;
+
 
 @end

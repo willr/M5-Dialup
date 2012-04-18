@@ -10,11 +10,7 @@
 
 @protocol FavoritesListDelegate <NSObject>
 
-- (void)removeFavorite:(NSNumber *)index;
 
-- (void)addFavorite:(NSDictionary *)personPhone;
-
-- (BOOL)isFavorite:(NSNumber *) phoneId;
 
 @optional
 

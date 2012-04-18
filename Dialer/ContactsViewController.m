@@ -9,10 +9,14 @@
 #import "ContactsViewController.h"
 #import "PersonViewController.h"
 #import "Constants.h"
+#import "AddressBookContainer.h"
+#import "PersonDataSource.h"
 
 @implementation ContactsViewController
 
-@synthesize addresses = _addresses, tableView = _tableView, dialerDelegate = _dialerDelegate;
+@synthesize contacts = _contacts;
+@synthesize tableView = _tableView;
+@synthesize dialerDelegate = _dialerDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,37 +33,6 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - CallButtonDelegate
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-
-    NSDictionary *person = [self.addresses getPersonForPath:indexPath];
-    
-    NSString *contactName = [person objectForKey:PersonName];
-    NSString *phoneNumber = [person objectForKey:PersonPhoneNumber];
-    
-    [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
-    
-}
-
-- (void)checkButtonTapped:(id)sender event:(id)event
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
-    
-    // UIButton *button = (UIButton *)sender;
-    // UITableViewCell *cell = (UITableViewCell *)[button superview];
-    // NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    if (indexPath != nil)
-    {
-        [self tableView: self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-    }
 }
 
 #pragma mark - View lifecycle
@@ -79,13 +52,14 @@
     table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     table.delegate = self;
     
-    if (self.addresses == nil) {
-        self.addresses = [[[ContactListContainer alloc] init] autorelease];
+    if (self.contacts == nil) {
+        self.contacts = [[ContactsDataSource alloc] init];
+        // self.contacts.abContainer = [[[AddressBookContainer alloc] init] autorelease];
     }
     
-    [self.addresses collectAddressBookInfo];
-    table.dataSource = self.addresses;
-    self.addresses.delegate = self;
+    [self.contacts collectAddressBookInfo];
+    table.dataSource = self.contacts;
+    self.contacts.callButtonDelegate = self;
     
     // save the tableView variable, cause we will need it for call button
     self.tableView = table;
@@ -112,7 +86,7 @@
 {
     [super viewWillAppear:animated];
     
-    if (self.addresses.favoritesModified) {
+    if ([self.contacts favoritesModified]) {
         [self.tableView reloadData];
     }
 }
@@ -132,20 +106,31 @@
     
     // NSArray *subViews = [self.navigationController viewControllers];
     // NSLog(@"Num viewControllers: %@", [[self.navigationController viewControllers] count]);
+        
+    PersonContainer *person = [[PersonContainer alloc] init];
+    person.person = [self.contacts personAtIndexPath:indexPath];
+    
+    PersonDataSource *personDS = [[PersonDataSource alloc] init];
+    personDS.person = person;
     
     PersonViewController *personController = [[PersonViewController alloc] init];
+    personController.person = personDS;
     
-    PersonContainer *person = [[PersonContainer alloc] init];
-    person.person = [self.addresses getPersonForPath:indexPath];
-    personController.personContainer = person;
-    person.delegate = personController;
-    person.favoritesListDelegate = self.addresses;
-    
+    // TODO: this is problematic... this is cirucular.. 
+    personDS.callButtonDelegate = personController;
+
     NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
     
     [self.navigationController pushViewController:personController animated:YES];
     
     [personController release];
+}
+
+#pragma mark - CallButtonDelegate
+
+- (void)checkButtonTapped:(id)sender event:(id)event
+{
+    [self.contacts checkButtonTapped:sender event:event tableView:self.tableView];
 }
 
 @end
