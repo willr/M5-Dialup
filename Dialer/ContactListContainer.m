@@ -15,7 +15,9 @@
 
 @implementation ContactListContainer
 
-@synthesize contactList = _contactList, contactLookup = _contactLookup, abContainer = _abContainer;
+@synthesize contactList = _contactList;
+@synthesize contactLookup = _contactLookup;
+@synthesize abContainer = _abContainer;
 
 - (id)init
 {
@@ -45,11 +47,12 @@
           placeInto:(NSMutableDictionary *)dict 
       havingPhoneId:(int)phoneId
 {
+    
     NSString * phoneLabel = (NSString *)key;
     NSMutableDictionary *phoneAttribs = [[NSMutableDictionary alloc] init];
     
-    NSLog(@"key: %@, index: %ld", phoneLabel, index);
-    NSString *copy = (NSString*)ABMultiValueCopyValueAtIndex(phones, index);
+    // NSLog(@"key: %@, index: %ld", phoneLabel, index);
+    NSString *copy = (NSString*)[self.abContainer multiValueCopyValueAtIndex:phones index:index];
     [dict setObject:phoneAttribs forKey:[NSString stringWithFormat:UniquePhoneIdentifierFormat, phoneLabel, index]];
     [phoneAttribs setObject:copy forKey:PersonPhoneNumber];
     [phoneAttribs setObject:[NSNumber numberWithInteger:phoneId] forKey:PersonPhoneId];
@@ -93,10 +96,10 @@
     self.contactList = [[[NSMutableArray alloc] init] autorelease];
     self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
     
-    ABAddressBookRef addressBook =  [self.abContainer AddressBookCreate];
+    ABAddressBookRef addressBook =  [self.abContainer addressBookCreate];
     
-    CFArrayRef allPeople = [self.abContainer AddressBookCopyArrayOfAllPeople:addressBook];
-    CFIndex nPeople = [self.abContainer AddressBookGetPersonCount:addressBook];
+    CFArrayRef allPeople = [self.abContainer addressBookCopyArrayOfAllPeople:addressBook];
+    CFIndex nPeople = [self.abContainer addressBookGetPersonCount:addressBook];
     
     // id of the phoneNumber for selecting, deselecting as favorite
     int phoneId = 0;
@@ -112,10 +115,10 @@
         }
         
         //For username and surname
-        ABMultiValueRef phones = (NSString*)[self.abContainer RecordCopyValue:ref propertyId:kABPersonPhoneProperty];
+        ABMultiValueRef phones = (NSString*)[self.abContainer recordCopyValue:ref propertyId:kABPersonPhoneProperty];
         
         //For Phone number
-        CFIndex phonesCount = [self.abContainer MultiValueGetCount:phones];
+        CFIndex phonesCount = [self.abContainer multiValueGetCount:phones];
         if(phonesCount > 0)
         {
             if (! [self addUserName:ref dOfPerson:dOfPerson])
@@ -127,10 +130,10 @@
             NSMutableDictionary *phoneList = [NSMutableDictionary dictionary];
             NSLog(@"Num PhoneNums: %ld", phonesCount);
             for(CFIndex i = 0; i < phonesCount; i++) {
-                CFStringRef phoneLabel = [self.abContainer MultiValueCopyLabelAtIndex:phones index:i];
+                NSString *phoneLabel = [self.abContainer multiValueCopyLabelAtIndex:phones index:i];
                 NSLog(@"label: %@", phoneLabel);
-                [self getCopyFrom:phones withKey:phoneLabel atIndex:i placeInto:phoneList havingPhoneId:phoneId++];
-                CFRelease(phoneLabel);
+                [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:phoneId++];
+                [phoneLabel release];
             }
             [dOfPerson setObject:phoneList forKey:PersonPhoneList];
             

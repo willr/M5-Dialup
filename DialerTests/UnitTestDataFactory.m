@@ -75,7 +75,7 @@
 {
     UnitTestDataFactory *factory = [[self alloc] init];
 
-    int phoneId = 0;
+    int phoneId = [UnitTestDataFactory standAloneUserPhoneId];
     
     NSDictionary *user = [factory createUserA:phoneId];
     
@@ -100,7 +100,7 @@
 {
     UnitTestDataFactory *factory = [[self alloc] init];
     
-    int phoneId = 0;
+    int phoneId = [UnitTestDataFactory standAloneUserPhoneId];
     
     NSDictionary *user = [factory createUserB:phoneId];
     
@@ -156,7 +156,7 @@
     
     NSArray *contactList = [[NSArray alloc] initWithContentsOfFile:filePath];
     
-    NSAssert(contactList != nil, "Should not be null");
+    NSAssert(contactList != nil, @"Should not be null");
     NSAssert([contactList count] > 1, @"Should have at least on contact in the list");
     
     NSMutableDictionary *contactLookup = [[NSMutableDictionary alloc] init];
@@ -168,6 +168,11 @@
     NSDictionary *contactInfo = [[NSDictionary alloc] initWithObjectsAndKeys:contactList, ContactArrayName, contactLookup, ContactLookupName, nil];
     
     return contactInfo;
+}
+
++ (NSUInteger) standAloneUserPhoneId
+{
+    return [[NSNumber numberWithUnsignedInt:9] unsignedIntValue];
 }
 
 @end

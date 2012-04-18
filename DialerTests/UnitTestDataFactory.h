@@ -18,4 +18,6 @@
 
 + (NSDictionary *) createUserB;
 
++ (NSUInteger) standAloneUserPhoneId;
+
 @end

@@ -28,21 +28,23 @@
 
 @interface PersonContainerTests : SenTestCase
 {
-    PersonContainer *_personContainer;
-    
-    NSDictionary *_contactLookup;
+    PersonContainer         *_personContainer;
+    FavoritePhoneContainer  *_favoritesContainer;
+    NSDictionary            *_contactLookup;
 }
 
-@property (strong, nonatomic) PersonContainer *personContainer;
-@property (strong, nonatomic) NSDictionary *contactLookup;
+@property (strong, nonatomic) PersonContainer           *personContainer;
+@property (strong, nonatomic) FavoritePhoneContainer    *favoritesContainer;
+@property (strong, nonatomic) NSDictionary              *contactLookup;
 
 @end
 
 
 @implementation PersonContainerTests
 
-@synthesize personContainer = _personContainer;
-@synthesize contactLookup = _contactLookup;
+@synthesize personContainer =       _personContainer;
+@synthesize contactLookup =         _contactLookup;
+@synthesize favoritesContainer =    _favoritesContainer;
 
 - (void) setUp 
 {
@@ -50,17 +52,6 @@
     
     self.personContainer = [[PersonContainer alloc] init];
     self.contactLookup = [[UnitTestDataFactory loadContactEntries] objectForKey:ContactLookupName];
-    
-    /*
-     
-    person.person = [self.addresses getPersonForPath:indexPath];
-    person.callButtonDelegate = personController;
-    person.favoritesListDelegate = self.addresses;
-    
-    */
-    
-    
-    // self.personContainer.callButtonDelegate = [OCMockObject niceMockForProtocol: @protocol(CallButtonDelegate)];
 }
 
 - (void)testGetPersonNameAndPhoneNumberForUserB
@@ -88,59 +79,46 @@
     assertThat(found3, equalTo(@"iPhone"));
 }
 
+- (void) testPhoneEntryAtIndexEqualsUserBiPhone
+{
+    NSDictionary *userB = [UnitTestDataFactory createUserB];
+    self.personContainer.person = userB;
+    NSLog(@"UserB entry: %@", userB);
+    
+    NSDictionary *found = [self.personContainer phoneEntryAtIndex:0];
+    NSLog(@"PhoneEntryAtIndex entry: %@", found);
+    
+    NSNumber *phoneId = [found objectForKey:PersonPhoneId];
+    assertThat(phoneId, notNilValue());
+    assertThatInt([phoneId unsignedIntValue], equalToInt([UnitTestDataFactory standAloneUserPhoneId]));
+    NSString *phoneNumber = [found objectForKey:PersonPhoneNumber];
+    assertThat(phoneNumber, equalTo(UserBPhone1));
+    
+}
 
-
-- (void) testToggleAddPhoneNumberAsFavorite
+- (void) testCountOfPhoneEntries
 {
     NSDictionary *person = [self.contactLookup objectForKey:@"Jack Doe"];
     self.personContainer.person = person;
     
-    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:1];
-    NSNumber *phoneId = [phoneEntry objectForKey:PersonPhoneId];
+    NSUInteger retCount = [self.personContainer count];
     
-    assertThatInt([phoneId intValue], equalToInt(8));
-    
-    ToggleImageControl *toggle = [[ToggleImageControl alloc] init];
-    
-    // set the toggled section = 1, which should be iPhone
-    toggle.tag = 1;
-    
-    id favoritesListMock = [OCMockObject mockForProtocol: @protocol(FavoritesListDelegate)];
-    self.personContainer.favoritesListDelegate = favoritesListMock;
-    [[favoritesListMock expect] addFavorite:person phoneId:phoneId];
-    
-    [self.personContainer toggled:toggle];
-    
-    [favoritesListMock verify];
-    
+    assertThatInteger(retCount, equalToInteger(3));
 }
 
-- (void) testToggleRemovePhoneNumberAsFavorite
+- (void) testPhoneIdAtIndex
 {
-    NSDictionary *person = [UnitTestDataFactory createUserB];
+    NSDictionary *person = [self.contactLookup objectForKey:@"Jack Doe"];
     self.personContainer.person = person;
     
-    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:1];
-    NSNumber *phoneId = [phoneEntry objectForKey:PersonPhoneId];
-    [phoneEntry setObject:[NSNumber numberWithBool:true] forKey:PersonIsFavorite];
-    
-    assertThatInt([phoneId intValue], equalToInt(0));
-    
-    ToggleImageControl *toggle = [[ToggleImageControl alloc] init];
-    
-    // set the toggled section = 1, which should be iPhone
-    toggle.tag = 1;
-    
-    id favoritesListMock = [OCMockObject mockForProtocol: @protocol(FavoritesListDelegate)];
-    self.personContainer.favoritesListDelegate = favoritesListMock;
-    [[favoritesListMock expect] removeFavorite:phoneId];
-    
-    [self.personContainer toggled:toggle];
-    
-    [favoritesListMock verify];
+    NSNumber *found1 = [self.personContainer phoneIdAtIndex:0];
+    assertThatInt([found1 intValue], equalToInt(9));
+    NSNumber *found2 = [self.personContainer phoneIdAtIndex:1];
+    assertThatInt([found2 intValue], equalToInt(8));
+    NSNumber *found3 = [self.personContainer phoneIdAtIndex:2];
+    assertThatInt([found3 intValue], equalToInt(7));
 }
+
 
 @end
 

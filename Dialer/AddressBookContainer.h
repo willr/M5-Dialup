@@ -11,16 +11,18 @@
 
 @interface AddressBookContainer : NSObject
 
-- (ABAddressBookRef) AddressBookCreate;
+- (ABAddressBookRef) addressBookCreate;
 
-- (CFArrayRef) AddressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook;
+- (CFArrayRef) addressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook;
 
-- (CFIndex) AddressBookGetPersonCount:(ABAddressBookRef)addressBook;
+- (CFIndex) addressBookGetPersonCount:(ABAddressBookRef)addressBook;
 
-- (ABMultiValueRef) RecordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
+- (ABMultiValueRef) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
 
-- (CFIndex) MultiValueGetCount:(ABMultiValueRef)phones;
+- (CFIndex) multiValueGetCount:(ABMultiValueRef)phones;
 
-- (CFStringRef) MultiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
+- (NSString *) multiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
+
+- (NSString *) multiValueCopyValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
 
 @end

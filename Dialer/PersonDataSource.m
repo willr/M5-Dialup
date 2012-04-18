@@ -87,7 +87,7 @@
     if (isFavorite) {
         toggleControl.activated = false;
         [toggleControl toggleImage];
-        [self.favorites addFavorite:phoneId];
+        // [self.favorites addFavorite:phoneId];
     }
     
     toggleControl.activated = true;

@@ -10,34 +10,39 @@
 
 @implementation AddressBookContainer
 
-- (ABAddressBookRef) AddressBookCreate
+- (ABAddressBookRef) addressBookCreate
 {
     return  ABAddressBookCreate();
 }
 
-- (CFArrayRef) AddressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook
+- (CFArrayRef) addressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook
 {
     return ABAddressBookCopyArrayOfAllPeople(addressBook);
 }
 
-- (CFIndex) AddressBookGetPersonCount:(ABAddressBookRef)addressBook
+- (CFIndex) addressBookGetPersonCount:(ABAddressBookRef)addressBook
 {
     return ABAddressBookGetPersonCount(addressBook);
 }
 
-- (ABMultiValueRef) RecordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
+- (ABMultiValueRef) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
 {
     return (NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty);
 }
 
-- (CFIndex) MultiValueGetCount:(ABMultiValueRef)phones
+- (CFIndex) multiValueGetCount:(ABMultiValueRef)phones
 {
     return ABMultiValueGetCount(phones);
 }
 
-- (CFStringRef) MultiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
+- (NSString *) multiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
 {
-    return ABMultiValueCopyLabelAtIndex(phones, index);
+    return (NSString *)ABMultiValueCopyLabelAtIndex(phones, index);
+}
+
+- (NSString *) multiValueCopyValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
+{
+    return (NSString *)ABMultiValueCopyValueAtIndex(phones, index);
 }
 
 @end
