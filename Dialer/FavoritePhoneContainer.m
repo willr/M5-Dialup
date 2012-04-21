@@ -124,6 +124,45 @@
     return [self.favorites objectAtIndex:pos];
 }
 
+- (NSNumber *) phoneIdAtIndex:(NSInteger)pos
+{
+    NSDictionary *person = [self personAtIndex:pos];
+    
+    // we can return the first found phoneId cause for Favorites, 
+    //  we will only ever have on phoneEntry in the phoneList
+    return [self getFirstFoundPhoneId:person];
+}
+
+- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSInteger)pos
+{
+    NSDictionary *person = [self personAtIndex:pos];
+    
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSString *phoneNumber = [[[phoneList allValues] objectAtIndex:0] objectForKey:PersonPhoneNumber];
+    
+    return [[[NSDictionary alloc] initWithObjectsAndKeys:[person objectForKey:PersonName], PersonName, phoneNumber, PersonPhoneNumber, nil] autorelease];
+    
+}
+
+- (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person
+{
+    NSNumber *phoneId = nil;
+    BOOL found = false;
+    
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSArray *phoneEntries = [phoneList allValues];
+    for (NSMutableDictionary *phoneEntry in phoneEntries) {
+        phoneId = [phoneEntry objectForKey:PersonPhoneId];
+        found = phoneId != nil;
+        
+        if (found) {
+            break;
+        }
+    }
+    
+    return phoneId;
+}
+
 - (NSDictionary *)personFromList:(NSArray *)list phoneId:(NSNumber *)phoneId
 {
     BOOL found = false;

@@ -33,4 +33,6 @@
 
 - (BOOL)isFavorite:(NSNumber *) favoriteId withList:(NSArray *)list;
 
+- (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person;
+
 @end

@@ -222,6 +222,56 @@
     assertThatBool([self.favoriteContainer isFavorite:userBPhoneId withList:self.favoriteContainer.favorites], equalToBool(YES));
 }
 
+- (void) testPhoneIdAtPosition
+{
+    NSDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    
+    NSString *phoneIdFormat = @"_$!<Home>!$__%d";
+    NSDictionary *userA = [contactsLookup objectForKey:UserAName];
+    NSDictionary *userAPhoneEntry = [[userA objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 0]];
+    NSNumber *userAPhoneId = [userAPhoneEntry objectForKey:PersonPhoneId];
+    
+    NSDictionary *userB = [contactsLookup objectForKey:UserBName];
+    NSDictionary *userBPhoneEntry = [[userB objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 3]];
+    NSNumber *userBPhoneId = [userBPhoneEntry objectForKey:PersonPhoneId];
+    
+    [self.favoriteContainer addFavorite:userA phoneId:userAPhoneId];
+    [self.favoriteContainer addFavorite:userB phoneId:userBPhoneId];
+    
+    assertThatInteger([self.favoriteContainer count], equalToInt(2));
+    
+    NSNumber *foundPhoneId = [self.favoriteContainer phoneIdAtIndex:1];
+    
+    assertThat(foundPhoneId, equalTo(userBPhoneId));
+    
+}
+
+- (void) testPersonNameAndPhoneNumberForIndex
+{
+    NSDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    
+    NSString *phoneIdFormat = @"_$!<Home>!$__%d";
+    NSDictionary *userA = [contactsLookup objectForKey:UserAName];
+    NSDictionary *userAPhoneEntry = [[userA objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 0]];
+    NSNumber *userAPhoneId = [userAPhoneEntry objectForKey:PersonPhoneId];
+    
+    NSDictionary *userB = [contactsLookup objectForKey:UserBName];
+    NSDictionary *userBPhoneEntry = [[userB objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 3]];
+    NSNumber *userBPhoneId = [userBPhoneEntry objectForKey:PersonPhoneId];
+    NSString *userBPhoneNumber = [userBPhoneEntry objectForKey:PersonPhoneNumber];
+    
+    [self.favoriteContainer addFavorite:userA phoneId:userAPhoneId];
+    [self.favoriteContainer addFavorite:userB phoneId:userBPhoneId];
+    
+    assertThatInteger([self.favoriteContainer count], equalToInt(2));
+    
+    NSDictionary *personNamePhone = [self.favoriteContainer nameAndPhoneNumberAtIndex:1];
+    
+    assertThat([personNamePhone objectForKey:PersonName], equalTo(UserBName));
+    assertThat([personNamePhone objectForKey:PersonPhoneNumber], equalTo(userBPhoneNumber));
+    
+}
+
 @end
 
 

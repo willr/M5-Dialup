@@ -28,6 +28,10 @@
 
 - (NSDictionary *)personAtIndex:(NSInteger)pos;
 
+- (NSNumber *) phoneIdAtIndex:(NSInteger)pos;
+
 - (NSUInteger)count;
+
+- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSInteger)pos;
 
 @end
