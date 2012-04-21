@@ -24,7 +24,8 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        
+        self.contactList = [[[NSMutableArray alloc] init] autorelease];
+        self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
     }
     return self;
 }
@@ -64,17 +65,17 @@
 
 - (BOOL)addUserName:(ABRecordRef)ref dOfPerson:(NSMutableDictionary *)dOfPerson
 {
-    CFStringRef firstName, lastName;
-    firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-    lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+    NSString *firstName, *lastName;
+    firstName = (NSString *)[self.abContainer recordCopyValue:ref propertyId:kABPersonFirstNameProperty];
+    lastName  = (NSString *)[self.abContainer recordCopyValue:ref propertyId:kABPersonLastNameProperty];
     bool firstEmpty = false;
     bool lastEmpty = false;
     if (firstName == nil) {
-        firstName = (CFStringRef)@"";
+        firstName = @"";
         firstEmpty = true;
     }
     if (lastName == nil) {
-        lastName = (CFStringRef)@"";
+        lastName = @"";
         lastEmpty = true;
     }
     if (firstEmpty && lastEmpty) {
@@ -89,17 +90,63 @@
     return true;
 }
 
+- (void)sortListByPersonName:(NSMutableArray *)contactList
+{
+    // The results are likely to be shown to a user
+    // Note the use of the localizedCaseInsensitiveCompare: selector
+    NSSortDescriptor *nameDescriptor =
+    [[[NSSortDescriptor alloc] initWithKey:PersonName
+                                 ascending:YES
+                                  selector:@selector(localizedCaseInsensitiveCompare:)] autorelease];
+    NSArray *descriptors = [NSArray arrayWithObjects:nameDescriptor, nil];
+    [contactList sortUsingDescriptors:descriptors];
+}
 
+- (void)addContactPhones:(ABRecordRef)ref 
+               dOfPerson:(NSMutableDictionary *)dOfPerson 
+                 phoneId:(int *)phoneId
+             contactList:(NSMutableArray *)contactList
+           contactLookup:(NSMutableDictionary *)contactLookup
+{
+    //For username and surname
+    ABMultiValueRef phones = (NSString*)[self.abContainer recordCopyValue:ref propertyId:kABPersonPhoneProperty];
+    
+    //For Phone number
+    CFIndex phonesCount = [self.abContainer multiValueGetCount:phones];
+    if(phonesCount > 0)
+    {
+        if (! [self addUserName:ref dOfPerson:dOfPerson])
+        {
+            CFRelease(phones);
+            return;
+        }
+        
+        NSMutableDictionary *phoneList = [NSMutableDictionary dictionary];
+        NSLog(@"Num PhoneNums: %ld", phonesCount);
+        for(CFIndex i = 0; i < phonesCount; i++) {
+            NSString *phoneLabel = [self.abContainer multiValueCopyLabelAtIndex:phones index:i];
+            NSLog(@"label: %@", phoneLabel);
+            [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:*phoneId++];
+            [phoneLabel release];
+        }
+        [dOfPerson setObject:phoneList forKey:PersonPhoneList];
+        
+        [self addDistinctUserToList:contactList 
+                             lookup:contactLookup 
+                             person:dOfPerson];
+    }
+    CFRelease(phones);
+}
 
 - (void)collectAddressBookInfo
 {
-    self.contactList = [[[NSMutableArray alloc] init] autorelease];
-    self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
+    // self.contactList = [[[NSMutableArray alloc] init] autorelease];
+    // self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
     
-    ABAddressBookRef addressBook =  [self.abContainer addressBookCreate];
+    [self.abContainer addressBookCreate];
     
-    CFArrayRef allPeople = [self.abContainer addressBookCopyArrayOfAllPeople:addressBook];
-    CFIndex nPeople = [self.abContainer addressBookGetPersonCount:addressBook];
+    CFArrayRef allPeople = (CFArrayRef)[self.abContainer addressBookCopyArrayOfAllPeople];
+    CFIndex nPeople = [self.abContainer addressBookGetPersonCount];
     
     // id of the phoneNumber for selecting, deselecting as favorite
     int phoneId = 0;
@@ -114,57 +161,33 @@
             continue;
         }
         
-        //For username and surname
-        ABMultiValueRef phones = (NSString*)[self.abContainer recordCopyValue:ref propertyId:kABPersonPhoneProperty];
-        
-        //For Phone number
-        CFIndex phonesCount = [self.abContainer multiValueGetCount:phones];
-        if(phonesCount > 0)
-        {
-            if (! [self addUserName:ref dOfPerson:dOfPerson])
-            {
-                CFRelease(phones);
-                continue;
-            }
-            
-            NSMutableDictionary *phoneList = [NSMutableDictionary dictionary];
-            NSLog(@"Num PhoneNums: %ld", phonesCount);
-            for(CFIndex i = 0; i < phonesCount; i++) {
-                NSString *phoneLabel = [self.abContainer multiValueCopyLabelAtIndex:phones index:i];
-                NSLog(@"label: %@", phoneLabel);
-                [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:phoneId++];
-                [phoneLabel release];
-            }
-            [dOfPerson setObject:phoneList forKey:PersonPhoneList];
-            
-            [self addDistinctUserToList:self.contactList 
-                                 lookup:self.contactLookup 
-                                 person:dOfPerson];
-        }
-        CFRelease(phones);
+        [self addContactPhones:ref 
+                     dOfPerson:dOfPerson 
+                       phoneId:&phoneId 
+                   contactList:self.contactList 
+                 contactLookup:self.contactLookup];
     }
     NSAssert(addrCount > 0, @"Failed to find any people in the current address book");
     // _favoriteList = [[NSMutableArray alloc] init];
     // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:0 phoneIndex:1]];
     // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:1 phoneIndex:0]];
     
-    // The results are likely to be shown to a user
-    // Note the use of the localizedCaseInsensitiveCompare: selector
-    NSSortDescriptor *nameDescriptor =
-        [[[NSSortDescriptor alloc] initWithKey:PersonName
-                                     ascending:YES
-                                      selector:@selector(localizedCaseInsensitiveCompare:)] autorelease];
-    NSArray *descriptors = [NSArray arrayWithObjects:nameDescriptor, nil];
-    [self.contactList sortUsingDescriptors:descriptors];
+    [self sortListByPersonName:self.contactList];
     
     NSLog(@"array is %@", self.contactList);
     
     CFRelease(allPeople);
     // CFRelease(addressBook);
-    
 }
 
-
-
-
 @end
+
+
+
+
+
+
+
+
+
+//

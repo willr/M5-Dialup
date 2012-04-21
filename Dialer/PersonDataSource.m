@@ -117,7 +117,7 @@
     if (isFavorite) {
         [self.favorites removeFavorite:phoneId];
     } else {
-        [self.favorites addFavorite:phoneId];
+        [self.favorites addFavorite:self.person.person phoneId:phoneId];
     }
 }
 

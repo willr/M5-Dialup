@@ -18,6 +18,10 @@
 
 - (BOOL)addUserName:(ABRecordRef)ref dOfPerson:(NSMutableDictionary *)dOfPerson;
 
-- (void)collectAddressBookInfo;
+- (void)addContactPhones:(ABRecordRef)ref 
+               dOfPerson:(NSMutableDictionary *)dOfPerson 
+                 phoneId:(int *)phoneId
+             contactList:(NSMutableArray *)contactList
+           contactLookup:(NSMutableDictionary *)contactLookup;
 
 @end

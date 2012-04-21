@@ -18,10 +18,11 @@
 }
 
 @property (nonatomic) BOOL favoritesModified;
+@property (nonatomic, strong) NSMutableArray *favorites;
 
 - (void)removeFavorite:(NSNumber *)phoneId;
 
-- (void)addFavorite:(NSNumber *)phoneId;
+- (void)addFavorite:(NSDictionary *)person phoneId:(NSNumber *)phoneId;
 
 - (BOOL)isFavorite:(NSNumber *) phoneId;
 
@@ -29,6 +30,6 @@
 
 - (NSUInteger)count;
 
-- (NSDictionary *)findPhoneEntryForPhoneId:(NSNumber *)phoneId;
+- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
 
 @end

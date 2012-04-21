@@ -73,6 +73,32 @@
     assertThatBool(found, equalToBool(true));
 }
 
+- (void) testGetFirstPhoneId
+{
+    NSDictionary *person = [UnitTestDataFactory createUserB];
+    
+    
+    NSNumber *phoneId = [UnitTestDataFactory getFirstFoundPhoneId:person];
+    
+    assertThat(phoneId, equalTo([NSNumber numberWithInt:10]));
+    
+    NSMutableArray *foundPhoneIds = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *phoneEntry in [[person objectForKey:PersonPhoneList] allValues]) {
+        NSNumber *phoneId = [phoneEntry objectForKey:PersonPhoneId];
+        
+        
+        BOOL found = [foundPhoneIds containsObject:phoneId];
+        if (found) {
+            
+            NSLog(@"Found duplicated phoneId: %@", phoneId);
+            [NSException raise:@"Found duplicated phoneId value" format:@"phoneId %d is a duplicate", [phoneId intValue]];        
+        }
+        
+        [foundPhoneIds addObject:phoneId];
+    }
+}
+
 @end
 
 

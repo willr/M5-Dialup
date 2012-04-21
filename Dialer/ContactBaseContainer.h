@@ -14,8 +14,6 @@
 
 - (NSString *) getPhoneLabelForDisplay: (NSString *) label;
 
-- (NSNumber*) getFirstFoundPhoneId: (NSDictionary*) person ;
-
 - (void)addDistinctUserToList:(NSMutableArray *)list 
                        lookup:(NSMutableDictionary *)hashedList 
                        person:(NSDictionary *)person;

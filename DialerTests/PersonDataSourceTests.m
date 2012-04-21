@@ -91,7 +91,10 @@
     BOOL fav = NO;
     [[[self.personContainerMock stub] andReturn:phoneId] phoneIdAtIndex:1];
     [[[self.favortiesContainerMock stub] andReturnValue:OCMOCK_VALUE(fav)] isFavorite:phoneId];
-    [[self.favortiesContainerMock expect] addFavorite:phoneId];
+    
+    NSDictionary *userA = [UnitTestDataFactory createUserA];
+    [[[self.personContainerMock stub] andReturn:userA] person];
+    [[self.favortiesContainerMock expect] addFavorite:userA phoneId:phoneId];
     
     [self.personDataSource toggled:toggle];
     

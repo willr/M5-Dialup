@@ -8,26 +8,50 @@
 
 #import "AddressBookContainer.h"
 
+@interface AddressBookContainer ()
+{
+    ABAddressBookRef _addressBookRef;
+}
+
+@property (nonatomic) ABAddressBookRef addressBookRef;
+
+@end
+
 @implementation AddressBookContainer
 
-- (ABAddressBookRef) addressBookCreate
+@synthesize addressBookRef = _addressBookRef;
+
+- (id) init
 {
-    return  ABAddressBookCreate();
+    self = [super init];
+    if (self != nil) {
+        // initialization code here
+        
+    }
+    
+    return self;
 }
 
-- (CFArrayRef) addressBookCopyArrayOfAllPeople:(ABAddressBookRef)addressBook
+- (void) addressBookCreate
 {
-    return ABAddressBookCopyArrayOfAllPeople(addressBook);
+    self.addressBookRef = ABAddressBookCreate();
+    
+    return;
 }
 
-- (CFIndex) addressBookGetPersonCount:(ABAddressBookRef)addressBook
+- (NSString *) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
 {
-    return ABAddressBookGetPersonCount(addressBook);
+    return ABRecordCopyValue(ref, propertyId);
 }
 
-- (ABMultiValueRef) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
+- (NSArray *) addressBookCopyArrayOfAllPeople
 {
-    return (NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty);
+    return (NSArray *)ABAddressBookCopyArrayOfAllPeople(self.addressBookRef);
+}
+
+- (CFIndex) addressBookGetPersonCount
+{
+    return ABAddressBookGetPersonCount(self.addressBookRef);
 }
 
 - (CFIndex) multiValueGetCount:(ABMultiValueRef)phones

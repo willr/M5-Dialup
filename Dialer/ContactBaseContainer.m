@@ -41,25 +41,6 @@
 }
 
 
-- (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person
-{
-    NSNumber *phoneId = nil;
-    BOOL found = false;
-    
-    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSArray *phoneEntries = [phoneList allValues];
-    for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        phoneId = [phoneEntry objectForKey:PersonPhoneId];
-        found = [phoneId isEqualToNumber:phoneId];
-        
-        if (found) {
-            break;
-        }
-    }
-    
-    return phoneId;
-}
-
 - (NSString *)getPhoneNumberDigitsRegex:(NSString *)phoneNumber
 {
     // Setup an NSError object to catch any failures

@@ -18,13 +18,13 @@
                       phoneEntryList:(NSMutableDictionary *)phoneEntries;
 
 - (NSDictionary *) createTestUserWithName:(NSString *)name 
-                                  phoneId:(int)phoneId 
+                                  phoneId:(int *)phoneId 
                         phoneEntryFormats:(NSArray *)formats 
                          phoneEntryValues:(NSArray *)values;
 
-- (NSDictionary *) createUserA:(int)phoneId;
+- (NSDictionary *) createUserA:(int *)phoneId;
 
-- (NSDictionary *) createUserB:(int)phoneId;
+- (NSDictionary *) createUserB:(int *)phoneId;
 
 @end
 
@@ -46,7 +46,7 @@
 }
 
 - (NSDictionary *) createTestUserWithName:(NSString *)name 
-                        phoneId:(int)phoneId 
+                        phoneId:(int *)phoneId
               phoneEntryFormats:(NSArray *)formats 
                phoneEntryValues:(NSArray *)values
 {
@@ -63,7 +63,7 @@
         NSLog(@"using format: %@", format);
         NSLog(@"using value: %@", value);
         
-        [self createEntryPhoneId:phoneId phoneIdFormat:format phoneNumber:value phoneEntryList:phoneEntriesList];
+        [self createEntryPhoneId:(*phoneId)++ phoneIdFormat:format phoneNumber:value phoneEntryList:phoneEntriesList];
     }
     
     [person setObject:phoneEntriesList forKey:PersonPhoneList];
@@ -76,8 +76,10 @@
     UnitTestDataFactory *factory = [[self alloc] init];
 
     int phoneId = [UnitTestDataFactory standAloneUserPhoneId];
+    int *phoneIdRef = malloc(sizeof(int));
+    *phoneIdRef = phoneId;
     
-    NSDictionary *user = [factory createUserA:phoneId];
+    NSDictionary *user = [factory createUserA:phoneIdRef];
     
     // delete the factory
     [factory release];
@@ -85,7 +87,7 @@
     return user;
 }
 
-- (NSDictionary *) createUserA:(int)phoneId
+- (NSDictionary *) createUserA:(int *)phoneId
 {
     
     NSArray *formats = [[NSArray alloc] initWithObjects:@"_$!<Home>!$__%d", @"iPhone__%d", nil];
@@ -101,8 +103,10 @@
     UnitTestDataFactory *factory = [[self alloc] init];
     
     int phoneId = [UnitTestDataFactory standAloneUserPhoneId];
+    int *phoneIdRef = malloc(sizeof(int));
+    *phoneIdRef = phoneId;
     
-    NSDictionary *user = [factory createUserB:phoneId];
+    NSDictionary *user = [factory createUserB:phoneIdRef];
     
     // delete the factory
     [factory release];
@@ -110,7 +114,7 @@
     return user;
 }
 
-- (NSDictionary *) createUserB:(int)phoneId
+- (NSDictionary *) createUserB:(int *)phoneId
 {
     NSArray *formats = [[NSArray alloc] initWithObjects:@"iPhone__%d", @"_$!<Home>!$__%d", nil];
     NSArray *values = [[NSArray alloc] initWithObjects:UserBPhone1, UserBPhone2, nil];
@@ -125,12 +129,14 @@
     UnitTestDataFactory *factory = [[self alloc] init];
 
     int phoneId = 0;
+    int *phoneIdRef = malloc(sizeof(int));
+    *phoneIdRef = phoneId;
     
     // person UserA
-    NSDictionary *userA = [factory createUserA:phoneId++];
+    NSDictionary *userA = [factory createUserA:phoneIdRef];
     
     // person UserB
-    NSDictionary *userB = [factory createUserB:phoneId++];
+    NSDictionary *userB = [factory createUserB:phoneIdRef];
     
     NSArray *contactList = [[NSArray alloc] initWithObjects:userA, userB, nil];
     NSDictionary *contactLookup = [[NSDictionary alloc] initWithObjectsAndKeys:userA, UserAName, userB, UserBName, nil];
@@ -173,6 +179,25 @@
 + (NSUInteger) standAloneUserPhoneId
 {
     return [[NSNumber numberWithUnsignedInt:9] unsignedIntValue];
+}
+
++ (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person
+{
+    NSNumber *phoneId = nil;
+    BOOL found = false;
+    
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSArray *phoneEntries = [phoneList allValues];
+    for (NSMutableDictionary *phoneEntry in phoneEntries) {
+        phoneId = [phoneEntry objectForKey:PersonPhoneId];
+        found = [phoneId isEqualToNumber:phoneId];
+        
+        if (found) {
+            break;
+        }
+    }
+    
+    return phoneId;
 }
 
 @end

@@ -38,6 +38,9 @@ NSString * const PersonPhoneNumber = @"phoneNumber";
 // just the digits of the phone number entry for that person
 NSString * const PersonPhoneNumberDigits = @"phoneDigits";
 
+// reference to the person object inside a favorite (for unfavoriting)
+NSString * const FavoritePersonRefName = @"personRef";
+
 // format strings, used in building strings for the dictionaries
 // @"%@ %@"		- name in person dict
 NSString * const PersonNameFormat = @"%@ %@";

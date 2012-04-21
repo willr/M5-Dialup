@@ -60,7 +60,7 @@
     NSLog(@"PersonContainer: %@", self.personContainer.person);
     
     // get retreieve the second phone number in the phone entries list
-    NSDictionary *returnedPerson = [self.personContainer nameAndPhoneNumberAtIndex:1];
+    NSDictionary *returnedPerson = [self.personContainer nameAndPhoneNumberAtIndex:0];
     
     assertThat([returnedPerson objectForKey:PersonName], equalTo(UserBName));
     assertThat([returnedPerson objectForKey:PersonPhoneNumber], equalTo(UserBPhone2));
@@ -85,7 +85,7 @@
     self.personContainer.person = userB;
     NSLog(@"UserB entry: %@", userB);
     
-    NSDictionary *found = [self.personContainer phoneEntryAtIndex:0];
+    NSDictionary *found = [self.personContainer phoneEntryAtIndex:1];
     NSLog(@"PhoneEntryAtIndex entry: %@", found);
     
     NSNumber *phoneId = [found objectForKey:PersonPhoneId];

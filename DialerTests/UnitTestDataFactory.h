@@ -20,4 +20,6 @@
 
 + (NSUInteger) standAloneUserPhoneId;
 
++ (NSNumber*) getFirstFoundPhoneId: (NSDictionary *) person;
+
 @end

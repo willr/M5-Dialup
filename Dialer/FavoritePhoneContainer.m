@@ -11,14 +11,22 @@
 
 @interface FavoritePhoneContainer ()
 
-@property (nonatomic, strong) NSMutableArray *favorites;
-
 @end
 
 @implementation FavoritePhoneContainer
 
 @synthesize favoritesModified = _favoritesModified;
 @synthesize favorites = _favorites;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+        self.favorites = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 - (NSUInteger)count
 {
@@ -27,30 +35,56 @@
 
 - (void)removeFavorite:(NSNumber *)phoneId
 {
-    // [_favoriteList removeObjectAtIndex:[index intValue]];
+    NSDictionary *phoneEntry = [self getPhoneEntryFromList:self.favorites forPhoneId:phoneId];
+    NSDictionary *personRef = [phoneEntry objectForKey:FavoritePersonRefName];
+    if (personRef == nil) {
+        NSString *errorText = [NSString stringWithFormat:@"PersonRef cannot be nil, phoneId: %d", [phoneId intValue]];
+        NSAssert(personRef == nil, errorText);
+    }
     
+    [self modifyFavoriteStatusOnPerson:personRef phoneId:phoneId status:NO];
     [self modifyFavoriteStatus:self.favorites phoneId:phoneId status:NO];
-    // [self modifyFavoriteStatus:_contactList phoneId:phoneId status:NO];
     
     self.favoritesModified = true;
 }
 
-
-- (void)addFavorite:(NSNumber *)phoneId
+- (void)addFavorite:(NSDictionary *)person phoneId:(NSNumber *)phoneId
 {
-    NSDictionary *phoneEntry = [self findPhoneEntryForPhoneId:phoneId];
+    if ([self isFavorite:phoneId]) {
+        return;
+    }
     
-    // TODO: this broken!!!, should do something with distinct, or the same name can be added twice
-    [self.favorites addObject:phoneEntry];
+    NSInteger foundPhoneIndex = [self withPerson:person getPhoneIndexForPhoneId:phoneId];
+    NSDictionary *favorite = [self createNewFavoriteFromContact:person phoneIndex:foundPhoneIndex];
     
-    // phoneId = [self getFirstFoundPhoneId:personPhone];    
+    [self.favorites addObject:favorite];
     
-    [self modifyFavoriteStatus:self.favorites phoneId:phoneId status:NO];
-    // [self modifyFavoriteStatus:_contactList phoneId:phoneId status:NO];
+    [self modifyFavoriteStatusOnPerson:person phoneId:phoneId status:YES];
+    [self modifyFavoriteStatusOnPerson:favorite phoneId:phoneId status:YES];
     
     _favoritesModified = true;
 }
-
+                              
+- (NSInteger) withPerson:(NSDictionary *)person getPhoneIndexForPhoneId:(NSNumber *)phoneId
+{
+    BOOL found = false;
+    BOOL foundPhoneId = false;
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSArray *phoneEntries = [phoneList allValues];
+    NSInteger i = 0;
+    for (NSMutableDictionary *phoneEntry in phoneEntries) {
+        NSNumber *phoneIdToCheck = [phoneEntry objectForKey:PersonPhoneId];
+        found = [phoneId isEqualToNumber:phoneIdToCheck];
+        
+        if (found) {
+            foundPhoneId = true;
+            break;
+        }
+        i++;
+    }
+    
+    return foundPhoneId ? i : -1;
+}
 
 - (BOOL)isFavorite:(NSNumber *) favoriteId
 {
@@ -80,15 +114,74 @@
 {
     return [self.favorites objectAtIndex:pos];
 }
-                            
-- (NSDictionary *)findPhoneEntryForPhoneId:(NSNumber *)phoneId
+
+- (NSDictionary *)personFromList:(NSArray *)list phoneId:(NSNumber *)phoneId
 {
-    return nil;
+    BOOL found = false;
+    NSDictionary *foundPerson = nil;
+    for (NSDictionary *person in list) {
+        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+        for (NSDictionary *phoneEntry in [phoneList allValues]) {
+            NSNumber *foundPhoneId = [phoneEntry objectForKey:PersonPhoneId];
+            found = [foundPhoneId isEqualToNumber:phoneId];
+            if (found) {
+                foundPerson = person;
+                break;
+            }
+        }
+        if (found) {
+            break;
+        }
+    }
+    
+    return foundPerson;
 }
 
+- (NSDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId
+{
+    BOOL found = false;
+    NSDictionary *foundPhoneEntry = nil;
+    
+    for (NSDictionary *person in list) {
+        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+        NSArray *phoneEntries = [phoneList allValues];
+        for (NSDictionary *phoneEntry in phoneEntries) {
+            NSNumber *storedPhoneId = [phoneEntry objectForKey:PersonPhoneId];
+            found = [phoneId isEqualToNumber:storedPhoneId];
+            if (found) {
+                foundPhoneEntry = phoneEntry;
+                break;
+            }
+        }
+        
+        if (found) {
+            break;
+        }
+    }
+
+    return foundPhoneEntry;
+}
+                            
+- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId
+{
+    BOOL found = false;
+    NSDictionary *foundPhoneEntry = nil;
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSArray *phoneEntries = [phoneList allValues];
+    for (NSMutableDictionary *phoneEntry in phoneEntries) {
+        NSNumber *phoneIdToCheck = [phoneEntry objectForKey:PersonPhoneId];
+        found = [phoneId isEqualToNumber:phoneIdToCheck];
+        
+        if (found) {
+            foundPhoneEntry = phoneEntry;
+            break;
+        }
+    }
+    
+    return foundPhoneEntry;
+}
 
 - (NSDictionary *)createNewFavoriteFromContact:(NSDictionary *)person 
-                                  contactIndex:(int)contactIndex 
                                     phoneIndex:(int)phoneIndex
 {
     NSMutableDictionary *fav = [[[NSMutableDictionary alloc] init] autorelease];
@@ -113,7 +206,6 @@
     NSDictionary *contact = [contactList objectAtIndex:contactIndex];
     
     return [self createNewFavoriteFromContact:contact 
-                                 contactIndex:contactIndex 
                                    phoneIndex:phoneIndex];
 }
 
@@ -131,6 +223,15 @@
         
         if (found) {
             [phoneEntry setObject:[NSNumber numberWithBool:status] forKey:PersonIsFavorite];
+            
+            if (status == true) {
+                // this is for unfavoriting, as we only have the phoneId when unfavoriting
+                [phoneEntry setObject:person forKey:FavoritePersonRefName];
+            } else {
+                // this is for unfavoriting, as we only have the phoneId when unfavoriting
+                [phoneEntry setObject:nil forKey:FavoritePersonRefName];
+            }
+            
             break;
         }
     }
@@ -155,29 +256,27 @@
 
 - (BOOL)getFavoriteStatusFromList:(NSArray *)list phoneId:(NSNumber *)phoneId
 {
-    BOOL found = false;
     BOOL isFavorite = false;
     NSNumber *yesFavorite = [NSNumber numberWithBool:YES];
     
-    for (NSDictionary *person in list) {
-        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-        NSArray *phoneEntries = [phoneList allValues];
-        for (NSDictionary *phoneEntry in phoneEntries) {
-            NSNumber *storedPhoneId = [phoneEntry objectForKey:PersonPhoneId];
-            found = [phoneId isEqualToNumber:storedPhoneId];
-            if (found) {
-                NSNumber *isFavoriteStored = [phoneEntry objectForKey:PersonIsFavorite];
-                isFavorite = [isFavoriteStored isEqualToNumber:yesFavorite];;
-                break;
-            }
-        }
-        
-        if (found) {
-            break;
-        }
+    NSDictionary *foundPhoneEntry = [self getPhoneEntryFromList:list forPhoneId:phoneId];
+    if (foundPhoneEntry != nil) {
+        NSNumber *isFavoriteStored = [foundPhoneEntry objectForKey:PersonIsFavorite];
+        isFavorite = [isFavoriteStored isEqualToNumber:yesFavorite];
     }
     
     return isFavorite;
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+// 

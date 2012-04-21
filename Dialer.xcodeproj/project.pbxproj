@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */; };
+		AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */; };
 		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListContainerTests.m; sourceTree = "<group>"; };
 		AF01AD9D153F627600802DFC /* ContactListContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContactListContainer+PrivateMethods.h"; sourceTree = "<group>"; };
+		AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhoneContainerTests.m; sourceTree = "<group>"; };
 		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -252,12 +254,13 @@
 				AF1878F614ECD4350033A7C3 /* Supporting Files */,
 				AF643AA1153CA6280041B7D1 /* UnitTestDataFactory.h */,
 				AF643AA2153CA6280041B7D1 /* UnitTestDataFactory.m */,
+				AF643AAE153CD6950041B7D1 /* UnitTestDataFactoryTests.m */,
 				AF643AA4153CA7950041B7D1 /* UnitTestConstants.h */,
 				AF643AA5153CA7950041B7D1 /* UnitTestConstants.m */,
-				AF643AAE153CD6950041B7D1 /* UnitTestDataFactoryTests.m */,
 				AF643A9F153CA5AC0041B7D1 /* PersonContainerTests.m */,
 				AF643AC1153E28BE0041B7D1 /* PersonDataSourceTests.m */,
 				AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */,
+				AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */,
 			);
 			path = DialerTests;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				AF643AAF153CD6950041B7D1 /* UnitTestDataFactoryTests.m in Sources */,
 				AF643AC2153E28BF0041B7D1 /* PersonDataSourceTests.m in Sources */,
 				AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */,
+				AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

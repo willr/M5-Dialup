@@ -11,7 +11,6 @@
 @interface FavoritePhoneContainer (PrivateMethods)
 
 - (NSDictionary *) createNewFavoriteFromContact: (NSDictionary *) person  
-                                   contactIndex: (int) contactIndex 
                                      phoneIndex: (int) phoneIndex ;
 
 - (NSDictionary *)createFavoriteFromContactList:(NSArray *)contactList 
@@ -25,4 +24,11 @@
 - (void) modifyFavoriteStatus: (NSArray*) list 
                       phoneId: (NSNumber*) phoneId 
                        status: (BOOL) status ;
+
+- (NSInteger) withPerson:(NSDictionary *)person getPhoneIndexForPhoneId:(NSNumber *)phoneId;
+
+- (NSDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId;
+
+- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
+
 @end
