@@ -126,9 +126,15 @@
 
 + (NSDictionary *)createContactEntries
 {
+    int phoneId = 0;
+    return [self createContactEntriesWithStartingPhoneId:phoneId];
+    
+}
+
++ (NSDictionary *)createContactEntriesWithStartingPhoneId:(int)phoneId
+{
     UnitTestDataFactory *factory = [[self alloc] init];
 
-    int phoneId = 0;
     int *phoneIdRef = malloc(sizeof(int));
     *phoneIdRef = phoneId;
     
@@ -138,8 +144,8 @@
     // person UserB
     NSDictionary *userB = [factory createUserB:phoneIdRef];
     
-    NSArray *contactList = [[NSArray alloc] initWithObjects:userA, userB, nil];
-    NSDictionary *contactLookup = [[NSDictionary alloc] initWithObjectsAndKeys:userA, UserAName, userB, UserBName, nil];
+    NSMutableArray *contactList = [[NSMutableArray alloc] initWithObjects:userA, userB, nil];
+    NSMutableDictionary *contactLookup = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userA, UserAName, userB, UserBName, nil];
     
     NSDictionary *contactInfo = [[NSDictionary alloc] initWithObjectsAndKeys:contactList, ContactArrayName, contactLookup, ContactLookupName, nil];
     
@@ -198,6 +204,31 @@
     }
     
     return phoneId;
+}
+
++ (NSMutableDictionary *) createMutableCopyFromReadonly:(NSDictionary *)person
+{
+    NSMutableDictionary *copy = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *copyPhoneList = [[NSMutableDictionary alloc] init];
+    NSDictionary *personPhoneList = [person objectForKey:PersonPhoneList];
+    
+    NSEnumerator *phoneListEnumerator = [personPhoneList keyEnumerator];
+    for (NSString *key in phoneListEnumerator) {
+        NSMutableDictionary *copyPhoneEntry = [[NSMutableDictionary alloc] init];
+        
+        NSDictionary *personPhoneEntry = [personPhoneList objectForKey:key];
+        NSEnumerator *phoneEntryEnumerator = [personPhoneEntry keyEnumerator];
+        for (NSString *entryKey in phoneEntryEnumerator) {
+            [copyPhoneEntry setValue:[personPhoneEntry objectForKey:entryKey] forKey:entryKey];
+        }
+        
+        [copyPhoneList setValue:copyPhoneEntry forKey:key];
+    }
+    
+    [copy setValue:copyPhoneList forKey:PersonPhoneList];
+    [copy setValue:[person objectForKey:PersonName] forKey:PersonName];
+    
+    return copy;
 }
 
 @end

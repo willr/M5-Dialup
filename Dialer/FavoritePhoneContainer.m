@@ -45,6 +45,8 @@
     [self modifyFavoriteStatusOnPerson:personRef phoneId:phoneId status:NO];
     [self modifyFavoriteStatus:self.favorites phoneId:phoneId status:NO];
     
+    [self.favorites removeObject:[self personFromList:self.favorites phoneId:phoneId]];
+    
     self.favoritesModified = true;
 }
 
@@ -88,9 +90,16 @@
 
 - (BOOL)isFavorite:(NSNumber *) favoriteId
 {
+    BOOL found = [self isFavorite:favoriteId withList:self.favorites];
+    
+    return found;
+}
+
+- (BOOL)isFavorite:(NSNumber *) favoriteId withList:(NSArray *)list
+{
     BOOL found = false;
     
-    for (NSDictionary *person in self.favorites) {
+    for (NSDictionary *person in list) {
         NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
         NSArray *phoneEntries = [phoneList allValues];
         NSNumber *phoneId;
@@ -229,7 +238,7 @@
                 [phoneEntry setObject:person forKey:FavoritePersonRefName];
             } else {
                 // this is for unfavoriting, as we only have the phoneId when unfavoriting
-                [phoneEntry setObject:nil forKey:FavoritePersonRefName];
+                [phoneEntry removeObjectForKey:FavoritePersonRefName];
             }
             
             break;

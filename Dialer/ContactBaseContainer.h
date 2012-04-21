@@ -18,4 +18,6 @@
                        lookup:(NSMutableDictionary *)hashedList 
                        person:(NSDictionary *)person;
 
+- (NSString *)getPhoneNumberDigitsRegex:(NSString *)phoneNumber;
+
 @end

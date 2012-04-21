@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */; };
 		AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */; };
+		AF01ADAD1543332A00802DFC /* ContactBaseContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */; };
 		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
@@ -28,11 +29,8 @@
 		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
 		AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5A0BED1519A04400A6B3A9 /* Security.framework */; };
 		AF5A0BF11519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */; };
-		AF5A0BF21519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF01519A43900A6B3A9 /* KeychainItemWrapper.m */; };
 		AF5A0BF51519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
-		AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF41519B15000A6B3A9 /* SecureData.m */; };
 		AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
-		AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */; };
 		AF643A9A153BC1EE0041B7D1 /* AddressBookContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643A99153BC1EE0041B7D1 /* AddressBookContainer.m */; };
 		AF643AA0153CA5AC0041B7D1 /* PersonContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643A9F153CA5AC0041B7D1 /* PersonContainerTests.m */; };
 		AF643AA3153CA6280041B7D1 /* UnitTestDataFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AA2153CA6280041B7D1 /* UnitTestDataFactory.m */; };
@@ -75,6 +73,7 @@
 		AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListContainerTests.m; sourceTree = "<group>"; };
 		AF01AD9D153F627600802DFC /* ContactListContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContactListContainer+PrivateMethods.h"; sourceTree = "<group>"; };
 		AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhoneContainerTests.m; sourceTree = "<group>"; };
+		AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactBaseContainerTests.m; sourceTree = "<group>"; };
 		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -261,6 +260,7 @@
 				AF643AC1153E28BE0041B7D1 /* PersonDataSourceTests.m */,
 				AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */,
 				AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */,
+				AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */,
 			);
 			path = DialerTests;
 			sourceTree = "<group>";
@@ -510,9 +510,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */,
-				AF5A0BF21519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */,
-				AF5A0BF61519B15100A6B3A9 /* SecureData.m in Sources */,
-				AF5A0BFB1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 				AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
 				AF643AA0153CA5AC0041B7D1 /* PersonContainerTests.m in Sources */,
 				AF643AA3153CA6280041B7D1 /* UnitTestDataFactory.m in Sources */,
@@ -521,6 +518,7 @@
 				AF643AC2153E28BF0041B7D1 /* PersonDataSourceTests.m in Sources */,
 				AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */,
 				AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */,
+				AF01ADAD1543332A00802DFC /* ContactBaseContainerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

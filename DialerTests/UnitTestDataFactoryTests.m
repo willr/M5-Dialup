@@ -77,7 +77,6 @@
 {
     NSDictionary *person = [UnitTestDataFactory createUserB];
     
-    
     NSNumber *phoneId = [UnitTestDataFactory getFirstFoundPhoneId:person];
     
     assertThat(phoneId, equalTo([NSNumber numberWithInt:10]));
@@ -97,6 +96,17 @@
         
         [foundPhoneIds addObject:phoneId];
     }
+}
+
+- (void) testCreateMutableCopyFromReadonly
+{
+    NSDictionary *contactInfo = [UnitTestDataFactory loadContactEntries];
+    NSDictionary *contactLookup = [contactInfo objectForKey:ContactLookupName];
+    NSDictionary *person = [contactLookup objectForKey:@"Jack Doe"];
+    
+    NSMutableDictionary *personCopy = [UnitTestDataFactory createMutableCopyFromReadonly:person];
+    
+    NSLog(@"personCopy: %@", personCopy);
 }
 
 @end

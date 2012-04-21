@@ -14,6 +14,8 @@
 
 + (NSDictionary *) createContactEntries;
 
++ (NSDictionary *)createContactEntriesWithStartingPhoneId:(int)phoneId;
+
 + (NSDictionary *) createUserA;
 
 + (NSDictionary *) createUserB;
@@ -21,5 +23,7 @@
 + (NSUInteger) standAloneUserPhoneId;
 
 + (NSNumber*) getFirstFoundPhoneId: (NSDictionary *) person;
+
++ (NSMutableDictionary *) createMutableCopyFromReadonly:(NSDictionary *)person;
 
 @end

@@ -15,7 +15,7 @@
 
 - (NSDictionary *)createFavoriteFromContactList:(NSArray *)contactList 
                                    contactIndex:(int)contactIndex 
-                                     phoneIndex:(int)phoneIndex
+                                     phoneIndex:(int)phoneIndex;
 
 - (BOOL) modifyFavoriteStatusOnPerson: (NSDictionary*) person 
                               phoneId: (NSNumber *)phoneId 
@@ -30,5 +30,7 @@
 - (NSDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId;
 
 - (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
+
+- (BOOL)isFavorite:(NSNumber *) favoriteId withList:(NSArray *)list;
 
 @end

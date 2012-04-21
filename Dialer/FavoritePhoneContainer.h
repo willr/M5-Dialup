@@ -30,6 +30,4 @@
 
 - (NSUInteger)count;
 
-- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
-
 @end
