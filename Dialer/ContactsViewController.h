@@ -25,10 +25,10 @@
     id<DialContactDelegate> _dialerDelegate;
 }
 
-@property (strong, nonatomic) ContactsDataSource        *contacts;
+@property (retain, nonatomic) ContactsDataSource        *contacts;
 
-@property (strong, nonatomic) UITableView               *tableView;
-@property (strong, nonatomic) id<DialContactDelegate>   dialerDelegate;
+@property (retain, nonatomic) UITableView               *tableView;
+@property (retain, nonatomic) id<DialContactDelegate>   dialerDelegate;
 
 
 @end

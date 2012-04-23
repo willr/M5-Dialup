@@ -122,13 +122,13 @@
     
     NSDictionary *phones = [person objectForKey:PersonPhoneList];
     [phones enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-     {
+    {
          NSLog(@"%@ has number %@", key, obj);
          NSString *phoneNum = [obj objectForKey:PersonPhoneNumber];
          cell.detailTextLabel.text = [NSString stringWithFormat:PhoneNumberDisplayFormat, 
                                       [self.contacts getPhoneLabelForDisplay:key], phoneNum];
          *stop = YES;
-     }];
+    }];
     
     UIButton *callButton;
     callButton = [self configureCallButton];

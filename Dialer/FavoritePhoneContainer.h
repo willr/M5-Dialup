@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic) BOOL favoritesModified;
-@property (nonatomic, strong) NSMutableArray *favorites;
+@property (nonatomic, retain) NSMutableArray *favorites;
 
 - (void)removeFavorite:(NSNumber *)phoneId;
 

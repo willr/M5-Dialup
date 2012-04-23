@@ -18,8 +18,8 @@
     FavoritePhoneContainer      *_favorites;
 }
 
-@property (strong, nonatomic) ContactListContainer      *contacts;
-@property (strong, nonatomic) FavoritePhoneContainer    *favorites;
+@property (retain, nonatomic) ContactListContainer      *contacts;
+@property (retain, nonatomic) FavoritePhoneContainer    *favorites;
 
 - (void)collectAddressBookInfo;
 

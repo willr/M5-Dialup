@@ -18,8 +18,8 @@
     FavoritePhoneContainer  *_favorites;
 }
 
-@property (strong, nonatomic) PersonContainer           *person;
-@property (strong, nonatomic) FavoritePhoneContainer    *favorites;
+@property (retain, nonatomic) PersonContainer           *person;
+@property (retain, nonatomic) FavoritePhoneContainer    *favorites;
 
 - (BOOL) favoritesModified;
 

@@ -23,7 +23,7 @@
 #import "UnitTestDataFactory.h"
 
 
-@interface ContactListDataSourceTests : SenTestCase
+@interface ContactDataSourceTests : SenTestCase
 {
     ContactsDataSource  *_contactDataSource;
     
@@ -39,7 +39,7 @@
 @end
 
 
-@implementation ContactListDataSourceTests
+@implementation ContactDataSourceTests
 
 @synthesize contactDataSource       = _contactDataSource;
 @synthesize contactListContainer    = _contactListContainer;
@@ -88,6 +88,31 @@
     assertThat(userBContact, notNilValue());
     assertThat([userBContact objectForKey:PersonName], equalTo(UserBName));
     
+}
+
+- (void) testNumberOfRowsInSection
+{
+    NSUInteger numRows1 = 3;
+    [[[self.contactListContainer expect] andReturnValue:OCMOCK_VALUE(numRows1)] count];
+    
+    NSInteger section1 = 1;
+    
+    NSInteger resultNumRows1 = [self.contactDataSource tableView:nil numberOfRowsInSection:section1];
+    
+    [self.contactListContainer verify];
+    
+    assertThatInteger(resultNumRows1, equalToInteger(numRows1));
+    
+    NSUInteger numRows2 = 2;
+    [[[self.favoriteContainer expect] andReturnValue:OCMOCK_VALUE(numRows2)] count];
+    
+    NSInteger section2 = 0;
+    
+    NSInteger resultNumRows2 = [self.contactDataSource tableView:nil numberOfRowsInSection:section2];
+    
+    [self.favoriteContainer verify];
+    
+    assertThatInteger(resultNumRows2, equalToInteger(numRows2));
 }
 
 @end

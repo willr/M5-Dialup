@@ -17,8 +17,8 @@
     NSDictionary *_person;
 }
 
-@property (strong, nonatomic) NSDictionary *person;
-@property (strong, nonatomic, readonly) NSString *name;
+@property (retain, nonatomic) NSDictionary *person;
+@property (retain, nonatomic, readonly) NSString *name;
 
 - (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;
 

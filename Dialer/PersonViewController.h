@@ -19,10 +19,10 @@
     UITableView                 *_tableView;
 }
 
-@property (strong, nonatomic) PersonDataSource          *person;
+@property (retain, nonatomic) PersonDataSource          *person;
 
-@property (strong, nonatomic) id<UITableViewDataSource> personDataSource;
-@property (strong, nonatomic) UITableView               *tableView;
+@property (retain, nonatomic) id<UITableViewDataSource> personDataSource;
+@property (retain, nonatomic) UITableView               *tableView;
 
 - (void)checkButtonTapped:(id)sender event:(id)event;
 

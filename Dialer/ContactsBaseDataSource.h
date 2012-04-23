@@ -14,7 +14,7 @@
     id _callButtonDelegate;
 }
 
-@property (strong, nonatomic) id<CallButtonDelegate> callButtonDelegate;
+@property (retain, nonatomic) id<CallButtonDelegate> callButtonDelegate;
 
 - (UIButton *) configureCallButton;
 

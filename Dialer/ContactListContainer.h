@@ -20,9 +20,9 @@
     AddressBookContainer    *_abContainer;
 }
 
-@property (strong, nonatomic) NSMutableArray            *contactList;
-@property (strong, nonatomic) NSMutableDictionary       *contactLookup;
-@property (strong, nonatomic) AddressBookContainer      *abContainer;
+@property (retain, nonatomic) NSMutableArray            *contactList;
+@property (retain, nonatomic) NSMutableDictionary       *contactLookup;
+@property (retain, nonatomic) AddressBookContainer      *abContainer;
 
 - (void)collectAddressBookInfo;
 

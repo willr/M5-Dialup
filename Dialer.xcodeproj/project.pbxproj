@@ -10,7 +10,7 @@
 		AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */; };
 		AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */; };
 		AF01ADAD1543332A00802DFC /* ContactBaseContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */; };
-		AF01ADAF1543598400802DFC /* ContactListDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAE1543598400802DFC /* ContactListDataSourceTests.m */; };
+		AF01ADAF1543598400802DFC /* ContactDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAE1543598400802DFC /* ContactDataSourceTests.m */; };
 		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
@@ -75,7 +75,7 @@
 		AF01AD9D153F627600802DFC /* ContactListContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContactListContainer+PrivateMethods.h"; sourceTree = "<group>"; };
 		AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhoneContainerTests.m; sourceTree = "<group>"; };
 		AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactBaseContainerTests.m; sourceTree = "<group>"; };
-		AF01ADAE1543598400802DFC /* ContactListDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListDataSourceTests.m; sourceTree = "<group>"; };
+		AF01ADAE1543598400802DFC /* ContactDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataSourceTests.m; sourceTree = "<group>"; };
 		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -263,7 +263,7 @@
 				AF01AD9A153F61DE00802DFC /* ContactListContainerTests.m */,
 				AF01ADAA1542414500802DFC /* FavoritePhoneContainerTests.m */,
 				AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */,
-				AF01ADAE1543598400802DFC /* ContactListDataSourceTests.m */,
+				AF01ADAE1543598400802DFC /* ContactDataSourceTests.m */,
 			);
 			path = DialerTests;
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 				AF01AD9B153F61DE00802DFC /* ContactListContainerTests.m in Sources */,
 				AF01ADAB1542414500802DFC /* FavoritePhoneContainerTests.m in Sources */,
 				AF01ADAD1543332A00802DFC /* ContactBaseContainerTests.m in Sources */,
-				AF01ADAF1543598400802DFC /* ContactListDataSourceTests.m in Sources */,
+				AF01ADAF1543598400802DFC /* ContactDataSourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
