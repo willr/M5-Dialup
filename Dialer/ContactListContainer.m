@@ -8,6 +8,7 @@
 
 #import <AddressBook/AddressBook.h>
 
+#import "AddressBookContainer.h"
 #import "ContactListContainer.h"
 #import "Constants.h"
 #import "FavoritePhoneContainer.h"
@@ -22,10 +23,11 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self != nil) {
         // Custom initialization
         self.contactList = [[[NSMutableArray alloc] init] autorelease];
         self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
+        self.abContainer = [[[AddressBookContainer alloc] init] autorelease];
     }
     return self;
 }
@@ -140,9 +142,6 @@
 
 - (void)collectAddressBookInfo
 {
-    // self.contactList = [[[NSMutableArray alloc] init] autorelease];
-    // self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
-    
     [self.abContainer addressBookCreate];
     
     CFArrayRef allPeople = (CFArrayRef)[self.abContainer copyAddressBookArrayOfAllPeople];
@@ -167,7 +166,7 @@
                    contactList:self.contactList 
                  contactLookup:self.contactLookup];
     }
-    NSAssert(addrCount > 0, @"Failed to find any people in the current address book");
+    NSAssert1(addrCount > 0, @"Failed to find any people in the current address book; Current Count %d", addrCount);
     // _favoriteList = [[NSMutableArray alloc] init];
     // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:0 phoneIndex:1]];
     // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:1 phoneIndex:0]];

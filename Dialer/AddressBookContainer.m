@@ -13,13 +13,9 @@
     ABAddressBookRef _addressBookRef;
 }
 
-@property (nonatomic, retain) __attribute__((NSObject)) ABAddressBookRef addressBookRef;
-
 @end
 
 @implementation AddressBookContainer
-
-@synthesize addressBookRef = _addressBookRef;
 
 - (id) init
 {
@@ -35,7 +31,11 @@
 - (void) dealloc
 {
     [super dealloc];
-    CFRelease(_addressBookRef);
+    if (_addressBookRef != nil) {
+        CFRelease(_addressBookRef);
+        _addressBookRef = nil;
+    }
+    
 }
 
 - (void) addressBookCreate

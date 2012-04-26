@@ -20,6 +20,16 @@
 
 @synthesize person = _person;
 
+- (id)init
+{
+    self = [super init];
+    if (self != nil) {
+        // Custom initialization
+
+    }
+    return self;
+}
+
 - (NSString *)name
 {
     return [self.person objectForKey:PersonName];

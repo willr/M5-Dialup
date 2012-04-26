@@ -15,6 +15,16 @@
 @synthesize person = _person;
 @synthesize favorites = _favorites;
 
+- (id)init
+{
+    self = [super init];
+    if (self != nil) {
+        // Custom initialization
+        
+    }
+    return self;
+}
+
 - (BOOL) favoritesModified
 {
     return self.favorites.favoritesModified;

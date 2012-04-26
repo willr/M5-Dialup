@@ -15,6 +15,16 @@
 @synthesize contacts = _contacts;
 @synthesize favorites = _favorites;
 
+- (id)init
+{
+    self = [super init];
+    if (self != nil) {
+        // Custom initialization
+        self.contacts = [[[ContactListContainer alloc] init] autorelease];
+    }
+    return self;
+}
+
 - (NSDictionary *)personAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *person;
@@ -48,13 +58,11 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-
     NSDictionary *personNamePhone = [self.favorites nameAndPhoneNumberAtIndex:indexPath.row];
     
     NSLog(@"call Person: %@ at %@", [personNamePhone objectForKey:PersonName], [personNamePhone objectForKey:PersonPhoneNumber]);
     
     // [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
-    
 }
 
 #pragma mark - TableViewDataSourceDelegate

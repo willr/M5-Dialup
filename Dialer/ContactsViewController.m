@@ -21,7 +21,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self != nil) {
         // Custom initialization
     }
     return self;
@@ -54,7 +54,6 @@
         self.contacts.callButtonDelegate = self;
     }
     
-    [self.contacts collectAddressBookInfo];
     table.dataSource = self.contacts;
     
     // save the tableView variable, cause we will need it for call button
@@ -77,39 +76,7 @@
     
     self.title = InitialWindowTitle;
     
-    /*
-    
-    // Get application frame dimensions (basically screen - status bar)
-    CGRect appRect = [[UIScreen mainScreen] applicationFrame];
-    
-    // create the table view to show the Contacts stored on the device.
-    UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];
-    table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    table.delegate = self;
-    
-    if (self.contacts == nil) {
-        self.contacts = [[[ContactsDataSource alloc] init] autorelease];
-        
-        // this is assign only, a "weak" reference as we use it to build the button
-        self.contacts.callButtonDelegate = self;
-    }
-    
     [self.contacts collectAddressBookInfo];
-    table.dataSource = self.contacts;
-    
-    // save the tableView variable, cause we will need it for call button
-    self.tableView = table;
-    
-    // cause the table to load
-    [table reloadData];
-    
-    // set the table as the view
-    self.view = table;
-    
-    // release the tableView as it is now being held as the View
-    [table release];
-     
-     */
 }
 
 - (void)viewDidUnload
