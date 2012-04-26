@@ -37,13 +37,8 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    self.title = InitialWindowTitle;
-    
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
     
@@ -53,13 +48,14 @@
     table.delegate = self;
     
     if (self.contacts == nil) {
-        self.contacts = [[ContactsDataSource alloc] init];
-        // self.contacts.abContainer = [[[AddressBookContainer alloc] init] autorelease];
+        self.contacts = [[[ContactsDataSource alloc] init] autorelease];
+        
+        // this is assign only, a "weak" reference as we use it to build the button
+        self.contacts.callButtonDelegate = self;
     }
     
     [self.contacts collectAddressBookInfo];
     table.dataSource = self.contacts;
-    self.contacts.callButtonDelegate = self;
     
     // save the tableView variable, cause we will need it for call button
     self.tableView = table;
@@ -72,6 +68,48 @@
     
     // release the tableView as it is now being held as the View
     [table release];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    self.title = InitialWindowTitle;
+    
+    /*
+    
+    // Get application frame dimensions (basically screen - status bar)
+    CGRect appRect = [[UIScreen mainScreen] applicationFrame];
+    
+    // create the table view to show the Contacts stored on the device.
+    UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];
+    table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    table.delegate = self;
+    
+    if (self.contacts == nil) {
+        self.contacts = [[[ContactsDataSource alloc] init] autorelease];
+        
+        // this is assign only, a "weak" reference as we use it to build the button
+        self.contacts.callButtonDelegate = self;
+    }
+    
+    [self.contacts collectAddressBookInfo];
+    table.dataSource = self.contacts;
+    
+    // save the tableView variable, cause we will need it for call button
+    self.tableView = table;
+    
+    // cause the table to load
+    [table reloadData];
+    
+    // set the table as the view
+    self.view = table;
+    
+    // release the tableView as it is now being held as the View
+    [table release];
+     
+     */
 }
 
 - (void)viewDidUnload
@@ -103,20 +141,18 @@
 {
     // cause the cell to deselect animated, nicely when released
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    // NSArray *subViews = [self.navigationController viewControllers];
-    // NSLog(@"Num viewControllers: %@", [[self.navigationController viewControllers] count]);
         
     PersonContainer *person = [[PersonContainer alloc] init];
     person.person = [self.contacts personAtIndexPath:indexPath];
     
     PersonDataSource *personDS = [[PersonDataSource alloc] init];
     personDS.person = person;
+    [person release];
     
     PersonViewController *personController = [[PersonViewController alloc] init];
     personController.person = personDS;
-    
-    // TODO: this is problematic... this is cirucular.. 
+
+    // this is assign only, a "weak" reference as we use it to build the button
     personDS.callButtonDelegate = personController;
 
     NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
@@ -134,3 +170,14 @@
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+//

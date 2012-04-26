@@ -13,14 +13,14 @@
 
 @synthesize callButtonDelegate = _callButtonDelegate;
 
-- (UIButton *)configureCallButton
+- (UIButton *)configureCallButton:(id<CallButtonDelegate>)callButtonDelegate
 {
     UIButton *callButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     CGRect frame = CGRectMake(0.0, 0.0, 60.0, 30.0);
     callButton.frame = frame;
     
     [callButton setTitle:CallButtonTitle forState:UIControlStateNormal];
-    [callButton addTarget:self.callButtonDelegate action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+    [callButton addTarget:callButtonDelegate action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     return callButton;
 }
 

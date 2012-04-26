@@ -86,7 +86,7 @@
     
     NSString *phoneNumber = @"512-333-1212";
     
-    [[[self.abContainer stub] andReturn:phoneNumber] multiValueCopyValueAtIndex:multiValueRef index:index];
+    [[[self.abContainer stub] andReturn:phoneNumber] copyMultiValueValueAtIndex:multiValueRef index:index];
     
     [self.contactContainer getCopyFrom:multiValueRef 
                                withKey:(CFStringRef)phoneLabel 
@@ -116,8 +116,8 @@
     NSString *firstName = @"Joe";
     NSString *lastName = @"User";
     
-    [[[self.abContainer expect] andReturn:firstName] recordCopyValue:record propertyId:kABPersonFirstNameProperty];
-    [[[self.abContainer expect] andReturn:lastName] recordCopyValue:record propertyId:kABPersonLastNameProperty];
+    [[[self.abContainer expect] andReturn:firstName] copyRecordValue:record propertyId:kABPersonFirstNameProperty];
+    [[[self.abContainer expect] andReturn:lastName] copyRecordValue:record propertyId:kABPersonLastNameProperty];
     
     [self.contactContainer addUserName:record dOfPerson:person];
     NSString *name = [person objectForKey:PersonName];
@@ -138,22 +138,22 @@
     NSMutableArray *contactList = [[NSMutableArray alloc] init];
     NSMutableDictionary *contactLookup = [[NSMutableDictionary alloc] init];
     
-    [[[self.abContainer expect] andReturn:phones] recordCopyValue:record propertyId:kABPersonPhoneProperty];
+    [[[self.abContainer expect] andReturn:phones] copyRecordValue:record propertyId:kABPersonPhoneProperty];
     CFIndex recordCount = (CFIndex)2;
     [[[self.abContainer expect] andReturnValue:OCMOCK_VALUE(recordCount)] multiValueGetCount:phones];
     
-    [[[self.abContainer expect] andReturn:@"FirstNameA"] recordCopyValue:record propertyId:kABPersonFirstNameProperty];
-    [[[self.abContainer expect] andReturn:@"LastNameA"] recordCopyValue:record propertyId:kABPersonLastNameProperty];
+    [[[self.abContainer expect] andReturn:@"FirstNameA"] copyRecordValue:record propertyId:kABPersonFirstNameProperty];
+    [[[self.abContainer expect] andReturn:@"LastNameA"] copyRecordValue:record propertyId:kABPersonLastNameProperty];
     
     NSString *phoneLabel0 = @"iPhone";
-    [[[self.abContainer expect] andReturn:phoneLabel0] multiValueCopyLabelAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneLabel0] copyMultiValueLabelAtIndex:phones index:0];
     NSString *phoneNumber0 = @"512-000-0000";
-    [[[self.abContainer expect] andReturn:phoneNumber0] multiValueCopyValueAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneNumber0] copyMultiValueValueAtIndex:phones index:0];
 
     NSString *phoneLabel1 = @"Home";
-    [[[self.abContainer expect] andReturn:phoneLabel1] multiValueCopyLabelAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneLabel1] copyMultiValueLabelAtIndex:phones index:1];
     NSString *phoneNumber1 = @"512-111-1111";
-    [[[self.abContainer expect] andReturn:phoneNumber1] multiValueCopyValueAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneNumber1] copyMultiValueValueAtIndex:phones index:1];
     
     
     int phoneIdInt = [phoneId intValue];
@@ -192,45 +192,45 @@
     
     [[self.abContainer stub] addressBookCreate];
     
-    [[[self.abContainer expect] andReturn:recordArrayRef] addressBookCopyArrayOfAllPeople];
+    [[[self.abContainer expect] andReturn:recordArrayRef] copyAddressBookArrayOfAllPeople];
     [[[self.abContainer expect] andReturnValue:OCMOCK_VALUE(personCount)] addressBookGetPersonCount];
     
     // addContactPhones method start
-    [[[self.abContainer expect] andReturn:phones] recordCopyValue:record1 propertyId:kABPersonPhoneProperty];
+    [[[self.abContainer expect] andReturn:phones] copyRecordValue:record1 propertyId:kABPersonPhoneProperty];
     CFIndex recordCount1 = (CFIndex)2;
     [[[self.abContainer expect] andReturnValue:OCMOCK_VALUE(recordCount1)] multiValueGetCount:phones];
     
     // userA
-    [[[self.abContainer expect] andReturn:@"FirstNameA"] recordCopyValue:record1 propertyId:kABPersonFirstNameProperty];
-    [[[self.abContainer expect] andReturn:@"LastNameA"] recordCopyValue:record1 propertyId:kABPersonLastNameProperty];
+    [[[self.abContainer expect] andReturn:@"FirstNameA"] copyRecordValue:record1 propertyId:kABPersonFirstNameProperty];
+    [[[self.abContainer expect] andReturn:@"LastNameA"] copyRecordValue:record1 propertyId:kABPersonLastNameProperty];
     
     NSString *phoneLabel0 = @"iPhone";
-    [[[self.abContainer expect] andReturn:phoneLabel0] multiValueCopyLabelAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneLabel0] copyMultiValueLabelAtIndex:phones index:0];
     NSString *phoneNumber0 = @"512-000-0000";
-    [[[self.abContainer expect] andReturn:phoneNumber0] multiValueCopyValueAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneNumber0] copyMultiValueValueAtIndex:phones index:0];
     
     NSString *phoneLabel1 = @"Home";
-    [[[self.abContainer expect] andReturn:phoneLabel1] multiValueCopyLabelAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneLabel1] copyMultiValueLabelAtIndex:phones index:1];
     NSString *phoneNumber1 = @"512-111-1111";
-    [[[self.abContainer expect] andReturn:phoneNumber1] multiValueCopyValueAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneNumber1] copyMultiValueValueAtIndex:phones index:1];
     
-    [[[self.abContainer expect] andReturn:phones] recordCopyValue:record2 propertyId:kABPersonPhoneProperty];
+    [[[self.abContainer expect] andReturn:phones] copyRecordValue:record2 propertyId:kABPersonPhoneProperty];
     CFIndex recordCount2 = (CFIndex)2;
     [[[self.abContainer expect] andReturnValue:OCMOCK_VALUE(recordCount2)] multiValueGetCount:phones];
     
     // userB
-    [[[self.abContainer expect] andReturn:@"FirstNameB"] recordCopyValue:record2 propertyId:kABPersonFirstNameProperty];
-    [[[self.abContainer expect] andReturn:@"LastNameB"] recordCopyValue:record2 propertyId:kABPersonLastNameProperty];
+    [[[self.abContainer expect] andReturn:@"FirstNameB"] copyRecordValue:record2 propertyId:kABPersonFirstNameProperty];
+    [[[self.abContainer expect] andReturn:@"LastNameB"] copyRecordValue:record2 propertyId:kABPersonLastNameProperty];
     
     NSString *phoneLabel3 = @"Work";
-    [[[self.abContainer expect] andReturn:phoneLabel3] multiValueCopyLabelAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneLabel3] copyMultiValueLabelAtIndex:phones index:0];
     NSString *phoneNumber3 = @"512-333-3333";
-    [[[self.abContainer expect] andReturn:phoneNumber3] multiValueCopyValueAtIndex:phones index:0];
+    [[[self.abContainer expect] andReturn:phoneNumber3] copyMultiValueValueAtIndex:phones index:0];
     
     NSString *phoneLabel4 = @"Mobile";
-    [[[self.abContainer expect] andReturn:phoneLabel4] multiValueCopyLabelAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneLabel4] copyMultiValueLabelAtIndex:phones index:1];
     NSString *phoneNumber4 = @"512-444-4444";
-    [[[self.abContainer expect] andReturn:phoneNumber4] multiValueCopyValueAtIndex:phones index:1];
+    [[[self.abContainer expect] andReturn:phoneNumber4] copyMultiValueValueAtIndex:phones index:1];
     // addContactPhones method end
     
     

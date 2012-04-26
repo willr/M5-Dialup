@@ -21,9 +21,9 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self != nil) {
         // Custom initialization
-        self.favorites = [[NSMutableArray alloc] init];
+        self.favorites = [[[NSMutableArray alloc] init] autorelease];
     }
     return self;
 }

@@ -33,21 +33,10 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-}
-*/
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.title = self.person.person.name;
-    
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
     
@@ -56,7 +45,7 @@
     table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     table.delegate = self;
     self.tableView = table;
-
+    
     table.dataSource = self.personDataSource;
     
     // cause the table to load
@@ -67,7 +56,15 @@
     
     // release the tableView as it is now being held as the View
     [table release];
+}
 
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.title = self.person.person.name;
 }
 
 - (void)viewDidUnload

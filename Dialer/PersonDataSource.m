@@ -70,7 +70,7 @@
     [txtView release];
     
     UIButton *callButton;
-    callButton = [self configureCallButton];
+    callButton = [self configureCallButton:self.callButtonDelegate];
     
     cell.accessoryView = callButton;
     

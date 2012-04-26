@@ -13,16 +13,16 @@
 
 - (void) addressBookCreate;
 
-- (NSArray *) addressBookCopyArrayOfAllPeople;
+- (NSArray *) copyAddressBookArrayOfAllPeople;
 
 - (CFIndex) addressBookGetPersonCount;
 
-- (NSString *) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
+- (NSString *) copyRecordValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
 
 - (CFIndex) multiValueGetCount:(ABMultiValueRef)phones;
 
-- (NSString *) multiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
+- (NSString *) copyMultiValueLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
 
-- (NSString *) multiValueCopyValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
+- (NSString *) copyMultiValueValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index;
 
 @end

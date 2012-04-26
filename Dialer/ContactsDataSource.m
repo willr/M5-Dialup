@@ -131,7 +131,7 @@
     }];
     
     UIButton *callButton;
-    callButton = [self configureCallButton];
+    callButton = [self configureCallButton:self.callButtonDelegate];
     cell.accessoryView = callButton;
     
     // [callButton release];    // button was auto-released

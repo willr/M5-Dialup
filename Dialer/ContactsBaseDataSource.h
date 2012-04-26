@@ -14,9 +14,10 @@
     id _callButtonDelegate;
 }
 
-@property (retain, nonatomic) id<CallButtonDelegate> callButtonDelegate;
+// use assign and not retain, as we dont want to increase the ref count
+@property (assign, nonatomic) id<CallButtonDelegate> callButtonDelegate;
 
-- (UIButton *) configureCallButton;
+- (UIButton *)configureCallButton:(id<CallButtonDelegate>)callButtonDelegate;
 
 - (UIButton *) createFavoriteButton;
 

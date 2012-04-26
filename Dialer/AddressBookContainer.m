@@ -13,7 +13,7 @@
     ABAddressBookRef _addressBookRef;
 }
 
-@property (nonatomic) ABAddressBookRef addressBookRef;
+@property (nonatomic, retain) __attribute__((NSObject)) ABAddressBookRef addressBookRef;
 
 @end
 
@@ -32,26 +32,32 @@
     return self;
 }
 
+- (void) dealloc
+{
+    [super dealloc];
+    CFRelease(_addressBookRef);
+}
+
 - (void) addressBookCreate
 {
-    self.addressBookRef = ABAddressBookCreate();
+    _addressBookRef = ABAddressBookCreate();
     
     return;
 }
 
-- (NSString *) recordCopyValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
+- (NSString *) copyRecordValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
 {
     return ABRecordCopyValue(ref, propertyId);
 }
 
-- (NSArray *) addressBookCopyArrayOfAllPeople
+- (NSArray *) copyAddressBookArrayOfAllPeople
 {
-    return (NSArray *)ABAddressBookCopyArrayOfAllPeople(self.addressBookRef);
+    return (NSArray *)ABAddressBookCopyArrayOfAllPeople(_addressBookRef);
 }
 
 - (CFIndex) addressBookGetPersonCount
 {
-    return ABAddressBookGetPersonCount(self.addressBookRef);
+    return ABAddressBookGetPersonCount(_addressBookRef);
 }
 
 - (CFIndex) multiValueGetCount:(ABMultiValueRef)phones
@@ -59,12 +65,12 @@
     return ABMultiValueGetCount(phones);
 }
 
-- (NSString *) multiValueCopyLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
+- (NSString *) copyMultiValueLabelAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
 {
     return (NSString *)ABMultiValueCopyLabelAtIndex(phones, index);
 }
 
-- (NSString *) multiValueCopyValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
+- (NSString *) copyMultiValueValueAtIndex:(ABMultiValueRef)phones index:(CFIndex)index
 {
     return (NSString *)ABMultiValueCopyValueAtIndex(phones, index);
 }
