@@ -27,12 +27,14 @@
 
 - (NSInteger) withPerson:(NSDictionary *)person getPhoneIndexForPhoneId:(NSNumber *)phoneId;
 
-- (NSDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId;
+- (NSMutableDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId;
 
-- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
+- (NSMutableDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
 
 - (BOOL)isFavorite:(NSNumber *) favoriteId withList:(NSArray *)list;
 
 - (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person;
+
+- (NSString *)favoritesFilePath;
 
 @end

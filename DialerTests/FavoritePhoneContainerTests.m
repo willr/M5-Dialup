@@ -113,7 +113,7 @@
     NSDictionary *favAPhoneEntry = [self getFavoritePhoneEntry:favA];
     NSString *favAPhoneId = [favAPhoneEntry objectForKey:PersonPhoneId];
     NSString *favAPhoneNumber = [favAPhoneEntry objectForKey:PersonPhoneNumber];
-    NSDictionary *favAPerson = [favAPhoneEntry objectForKey:FavoritePersonRefName];
+    NSDictionary *favAPerson = [self.favoriteContainer.contactRef objectForKey:favAPhoneId];
     assertThat(favAPhoneId, equalTo(userAPhoneId));
     assertThat(favAPhoneNumber, equalTo(userAPhoneNumber));
     assertThat(favAPerson, notNilValue());
@@ -123,7 +123,7 @@
     NSDictionary *favBPhoneEntry = [self getFavoritePhoneEntry:favB];
     NSString *favBPhoneId = [favBPhoneEntry objectForKey:PersonPhoneId];
     NSString *favBPhoneNumber = [favBPhoneEntry objectForKey:PersonPhoneNumber];
-    NSDictionary *favBPerson = [favBPhoneEntry objectForKey:FavoritePersonRefName];
+    NSDictionary *favBPerson = [self.favoriteContainer.contactRef objectForKey:favBPhoneId];
     assertThat(favBPhoneId, equalTo(userBPhoneId));
     assertThat(favBPhoneNumber, equalTo(userBPhoneNumber));
     assertThat(favBPerson, notNilValue());
@@ -172,7 +172,7 @@
     NSDictionary *favAPhoneEntry = [self getFavoritePhoneEntry:favA];
     NSString *favAPhoneId = [favAPhoneEntry objectForKey:PersonPhoneId];
     NSString *favAPhoneNumber = [favAPhoneEntry objectForKey:PersonPhoneNumber];
-    NSDictionary *favAPerson = [favAPhoneEntry objectForKey:FavoritePersonRefName];
+    NSDictionary *favAPerson = [self.favoriteContainer.contactRef objectForKey:favAPhoneId];
     assertThat(favAPhoneId, equalTo(userAPhoneId1));
     assertThat(favAPhoneNumber, equalTo(userAPhoneNumber1));
     assertThat(favAPerson, notNilValue());
@@ -243,7 +243,6 @@
     NSNumber *foundPhoneId = [self.favoriteContainer phoneIdAtIndex:1];
     
     assertThat(foundPhoneId, equalTo(userBPhoneId));
-    
 }
 
 - (void) testPersonNameAndPhoneNumberForIndex
@@ -269,6 +268,80 @@
     
     assertThat([personNamePhone objectForKey:PersonName], equalTo(UserBName));
     assertThat([personNamePhone objectForKey:PersonPhoneNumber], equalTo(userBPhoneNumber));
+    
+}
+
+- (void) testSaveFavoritesToFile
+{
+    NSString *filePath = [self.favoriteContainer favoritesFilePath];
+    
+    NSDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    NSString *phoneIdFormat = @"_$!<Home>!$__%d";
+    NSDictionary *userA = [contactsLookup objectForKey:UserAName];
+    NSDictionary *userAPhoneEntry = [[userA objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 0]];
+    NSNumber *userAPhoneId = [userAPhoneEntry objectForKey:PersonPhoneId];
+    
+    NSDictionary *userB = [contactsLookup objectForKey:UserBName];
+    NSDictionary *userBPhoneEntry = [[userB objectForKey:PersonPhoneList] objectForKey:[NSString stringWithFormat:phoneIdFormat, 3]];
+    NSNumber *userBPhoneId = [userBPhoneEntry objectForKey:PersonPhoneId];
+    
+    NSArray *test = [[NSArray alloc] initWithObjects:userA, userB, nil];
+    NSLog(@"Hmm: %@", test);
+    [test release];
+    
+    [self.favoriteContainer addFavorite:userA phoneId:userAPhoneId];
+    [self.favoriteContainer addFavorite:userB phoneId:userBPhoneId];
+    
+    [self.favoriteContainer saveFavorites];
+    
+    NSArray *favoriteList = [[NSArray alloc] initWithContentsOfFile:filePath];
+    
+    assertThatInt([favoriteList count], equalToInt(2));
+}
+
+- (void) testLoadFavoritesFromFile
+{
+    NSString *filePath = [self.favoriteContainer favoritesFilePath];
+    
+    // save a file first
+    NSArray *contactsList = [[UnitTestDataFactory createContactEntries] objectForKey:ContactArrayName];
+    [contactsList writeToFile:filePath atomically:YES];
+    
+    NSDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    [self.favoriteContainer loadSavedFavorites:contactsLookup];
+    
+    assertThatInt([self.favoriteContainer count], equalToInt(2));
+    
+}
+
+- (void) testLoadFavoritesFromFileWith1InvalidName
+{
+    NSMutableDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    NSMutableDictionary *userB = [contactsLookup objectForKey:UserBName];
+    [userB setObject:@"Dummy Name" forKey:PersonName];
+    
+    [contactsLookup removeObjectForKey:UserBName];
+    [contactsLookup setObject:userB forKey:@"Dummy Name"];
+    
+    [self.favoriteContainer loadSavedFavorites:contactsLookup];
+    
+    assertThatInt([self.favoriteContainer count], equalToInt(1));
+    
+}
+
+- (void) testLoadFavoritesFromFileWith1InvalidPhoneNumber
+{
+    NSMutableDictionary *contactsLookup = [[UnitTestDataFactory createContactEntries] objectForKey:ContactLookupName];
+    NSMutableDictionary *userB = [contactsLookup objectForKey:UserBName];
+    NSMutableDictionary *userBPhoneList = [userB objectForKey:PersonPhoneList];
+    for (NSString *phoneEntryKey in userBPhoneList) {
+        NSDictionary *phoneEntry = [userBPhoneList objectForKey:phoneEntryKey];
+        [phoneEntry setValue:@"123456789" forKey:PersonPhoneNumber];
+    }
+    
+    [self.favoriteContainer loadSavedFavorites:contactsLookup];
+    
+    assertThatInt([self.favoriteContainer count], equalToInt(1));
     
 }
 

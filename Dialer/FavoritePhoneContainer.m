@@ -17,6 +17,7 @@
 
 @synthesize favoritesModified = _favoritesModified;
 @synthesize favorites = _favorites;
+@synthesize contactRef = _contactRef;
 
 - (id)init
 {
@@ -24,6 +25,7 @@
     if (self != nil) {
         // Custom initialization
         self.favorites = [[[NSMutableArray alloc] init] autorelease];
+        self.contactRef = [[[NSMutableDictionary alloc] init] autorelease];
     }
     return self;
 }
@@ -35,14 +37,7 @@
 
 - (void)removeFavorite:(NSNumber *)phoneId
 {
-    NSDictionary *phoneEntry = [self getPhoneEntryFromList:self.favorites forPhoneId:phoneId];
-    NSDictionary *personRef = [phoneEntry objectForKey:FavoritePersonRefName];
-    if (personRef == nil) {
-        NSString *errorText = [NSString stringWithFormat:@"PersonRef cannot be nil, phoneId: %d", [phoneId intValue]];
-        NSAssert(personRef == nil, errorText);
-    }
-    
-    [self modifyFavoriteStatusOnPerson:personRef phoneId:phoneId status:NO];
+    [self modifyFavoriteStatusOnPerson:[self.contactRef objectForKey:phoneId] phoneId:phoneId status:NO];
     [self modifyFavoriteStatus:self.favorites phoneId:phoneId status:NO];
     
     [self.favorites removeObject:[self personFromList:self.favorites phoneId:phoneId]];
@@ -64,6 +59,8 @@
     [self modifyFavoriteStatusOnPerson:person phoneId:phoneId status:YES];
     [self modifyFavoriteStatusOnPerson:favorite phoneId:phoneId status:YES];
     
+    // NSLog(@"favorite: %@", favorite);
+    
     _favoritesModified = true;
 }
                               
@@ -72,10 +69,10 @@
     BOOL found = false;
     BOOL foundPhoneId = false;
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSArray *phoneEntries = [phoneList allValues];
+
     NSInteger i = 0;
-    for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        NSNumber *phoneIdToCheck = [phoneEntry objectForKey:PersonPhoneId];
+    for (NSString *phoneEntryKey in phoneList) {
+        NSNumber *phoneIdToCheck = [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneId];
         found = [phoneId isEqualToNumber:phoneIdToCheck];
         
         if (found) {
@@ -101,10 +98,10 @@
     
     for (NSDictionary *person in list) {
         NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-        NSArray *phoneEntries = [phoneList allValues];
+
         NSNumber *phoneId;
-        for (NSDictionary *phoneEntry in phoneEntries) {
-            phoneId = [phoneEntry objectForKey:PersonPhoneId];
+        for (NSString *phoneEntryKey in phoneList) {
+            phoneId = [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneId];
             found = [phoneId isEqualToNumber:favoriteId];
             if (found) {
                 break;
@@ -150,9 +147,8 @@
     BOOL found = false;
     
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSArray *phoneEntries = [phoneList allValues];
-    for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        phoneId = [phoneEntry objectForKey:PersonPhoneId];
+    for (NSString *phoneEntryKey in phoneList) {
+        phoneId = [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneId];
         found = phoneId != nil;
         
         if (found) {
@@ -165,44 +161,26 @@
 
 - (NSDictionary *)personFromList:(NSArray *)list phoneId:(NSNumber *)phoneId
 {
-    BOOL found = false;
     NSDictionary *foundPerson = nil;
+    NSDictionary *foundPhoneEntry = nil;
+    
     for (NSDictionary *person in list) {
-        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-        for (NSDictionary *phoneEntry in [phoneList allValues]) {
-            NSNumber *foundPhoneId = [phoneEntry objectForKey:PersonPhoneId];
-            found = [foundPhoneId isEqualToNumber:phoneId];
-            if (found) {
-                foundPerson = person;
-                break;
-            }
-        }
-        if (found) {
-            break;
+        foundPhoneEntry = [self findPhoneEntryFromPerson:person forPhoneId:phoneId];
+        if (foundPhoneEntry != nil) {
+            foundPerson = person;
         }
     }
     
     return foundPerson;
 }
 
-- (NSDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId
+- (NSMutableDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId
 {
-    BOOL found = false;
-    NSDictionary *foundPhoneEntry = nil;
+    NSMutableDictionary *foundPhoneEntry = nil;
     
     for (NSDictionary *person in list) {
-        NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-        NSArray *phoneEntries = [phoneList allValues];
-        for (NSDictionary *phoneEntry in phoneEntries) {
-            NSNumber *storedPhoneId = [phoneEntry objectForKey:PersonPhoneId];
-            found = [phoneId isEqualToNumber:storedPhoneId];
-            if (found) {
-                foundPhoneEntry = phoneEntry;
-                break;
-            }
-        }
-        
-        if (found) {
+        foundPhoneEntry = [self findPhoneEntryFromPerson:person forPhoneId:phoneId];
+        if (foundPhoneEntry != nil) {
             break;
         }
     }
@@ -210,13 +188,14 @@
     return foundPhoneEntry;
 }
                             
-- (NSDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId
+- (NSMutableDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId
 {
     BOOL found = false;
-    NSDictionary *foundPhoneEntry = nil;
+    NSMutableDictionary *foundPhoneEntry = nil;
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSArray *phoneEntries = [phoneList allValues];
-    for (NSMutableDictionary *phoneEntry in phoneEntries) {
+
+    for (NSString *phoneEntryKey in phoneList) {
+        NSMutableDictionary *phoneEntry = [phoneList objectForKey:phoneEntryKey];
         NSNumber *phoneIdToCheck = [phoneEntry objectForKey:PersonPhoneId];
         found = [phoneId isEqualToNumber:phoneIdToCheck];
         
@@ -244,6 +223,8 @@
     
     [favPhoneList release];
     
+    // NSLog(@"createdFav: %@", fav);
+    
     return fav;
 }
 
@@ -262,25 +243,16 @@
                               status:(BOOL)status
 {
     BOOL found = false;
-    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSArray *phoneEntries = [phoneList allValues];
     
-    for (NSMutableDictionary *phoneEntry in phoneEntries) {
-        NSNumber *potentialMatch = [phoneEntry objectForKey:PersonPhoneId];
-        found = [potentialMatch isEqualToNumber:phoneId];
+    NSMutableDictionary *phoneEntry = [self findPhoneEntryFromPerson:person forPhoneId:phoneId];
+    if (phoneEntry != nil) {
+        [phoneEntry setObject:[NSNumber numberWithBool:status] forKey:PersonIsFavorite];
         
-        if (found) {
-            [phoneEntry setObject:[NSNumber numberWithBool:status] forKey:PersonIsFavorite];
-            
-            if (status == true) {
-                // this is for unfavoriting, as we only have the phoneId when unfavoriting
-                [phoneEntry setObject:person forKey:FavoritePersonRefName];
-            } else {
-                // this is for unfavoriting, as we only have the phoneId when unfavoriting
-                [phoneEntry removeObjectForKey:FavoritePersonRefName];
-            }
-            
-            break;
+        // this is for unfavoriting, as we only have the phoneId when unfavoriting
+        if (status == true) {
+            [self.contactRef  setObject:person forKey:phoneId];
+        } else {
+            [self.contactRef removeObjectForKey:FavoritePersonRefName];
         }
     }
     
@@ -314,6 +286,96 @@
     }
     
     return isFavorite;
+}
+
+- (NSString *)favoritesFilePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:FavoritesFileName];
+    
+    NSLog(@"Favorities File Path: %@", filePath);
+    
+    // NSAssert(filePath != nil, @"File path should not be nil");
+    return filePath;
+}
+
+- (BOOL) validateFavorite:(NSDictionary *)favorite asContact:(NSMutableDictionary *)contact
+{
+    NSMutableDictionary *contactPhoneList = [contact objectForKey:PersonPhoneList];
+    NSDictionary *favoritePhoneList = [favorite objectForKey:PersonPhoneList];
+    BOOL found = false;
+    
+    NSEnumerator *favoritePhoneListEnumerator = [favoritePhoneList keyEnumerator];
+    for (NSString *key in favoritePhoneListEnumerator) {
+        NSDictionary *favoritePhoneEntry = [favoritePhoneList objectForKey:key];
+        
+        NSString *favoritePhoneNum = [favoritePhoneEntry objectForKey:PersonPhoneNumber];
+        NSString *favoritePhoneDigits = [self getPhoneNumberDigitsRegex:favoritePhoneNum];
+        
+        found = [self isPhoneEntryMatchWithKey:key 
+                               storedPhoneList:contactPhoneList 
+                                newPhoneDigits:favoritePhoneDigits];
+        if (found) {
+            return found;
+        }
+    }
+    
+    return found;
+}
+
+- (void) loadSavedFavorites:(NSDictionary *)contactLookup
+{
+    NSString *filePath = [self favoritesFilePath];
+
+    if (filePath == nil) {
+        // just exit since there is no file to load
+        return;
+    }
+
+    NSData *favoritesData = [NSData dataWithContentsOfFile:filePath];
+    NSPropertyListFormat *format = NULL;
+    NSError *error = nil;
+    NSArray *serializedContactList = [NSPropertyListSerialization propertyListWithData:favoritesData 
+                                                                     options:NSPropertyListMutableContainersAndLeaves 
+                                                                      format:format 
+                                                                       error:&error];
+    
+    for (NSMutableDictionary *favoritePerson in serializedContactList) {
+        NSString *serializedPersonName = [favoritePerson objectForKey:PersonName];
+        NSMutableDictionary *contactPerson = [contactLookup objectForKey:serializedPersonName];
+        
+        if([[favoritePerson objectForKey:PersonName] isEqual:serializedPersonName]) {
+            BOOL isValid = [self validateFavorite:favoritePerson asContact:contactPerson];
+            if (isValid) {
+                [self.favorites addObject:favoritePerson];
+            }
+        }
+    }
+}
+
+- (void) saveFavorites
+{
+    NSString *filePath = [self favoritesFilePath];
+    
+    NSLog(@"saveFavorites current Favorites: %@", self.favorites);
+    
+    // [self.favorites writeToFile:filePath atomically:YES];
+    NSError *error = nil;
+    NSData *favoritesData = [NSPropertyListSerialization dataWithPropertyList:self.favorites 
+                                                                       format:NSPropertyListXMLFormat_v1_0 
+                                                                      options:0 
+                                                                        error:&error];
+    if (error) {
+        NSLog(@"Error Descr %@",error.localizedDescription);
+        NSLog(@"Error Code %@",error.code);    
+        NSLog(@"Error Domain %@",error.domain);
+        return;
+    }
+    
+    NSAssert([favoritesData length] != 0, @"serialization result is empty");
+             
+    [favoritesData writeToFile:filePath atomically:YES];
 }
 
 @end

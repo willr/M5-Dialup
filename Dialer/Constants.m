@@ -77,5 +77,6 @@ NSString * const EmptyBoxImageTitle = @"box";
 // box with checkmark
 NSString * const BoxWithCheckmarkImageTitle = @"WithCheckMark";
 
-
+// favorites filename
+NSString * const FavoritesFileName = @"favoritesFile.plist";
 

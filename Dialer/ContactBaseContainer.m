@@ -73,6 +73,29 @@
     return digits;
 }
 
+- (BOOL)isPhoneEntryMatchWithKey:(NSString *)storedPhoneEntryKey 
+          storedPhoneList:(NSMutableDictionary *)storedPhoneList 
+           newPhoneDigits:(NSString *)newPhoneDigits
+{
+    if (storedPhoneList == nil || [storedPhoneList count] == 0) {
+        return false;
+    }
+    
+    NSMutableDictionary *storedPhoneEntry = [storedPhoneList objectForKey:storedPhoneEntryKey];
+    if (storedPhoneEntry == nil || [storedPhoneEntry count] == 0) {
+        return false;
+    }
+    
+    NSString *storedPhoneDigits = [storedPhoneEntry objectForKey:PersonPhoneNumberDigits];
+    if (storedPhoneDigits == nil) {
+        storedPhoneDigits = [self getPhoneNumberDigitsRegex:[storedPhoneEntry objectForKey:PersonPhoneNumber]];
+        [storedPhoneEntry setObject:storedPhoneDigits forKey:PersonPhoneNumberDigits];
+    }
+    BOOL found = [storedPhoneDigits isEqualToString:newPhoneDigits];
+
+    return found;
+}
+
 - (void)addDistinctPhoneNumbers:(NSDictionary *)person foundPerson:(NSDictionary *)foundPerson
 {
     // ok we found a matching name, check all the phoneNumbers for this contact, and add if not exist
@@ -81,25 +104,16 @@
     
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
     
-    for (NSDictionary *phoneEntryKey in phoneList) {
+    for (NSString *phoneEntryKey in phoneList) {
         found = false;
         NSString *newPhoneNum = [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneNumber];
-        // NSLog(@"newPhoneNum: %@", newPhoneNum);
         NSString *newPhoneDigits = [self getPhoneNumberDigitsRegex:newPhoneNum];
         
         NSMutableDictionary *storedPhoneList = [foundPerson objectForKey:PersonPhoneList];
-        for (NSMutableDictionary *storedPhoneEntryKey in storedPhoneList) {
-            NSMutableDictionary *storedPhoneEntry = [storedPhoneList objectForKey:storedPhoneEntryKey];
-            NSString *storedPhoneDigits = [storedPhoneEntry objectForKey:PersonPhoneNumberDigits];
-            if (storedPhoneDigits == nil) {
-                storedPhoneDigits = [self getPhoneNumberDigitsRegex:[storedPhoneEntry objectForKey:PersonPhoneNumber]];
-                [storedPhoneEntry setObject:storedPhoneDigits forKey:PersonPhoneNumberDigits];
-            }
-            BOOL foundPhoneNum = [storedPhoneDigits isEqualToString:newPhoneDigits];
-            if (foundPhoneNum) {
-                found = true;
-                break;
-            }
+        for (NSString *storedPhoneEntryKey in storedPhoneList) {
+            found = [self isPhoneEntryMatchWithKey:storedPhoneEntryKey 
+                                   storedPhoneList:storedPhoneList 
+                                    newPhoneDigits:newPhoneDigits];
         }
         
         if (!found) {

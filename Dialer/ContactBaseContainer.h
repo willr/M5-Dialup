@@ -20,4 +20,8 @@
 
 - (NSString *)getPhoneNumberDigitsRegex:(NSString *)phoneNumber;
 
+- (BOOL)isPhoneEntryMatchWithKey:(NSString *)storedPhoneEntryKey 
+          storedPhoneList:(NSMutableDictionary *)storedPhoneList 
+           newPhoneDigits:(NSString *)newPhoneDigits;
+
 @end

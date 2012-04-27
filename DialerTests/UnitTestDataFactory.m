@@ -223,10 +223,13 @@
         }
         
         [copyPhoneList setValue:copyPhoneEntry forKey:key];
+        [copyPhoneEntry release];
     }
     
     [copy setValue:copyPhoneList forKey:PersonPhoneList];
     [copy setValue:[person objectForKey:PersonName] forKey:PersonName];
+    
+    [copyPhoneList release];
     
     return copy;
 }

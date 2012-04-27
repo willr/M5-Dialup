@@ -77,6 +77,9 @@
     self.title = InitialWindowTitle;
     
     [self.contacts collectAddressBookInfo];
+    
+    // cause the table to load
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload

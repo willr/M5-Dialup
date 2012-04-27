@@ -76,3 +76,6 @@ extern NSString * const InitialWindowTitle;
 extern NSString * const EmptyBoxImageTitle;
 // box with checkmark
 extern NSString * const BoxWithCheckmarkImageTitle;
+
+// favorites filename
+extern NSString * const FavoritesFileName;

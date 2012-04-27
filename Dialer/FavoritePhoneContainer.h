@@ -12,13 +12,15 @@
 
 @interface FavoritePhoneContainer : ContactBaseContainer
 {
-    NSMutableArray *_favorites;
+    NSMutableArray      *_favorites;
+    NSMutableDictionary *_contactRef;
     
     BOOL _favoritesModified;
 }
 
-@property (nonatomic) BOOL favoritesModified;
-@property (nonatomic, retain) NSMutableArray *favorites;
+@property (nonatomic)         BOOL                  favoritesModified;
+@property (nonatomic, retain) NSMutableArray        *favorites;
+@property (nonatomic, retain) NSMutableDictionary   *contactRef;
 
 - (void)removeFavorite:(NSNumber *)phoneId;
 
@@ -33,5 +35,11 @@
 - (NSUInteger)count;
 
 - (NSDictionary *) nameAndPhoneNumberAtIndex:(NSInteger)pos;
+
+- (BOOL) validateFavorite:(NSDictionary *)favorite asContact:(NSDictionary *)contact;
+
+- (void) loadSavedFavorites:(NSDictionary *)contactLookup;
+
+- (void) saveFavorites;
 
 @end

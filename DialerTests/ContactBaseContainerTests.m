@@ -101,6 +101,22 @@
     // NSLog(@"foundPhoneList: %@", foundPhoneList);
 }
 
+/*
+- (void) testCreateMutableCopyFromReadonly
+{
+    NSDictionary *contactInfo = [UnitTestDataFactory loadContactEntries];
+    NSDictionary *contactLookup = [contactInfo objectForKey:ContactLookupName];
+    NSDictionary *person = [contactLookup objectForKey:@"Jack Doe"];
+    
+    NSMutableDictionary *personCopy = [self.baseContainer mutableCopyFromReadonly:person];
+    
+    assertThat([personCopy objectForKey:PersonName], equalTo(@"Jack Doe"));
+    assertThatInt([[personCopy objectForKey:PersonPhoneList] count], equalToInt(3));
+    
+    NSLog(@"personCopy: %@", personCopy);
+}
+*/
+
 @end
 
 
