@@ -27,7 +27,7 @@
 
 @property (retain, nonatomic) ContactsDataSource        *contacts;
 
-@property (retain, nonatomic) UITableView               *tableView;
+@property (assign, nonatomic) UITableView               *tableView;
 @property (retain, nonatomic) id<DialContactDelegate>   dialerDelegate;
 
 

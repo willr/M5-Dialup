@@ -12,7 +12,7 @@
 
 @synthesize person = _person;
 @synthesize tableView = _tableView;
-@synthesize personDataSource = _personDataSource;
+// @synthesize personDataSource = _personDataSource;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +46,7 @@
     table.delegate = self;
     self.tableView = table;
     
-    table.dataSource = self.personDataSource;
+    table.dataSource = self.person;
     
     // cause the table to load
     [table reloadData];
@@ -65,6 +65,9 @@
     [super viewDidLoad];
     
     self.title = self.person.person.name;
+    
+    // cause the table to load
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload

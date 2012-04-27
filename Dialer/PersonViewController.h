@@ -15,13 +15,13 @@
 {
     PersonDataSource             *_person;
     
-    id<UITableViewDataSource>   _personDataSource;
+    // id<UITableViewDataSource>   _personDataSource;
     UITableView                 *_tableView;
 }
 
 @property (retain, nonatomic) PersonDataSource          *person;
 
-@property (retain, nonatomic) id<UITableViewDataSource> personDataSource;
+// @property (retain, nonatomic) id<UITableViewDataSource> personDataSource;
 @property (retain, nonatomic) UITableView               *tableView;
 
 - (void)checkButtonTapped:(id)sender event:(id)event;

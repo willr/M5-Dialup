@@ -21,6 +21,7 @@
     if (self != nil) {
         // Custom initialization
         
+        // PersonContainer will be set on cellSelected from ContactsViewController
     }
     return self;
 }

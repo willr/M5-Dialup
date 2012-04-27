@@ -251,15 +251,19 @@
     NSString *firstPhoneEntry1 = [[phoneList1 allKeys] objectAtIndex:0];
     assertThat(firstPhoneEntry1, equalTo(expectedPhoneLabel1));
     
-    NSString *firstPhoneNumber1 = [[[phoneList1 allValues] objectAtIndex:0] objectForKey:PersonPhoneNumber];
+    NSDictionary *phoneEntry1 = [[phoneList1 allValues] objectAtIndex:0];
+    NSString *firstPhoneNumber1 = [phoneEntry1 objectForKey:PersonPhoneNumber];
     assertThat(firstPhoneNumber1, equalTo(phoneNumber0));
+    assertThatInt([[phoneEntry1 objectForKey:PersonPhoneId] intValue], equalToInt(1));
     
     NSString *expectedPhoneLabel2 = [NSString stringWithFormat:UniquePhoneIdentifierFormat, phoneLabel1, 1];
     NSString *firstPhoneEntry2 = [[phoneList1 allKeys] objectAtIndex:1];
     assertThat(firstPhoneEntry2, equalTo(expectedPhoneLabel2));
     
-    NSString *firstPhoneNumber2 = [[[phoneList1 allValues] objectAtIndex:1] objectForKey:PersonPhoneNumber];
+    NSDictionary *phoneEntry2 = [[phoneList1 allValues] objectAtIndex:1];
+    NSString *firstPhoneNumber2 = [phoneEntry2 objectForKey:PersonPhoneNumber];
     assertThat(firstPhoneNumber2, equalTo(phoneNumber1));
+    assertThatInt([[phoneEntry2 objectForKey:PersonPhoneId] intValue], equalToInt(2));
     
     NSDictionary *userB = [contactList objectAtIndex:1];
     NSString *userNameB = [userB objectForKey:PersonName];
@@ -272,15 +276,19 @@
     NSString *firstPhoneEntry3 = [[phoneList2 allKeys] objectAtIndex:0];
     assertThat(firstPhoneEntry3, equalTo(expectedPhoneLabel3));
     
-    NSString *firstPhoneNumber3 = [[[phoneList2 allValues] objectAtIndex:0] objectForKey:PersonPhoneNumber];
+    NSDictionary *phoneEntry3 = [[phoneList2 allValues] objectAtIndex:0];
+    NSString *firstPhoneNumber3 = [phoneEntry3 objectForKey:PersonPhoneNumber];
     assertThat(firstPhoneNumber3, equalTo(phoneNumber3));
+    assertThatInt([[phoneEntry3 objectForKey:PersonPhoneId] intValue], equalToInt(3));
     
     NSString *expectedPhoneLabel4 = [NSString stringWithFormat:UniquePhoneIdentifierFormat, phoneLabel4, 1];
     NSString *firstPhoneEntry4 = [[phoneList2 allKeys] objectAtIndex:1];
     assertThat(firstPhoneEntry4, equalTo(expectedPhoneLabel4));
     
-    NSString *firstPhoneNumber4 = [[[phoneList2 allValues] objectAtIndex:1] objectForKey:PersonPhoneNumber];
+    NSDictionary *phoneEntry4 = [[phoneList2 allValues] objectAtIndex:1];
+    NSString *firstPhoneNumber4 = [phoneEntry4 objectForKey:PersonPhoneNumber];
     assertThat(firstPhoneNumber4, equalTo(phoneNumber4));
+    assertThatInt([[phoneEntry4 objectForKey:PersonPhoneId] intValue], equalToInt(4));
 }
 
 @end

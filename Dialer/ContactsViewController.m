@@ -87,16 +87,15 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    
     if ([self.contacts favoritesModified]) {
         [self.tableView reloadData];
     }
+    
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -117,6 +116,7 @@
     
     PersonDataSource *personDS = [[PersonDataSource alloc] init];
     personDS.person = person;
+    personDS.favorites = self.contacts.favorites;
     [person release];
     
     PersonViewController *personController = [[PersonViewController alloc] init];

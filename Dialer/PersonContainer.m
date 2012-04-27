@@ -26,6 +26,7 @@
     if (self != nil) {
         // Custom initialization
 
+        // Person dictionary will be set on cellSelected from teh ContactViewController
     }
     return self;
 }
@@ -52,6 +53,7 @@
 {
     NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
     NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:entryPos];
+    NSLog(@"phoneEntryAtIndex: %@", phoneList);
     
     return phoneEntry;
 }

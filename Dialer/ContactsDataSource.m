@@ -21,6 +21,7 @@
     if (self != nil) {
         // Custom initialization
         self.contacts = [[[ContactListContainer alloc] init] autorelease];
+        self.favorites = [[[FavoritePhoneContainer alloc] init] autorelease];
     }
     return self;
 }

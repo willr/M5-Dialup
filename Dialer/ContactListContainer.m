@@ -128,7 +128,8 @@
         for(CFIndex i = 0; i < phonesCount; i++) {
             NSString *phoneLabel = [self.abContainer copyMultiValueLabelAtIndex:phones index:i];
             NSLog(@"label: %@", phoneLabel);
-            [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:*phoneId++];
+            [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:*phoneId];
+            (*phoneId)++;
             [phoneLabel release];
         }
         [dOfPerson setObject:phoneList forKey:PersonPhoneList];
