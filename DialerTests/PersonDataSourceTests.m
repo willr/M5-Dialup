@@ -142,7 +142,13 @@
     NSUInteger indexes[2] = { 1, 3 };
     NSIndexPath *indexPath = [NSIndexPath indexPathWithIndexes:indexes length:2];
     
+    NSDictionary *result = [[NSDictionary alloc] init];
+    [result setValue:@"result" forKey:@"key"];
+    [[[self.personContainerMock expect] andReturn:result] nameAndPhoneNumberAtIndex:3];
+    
     [self.personDataSource tableView:nil accessoryButtonTappedForRowWithIndexPath:indexPath];
+    
+    [self.personContainerMock verify];
 }
 
 - (void) testCreateCellForRowAtIndexPathReturnContactListContact

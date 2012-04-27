@@ -79,3 +79,19 @@ extern NSString * const BoxWithCheckmarkImageTitle;
 
 // favorites filename
 extern NSString * const FavoritesFileName;
+
+// UserDefaults Keys
+extern NSString * const M5UrlEndPointName;
+
+// KeyChainItem Keys
+extern NSString * const M5UserAccountName;
+extern NSString * const M5UserAccountPassword;
+
+
+
+
+
+
+
+
+//

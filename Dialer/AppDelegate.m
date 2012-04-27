@@ -9,21 +9,29 @@
 #import "AppDelegate.h"
 
 #import "ContactsViewController.h"
+#import "UserDefaultsContainer.h"
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window      = _window;
+// @synthesize appDefaults = _appDefaults;
 
 - (void)dealloc
 {
+    // [_appDefaults release];
     [_window release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // setup the application defaults the application.
+    // _appDefaults = [[UserDefaultsContainer alloc] init];
+    // [self.appDefaults registerDefaults];
+    [[UserDefaultsContainer current] registerDefaults];
     
     ContactsViewController *contacts = [[ContactsViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contacts];

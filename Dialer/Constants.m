@@ -80,3 +80,17 @@ NSString * const BoxWithCheckmarkImageTitle = @"WithCheckMark";
 // favorites filename
 NSString * const FavoritesFileName = @"favoritesFile.plist";
 
+// UserDefaults Keys
+NSString * const M5UrlEndPointName = @"M5UrlEndPoint";
+
+// KeyChainItem Keys
+NSString * const M5UserAccountName = @"M5UserAccountName";
+NSString * const M5UserAccountPassword = @"M5UserAccountPassword";
+
+
+
+
+
+
+
+//

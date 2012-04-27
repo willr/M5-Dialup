@@ -53,7 +53,7 @@
 {
     NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
     NSMutableDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:entryPos];
-    NSLog(@"phoneEntryAtIndex: %@", phoneList);
+    // NSLog(@"phoneEntryAtIndex: %@", phoneList);
     
     return phoneEntry;
 }

@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "UserDefaultsContainer.h"
+
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    // UserDefaultsContainer *_appDefaults;
+}
 
-@property (strong, nonatomic) UIWindow *window;
+@property (retain, nonatomic) UIWindow              *window;
+// @property (retain, nonatomic) UserDefaultsContainer *appDefaults;
 
 void onUncaughtException(NSException* exception);
 

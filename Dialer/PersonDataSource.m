@@ -35,14 +35,11 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    // NSDictionary *person = self.person.person;
-    /*
-     NSString *contactName = [person objectForKey:PersonName];
-     NSString *phoneNumber = [person objectForKey:PersonPhoneNumber];
-     
-     [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
-     
-     */
+    NSDictionary *personNamePhone = [self.person nameAndPhoneNumberAtIndex:indexPath.row];
+    
+    NSLog(@"call Person: %@ at %@", [personNamePhone objectForKey:PersonName], [personNamePhone objectForKey:PersonPhoneNumber]);
+    
+    // [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
 }
 
 #pragma mark - TableViewDataSourceDelegate
