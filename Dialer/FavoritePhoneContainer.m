@@ -130,7 +130,7 @@
     return [self getFirstFoundPhoneId:person];
 }
 
-- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSInteger)pos
+- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSUInteger)pos;
 {
     NSDictionary *person = [self personAtIndex:pos];
     

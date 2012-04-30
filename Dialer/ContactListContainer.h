@@ -28,6 +28,8 @@
 
 - (NSDictionary *) personAtIndex:(NSUInteger)index;
 
+- (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;
+
 - (NSUInteger)count;
 
 @end

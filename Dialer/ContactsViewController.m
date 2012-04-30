@@ -7,6 +7,7 @@
 //
 
 #import "ContactsViewController.h"
+#import "DialerBaseViewController.h"
 #import "PersonViewController.h"
 #import "Constants.h"
 #import "AddressBookContainer.h"
@@ -132,11 +133,24 @@
     [personController release];
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *personNamePhone = [self.contacts nameAndPhoneNumberAtIndexPath:indexPath];
+    
+    NSString *personName = [personNamePhone objectForKey:PersonName];
+    NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
+    NSLog(@"call Person: %@ at %@", personName, phoneNumber);
+    
+    [self connectWithContact:personName phoneNumber:phoneNumber delegate:self];
+}
+
 #pragma mark - CallButtonDelegate
 
 - (void)checkButtonTapped:(id)sender event:(id)event
 {
-    [self.contacts checkButtonTapped:sender event:event tableView:self.tableView];
+    NSIndexPath *indexPath = [self indexPathForButtonTapped:sender event:event tableView:self.tableView];
+    
+    [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
 }
 
 @end

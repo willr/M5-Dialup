@@ -42,6 +42,17 @@
     return [self.contactList objectAtIndex:index];
 }
 
+- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSUInteger)pos
+{
+    NSDictionary *person = [self personAtIndex:pos];
+    
+    NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
+    NSString *phoneNumber = [[[phoneList allValues] objectAtIndex:0] objectForKey:PersonPhoneNumber];
+    
+    return [[[NSDictionary alloc] initWithObjectsAndKeys:[person objectForKey:PersonName], PersonName, phoneNumber, PersonPhoneNumber, nil] autorelease];
+    
+}
+
 #pragma mark - AddressBook collection methods
 
 - (void)getCopyFrom:(ABMultiValueRef)phones 

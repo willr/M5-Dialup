@@ -55,15 +55,21 @@
     [self.contacts collectAddressBookInfo];
 }
 
-#pragma mark - CallButtonDelegate
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (NSDictionary *)nameAndPhoneNumberAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *personNamePhone = [self.favorites nameAndPhoneNumberAtIndex:indexPath.row];
+    NSDictionary *results = nil;
+    switch (indexPath.section) {
+        case 0:
+            results = [self.favorites nameAndPhoneNumberAtIndex:indexPath.row];
+            break;
+        case 1:
+            results = [self.contacts nameAndPhoneNumberAtIndex:indexPath.row];
+            break;
+        default:
+            break;
+    }
     
-    NSLog(@"call Person: %@ at %@", [personNamePhone objectForKey:PersonName], [personNamePhone objectForKey:PersonPhoneNumber]);
-    
-    // [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
+    return results;
 }
 
 #pragma mark - TableViewDataSourceDelegate

@@ -9,20 +9,18 @@
 #import <UIKit/UIKit.h>
 
 #import "SecureData.h"
-#import "DialContactDelegate.h"
+#import "DialingViewDelegate.h"
+#import "LoginViewDelegate.h"
+#import "LoginInfoViewController.h"
 
-@interface DialingViewController : UIViewController <UITextFieldDelegate, DialContactDelegate>
+@interface DialingViewController : UIViewController <LoginViewDelegate>
 {
-    UILabel         *message;
-    UILabel         *contactDialed;
-    UILabel         *progress;
+    SecureData              *secureData;
+
+    id<DialingViewDelegate> _delegate;
     
-    NSString        *userName;
-    NSString        *password;
-    
-    UIButton        *cancelButton;
-    
-    SecureData      *secureData;
 }
+
+@property (nonatomic, retain) id<DialingViewDelegate>   delegate;
 
 @end

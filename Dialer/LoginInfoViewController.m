@@ -7,6 +7,8 @@
 //
 
 #import "LoginInfoViewController.h"
+#import "Constants.h"
+
 
 @interface LoginInfoViewController ()
 
@@ -14,22 +16,42 @@
 
 @implementation LoginInfoViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize loginDataSource = _loginDataSource;
+@synthesize tableView = _tableView;
+
+- (void)loadView
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+    // Get application frame dimensions (basically screen - status bar)
+    CGRect appRect = [[UIScreen mainScreen] applicationFrame];
+    
+    // create the table view to show the Contacts stored on the device.
+    UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];
+    table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    table.delegate = self;
+    LoginInfoViewDataSource *loginInfoDS = [[LoginInfoViewDataSource alloc] init];
+    table.dataSource = loginInfoDS;
+    [loginInfoDS release];
+    
+    // save the tableView variable, cause we will need it
+    self.tableView = table;
+    
+    // cause the table to load
+    [table reloadData];
+    
+    // set the table as the view
+    self.view = table;
+    
+    // release the tableView as it is now being held as the View
+    [table release];}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    /*
     // Create instance of keychain wrapper
-	secureData = [SecureData currentSecureData];
+	secureData = [SecureData current];
     
     username = [[UITextField alloc] initWithFrame:CGRectMake(40, 30, 240, 30)];
     [username setBorderStyle:UITextBorderStyleRoundedRect];
@@ -41,7 +63,7 @@
     [[self view] addSubview:username];  
     
 	// Get username from keychain (if it exists)
-	[username setText:[secureData.keychain objectForKey:(id)kSecAttrAccount]];
+	[username setText:[secureData userNameValue]];
     NSLog(@"username: %@", [username text]);
     
     password = [[UITextField alloc] initWithFrame:CGRectMake(40, 75, 240, 30)];
@@ -55,7 +77,7 @@
     [[self view] addSubview:password];  
     
 	// Get password from keychain (if it exists)  
-	[password setText:[secureData.keychain objectForKey:(id)kSecValueData]];
+	[password setText:[secureData passwordValue]];
     NSLog(@"password: %@", [password text]);
     
     testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -69,6 +91,7 @@
     [resetButton setTitle:@"Reset Keychain" forState:UIControlStateNormal];
     [resetButton addTarget:self action:@selector(resetPressed:) forControlEvents: UIControlEventTouchUpInside];        
     [[self view] addSubview:resetButton];
+     */
 }
 
 - (void)viewDidUnload
@@ -80,6 +103,36 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{    
+	if (indexPath.section != kShowCleartextSection)
+	{
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+		// id secAttr = [self.loginDataSource secAttrForSection:indexPath.section];
+        
+        /*
+		[textFieldController.textControl setPlaceholder:[self titleForSection:indexPath.section]];
+		[textFieldController.textControl setSecureTextEntry:(indexPath.section == kPasswordSection || indexPath.section == kAccountNumberSection)];
+		if (indexPath.section == kUsernameSection || indexPath.section == kPasswordSection)
+		{
+			textFieldController.keychainItemWrapper = passwordItem;
+		}
+		else {
+			textFieldController.keychainItemWrapper = accountNumberItem;
+		}
+		textFieldController.textValue = [textFieldController.keychainItemWrapper objectForKey:secAttr];
+		textFieldController.editedFieldKey = secAttr;
+		textFieldController.title = [DetailViewController titleForSection:indexPath.section];
+		
+		[self.navigationController pushViewController:textFieldController animated:YES];
+         
+         */
+	}
 }
 
 @end

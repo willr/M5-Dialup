@@ -1,0 +1,19 @@
+//
+//  DialerBaseViewController.h
+//  Dialer
+//
+//  Created by William Richardson on 4/30/12.
+//  Copyright (c) 2012 CodeSpan Technologies. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "DialingViewController.h"
+
+@interface DialerBaseViewController : UIViewController<DialingViewDelegate>
+
+- (NSIndexPath *) indexPathForButtonTapped:(id)sender event:(id)event tableView:(UITableView *)tableView ;
+
+- (void)connectWithContact:(NSString *)contactName phoneNumber:(NSString *)phoneNumber delegate:(id<DialingViewDelegate>)delegate;
+
+@end

@@ -7,6 +7,7 @@
 //
 
 #import "DialingViewController.h"
+#import "LoginInfoViewController.h"
 
 @interface DialingViewController ()
 
@@ -14,18 +15,22 @@
 
 @implementation DialingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize delegate = _delegate;
 
 - (void)loadLoginInfoView
 {
+    NSLog(@"Invalid Login Info, confirming with User.");
     
+    LoginInfoViewController *loginController = [[LoginInfoViewController alloc] init];
+    
+    [self.navigationController pushViewController:loginController animated:YES];
+    
+    [loginController release];
+}
+
+- (void) loadView
+{
+    [super loadView];
 }
 
 - (void)viewDidLoad
@@ -34,21 +39,19 @@
 	// Do any additional setup after loading the view.
     
     // Create instance of keychain wrapper
-	secureData = [SecureData currentSecureData];
+	secureData = [SecureData current];
     
     // Get username from keychain (if it exists)
-	userName = [secureData.keychain objectForKey:(id)kSecAttrAccount];
+	NSString *userName = [secureData.keychain objectForKey:(id)kSecAttrAccount];
     NSLog(@"username: %@", userName);
     
     // Get password from keychain (if it exists)  
-	password = [secureData.keychain objectForKey:(id)kSecValueData];
+	NSString *password = [secureData.keychain objectForKey:(id)kSecValueData];
     NSLog(@"password: %@", password);
     
     if (userName  == nil || password == nil) {
         [self loadLoginInfoView];
     }
-    
-    
     
 }
 
@@ -63,17 +66,32 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - DialContact protocol
 
-- (void)connectWithContact:(NSString *)contactName phoneNumber:(NSString *)phoneNumber
+#pragma mark - LoginViewDelegate
+
+- (void) loginInfoEntered
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Initiating call" 
-                                                    message:[NSString stringWithFormat:@"Calling %@ with phone number %@", contactName, phoneNumber]
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) loginInfoEntryCancelled
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

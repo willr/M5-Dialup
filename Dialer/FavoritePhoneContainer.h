@@ -34,7 +34,7 @@
 
 - (NSUInteger)count;
 
-- (NSDictionary *) nameAndPhoneNumberAtIndex:(NSInteger)pos;
+- (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;
 
 - (BOOL) validateFavorite:(NSDictionary *)favorite asContact:(NSDictionary *)contact;
 

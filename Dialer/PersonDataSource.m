@@ -31,15 +31,9 @@
     return self.favorites.favoritesModified;
 }
 
-#pragma mark - CallButtonDelegate
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (NSDictionary *)nameAndPhoneNumberAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *personNamePhone = [self.person nameAndPhoneNumberAtIndex:indexPath.row];
-    
-    NSLog(@"call Person: %@ at %@", [personNamePhone objectForKey:PersonName], [personNamePhone objectForKey:PersonPhoneNumber]);
-    
-    // [self.dialerDelegate connectWithContact:contactName phoneNumber:phoneNumber];
+    return [self.person nameAndPhoneNumberAtIndex:indexPath.row];
 }
 
 #pragma mark - TableViewDataSourceDelegate

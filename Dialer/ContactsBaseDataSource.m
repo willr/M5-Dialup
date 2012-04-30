@@ -8,6 +8,7 @@
 
 #import "ContactsBaseDataSource.h"
 #import "Constants.h"
+#import "DialingViewController.h"
 
 @implementation ContactsBaseDataSource
 
@@ -33,28 +34,6 @@
     [callButton setTitle:FavoriteButtonTitle forState:UIControlStateNormal];
     [callButton addTarget:self action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
     return callButton;
-}
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    NSAssert(false, @"This method should be overriden");
-}
-
-- (void)checkButtonTapped:(id)sender event:(id)event tableView:(UITableView *)tableView 
-{
-    NSSet *touches = [event allTouches];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentTouchPosition = [touch locationInView:tableView];
-    NSIndexPath *indexPath = [tableView indexPathForRowAtPoint: currentTouchPosition];
-    
-    // UIButton *button = (UIButton *)sender;
-    // UITableViewCell *cell = (UITableViewCell *)[button superview];
-    // NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    if (indexPath != nil)
-    {
-        [self tableView: tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-    }
 }
 
 @end

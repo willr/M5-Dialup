@@ -86,6 +86,14 @@ NSString * const M5UrlEndPointName = @"M5UrlEndPoint";
 // KeyChainItem Keys
 NSString * const M5UserAccountName = @"M5UserAccountName";
 NSString * const M5UserAccountPassword = @"M5UserAccountPassword";
+NSString * const KeychainUserPasswordIdentifier = @"UserNamePassword";
+
+
+// LoginInfo Headers
+NSString * const UserNameName =@"Username";
+NSString * const PasswordName = @"Password";
+NSString * const CallbackNumberName = @"Callback Phone Number";
+
 
 
 

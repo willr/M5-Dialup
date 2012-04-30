@@ -86,11 +86,19 @@ extern NSString * const M5UrlEndPointName;
 // KeyChainItem Keys
 extern NSString * const M5UserAccountName;
 extern NSString * const M5UserAccountPassword;
+extern NSString * const KeychainUserPasswordIdentifier;
 
+// LoginInfo Headers
+extern NSString * const UserNameName;
+extern NSString * const PasswordName;
+extern NSString * const CallbackNumberName;
 
-
-
-
+enum {
+    kUsernameSection = 0,
+    kPasswordSection,
+    kAccountNumberSection,
+    kShowCleartextSection
+};
 
 
 

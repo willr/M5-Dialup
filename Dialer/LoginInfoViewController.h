@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SecureData.h"
 
-@interface LoginInfoViewController : UIViewController <UITextFieldDelegate>
+#import "SecureData.h"
+#import "LoginInfoViewDataSource.h"
+
+@interface LoginInfoViewController : UIViewController <UIActionSheetDelegate, UITableViewDelegate>
 {
-    UITextField     *username;
-    UITextField     *password;
-	
-    UIButton        *testButton;
-    UIButton        *resetButton;
+    LoginInfoViewDataSource *_loginDataSource;
     
-    SecureData      *secureData;
+    UITableView *_tableView;
 }
+
+@property (nonatomic, retain) LoginInfoViewDataSource *loginDataSource;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

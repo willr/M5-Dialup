@@ -10,8 +10,9 @@
 
 #import "PersonDataSource.h"
 #import "CallButtonDelegate.h"
+#import "DialerBaseViewController.h"
 
-@interface PersonViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
+@interface PersonViewController : DialerBaseViewController <UITableViewDelegate, CallButtonDelegate>
 {
     PersonDataSource             *_person;
     

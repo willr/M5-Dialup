@@ -23,6 +23,6 @@
 
 - (BOOL) favoritesModified;
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
+- (NSDictionary *)nameAndPhoneNumberAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

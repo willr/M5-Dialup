@@ -13,6 +13,9 @@
 		AF01ADAF1543598400802DFC /* ContactDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADAE1543598400802DFC /* ContactDataSourceTests.m */; };
 		AF01ADD5154B296E00802DFC /* UserDefaultsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADD4154B296D00802DFC /* UserDefaultsContainer.m */; };
 		AF01ADDA154B384400802DFC /* UserDefaultsContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADD9154B384300802DFC /* UserDefaultsContainerTests.m */; };
+		AF01ADDC154F01C500802DFC /* SecureDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADDB154F01C500802DFC /* SecureDataTests.m */; };
+		AF01ADE9154F1C5000802DFC /* LoginInfoViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADE8154F1C5000802DFC /* LoginInfoViewDataSource.m */; };
+		AF01ADF0154F408A00802DFC /* DialerBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADEF154F408900802DFC /* DialerBaseViewController.m */; };
 		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
@@ -27,7 +30,6 @@
 		AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */; };
 		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
 		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
-		AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */; };
 		AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF472EE4151EAC980058E7A5 /* DialingViewController.m */; };
 		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
 		AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5A0BED1519A04400A6B3A9 /* Security.framework */; };
@@ -50,16 +52,12 @@
 		AF643ACD153E32C20041B7D1 /* ContactsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643ACC153E32C20041B7D1 /* ContactsDataSource.m */; };
 		AF643AD0153E32E50041B7D1 /* ContactsBaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643ACF153E32E50041B7D1 /* ContactsBaseDataSource.m */; };
 		AF643AD6153E3B950041B7D1 /* FavoritePhoneContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF643AD5153E3B940041B7D1 /* FavoritePhoneContainer.m */; };
-		AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
-		AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */; };
 		AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */; };
 		AF8D29B114EE574A006FF1C9 /* ContactBaseContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AC14EE574A006FF1C9 /* ContactBaseContainer.m */; };
 		AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29AE14EE574A006FF1C9 /* ContactListContainer.m */; };
 		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
 		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
 		AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */; };
-		AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */; };
-		AF8D29C014EEDD18006FF1C9 /* FavoritesListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +80,13 @@
 		AF01ADD4154B296D00802DFC /* UserDefaultsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsContainer.m; sourceTree = "<group>"; };
 		AF01ADD6154B2E3C00802DFC /* UserDefaultsContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserDefaultsContainer+PrivateMethods.h"; sourceTree = "<group>"; };
 		AF01ADD9154B384300802DFC /* UserDefaultsContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsContainerTests.m; sourceTree = "<group>"; };
+		AF01ADDB154F01C500802DFC /* SecureDataTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecureDataTests.m; sourceTree = "<group>"; };
+		AF01ADE7154F1C5000802DFC /* LoginInfoViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInfoViewDataSource.h; sourceTree = "<group>"; };
+		AF01ADE8154F1C5000802DFC /* LoginInfoViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginInfoViewDataSource.m; sourceTree = "<group>"; };
+		AF01ADEA154F31DC00802DFC /* DialingViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialingViewDelegate.h; sourceTree = "<group>"; };
+		AF01ADEE154F408800802DFC /* DialerBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerBaseViewController.h; sourceTree = "<group>"; };
+		AF01ADEF154F408900802DFC /* DialerBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerBaseViewController.m; sourceTree = "<group>"; };
+		AF01ADF1154F505C00802DFC /* LoginViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewDelegate.h; sourceTree = "<group>"; };
 		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,7 +109,6 @@
 		AF2EC0C514EE180D00E21302 /* PersonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonContainer.h; sourceTree = "<group>"; };
 		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
 		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
-		AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallButtonDelegate.m; sourceTree = "<group>"; };
 		AF472EE3151EAC980058E7A5 /* DialingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingViewController.h; sourceTree = "<group>"; };
 		AF472EE4151EAC980058E7A5 /* DialingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingViewController.m; sourceTree = "<group>"; };
 		AF5A0B911516B48000A6B3A9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -141,8 +145,6 @@
 		AF643AD4153E3B940041B7D1 /* FavoritePhoneContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritePhoneContainer.h; sourceTree = "<group>"; };
 		AF643AD5153E3B940041B7D1 /* FavoritePhoneContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePhoneContainer.m; sourceTree = "<group>"; };
 		AF643AD7153E4D940041B7D1 /* FavoritePhoneContainer+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoritePhoneContainer+PrivateMethods.h"; sourceTree = "<group>"; };
-		AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialContactDelegate.h; sourceTree = "<group>"; };
-		AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialContactDelegate.m; sourceTree = "<group>"; };
 		AF8D29A714EE4E71006FF1C9 /* ToggleImageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleImageControl.h; sourceTree = "<group>"; };
 		AF8D29A814EE4E71006FF1C9 /* ToggleImageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleImageControl.m; sourceTree = "<group>"; };
 		AF8D29AB14EE5749006FF1C9 /* ContactBaseContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactBaseContainer.h; sourceTree = "<group>"; };
@@ -154,9 +156,7 @@
 		AF8D29B514EE59E7006FF1C9 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
 		AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WithCheckMark.png; sourceTree = "<group>"; };
 		AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleDelegate.h; sourceTree = "<group>"; };
-		AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleDelegate.m; sourceTree = "<group>"; };
 		AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListDelegate.h; sourceTree = "<group>"; };
-		AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesListDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +271,7 @@
 				AF01ADAC1543332A00802DFC /* ContactBaseContainerTests.m */,
 				AF01ADAE1543598400802DFC /* ContactDataSourceTests.m */,
 				AF01ADD9154B384300802DFC /* UserDefaultsContainerTests.m */,
+				AF01ADDB154F01C500802DFC /* SecureDataTests.m */,
 			);
 			path = DialerTests;
 			sourceTree = "<group>";
@@ -291,8 +292,6 @@
 			children = (
 				AF472EE3151EAC980058E7A5 /* DialingViewController.h */,
 				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
-				AF7A5AD915328EEC000FBDDB /* DialContactDelegate.h */,
-				AF7A5ADA15328EEC000FBDDB /* DialContactDelegate.m */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -306,6 +305,8 @@
 				AF5A0BF41519B15000A6B3A9 /* SecureData.m */,
 				AF5A0BF81519B52900A6B3A9 /* LoginInfoViewController.h */,
 				AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */,
+				AF01ADE7154F1C5000802DFC /* LoginInfoViewDataSource.h */,
+				AF01ADE8154F1C5000802DFC /* LoginInfoViewDataSource.m */,
 			);
 			name = Security;
 			sourceTree = "<group>";
@@ -325,6 +326,8 @@
 				AF643ABC153E27950041B7D1 /* PersonDataSource.h */,
 				AF643ABD153E27950041B7D1 /* PersonDataSource.m */,
 				AF643AC3153E28FB0041B7D1 /* PersonDataSource+PrivateMethods.h */,
+				AF01ADEE154F408800802DFC /* DialerBaseViewController.h */,
+				AF01ADEF154F408900802DFC /* DialerBaseViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -350,12 +353,11 @@
 		AF8D29C114EEDD2A006FF1C9 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				AF01ADEA154F31DC00802DFC /* DialingViewDelegate.h */,
 				AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */,
-				AF2EC0CD14EE2CC700E21302 /* CallButtonDelegate.m */,
 				AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */,
-				AF8D29BF14EEDD17006FF1C9 /* FavoritesListDelegate.m */,
 				AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */,
-				AF8D29BC14EED78C006FF1C9 /* ToggleDelegate.m */,
+				AF01ADF1154F505C00802DFC /* LoginViewDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -497,25 +499,23 @@
 				AF1878E214ECD4350033A7C3 /* AppDelegate.m in Sources */,
 				AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */,
 				AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */,
-				AF2EC0CE14EE2CC800E21302 /* CallButtonDelegate.m in Sources */,
 				AF8D29A914EE4E71006FF1C9 /* ToggleImageControl.m in Sources */,
 				AF8D29B114EE574A006FF1C9 /* ContactBaseContainer.m in Sources */,
 				AF8D29B214EE574A006FF1C9 /* ContactListContainer.m in Sources */,
 				AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */,
-				AF8D29BD14EED78C006FF1C9 /* ToggleDelegate.m in Sources */,
-				AF8D29C014EEDD18006FF1C9 /* FavoritesListDelegate.m in Sources */,
 				AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */,
 				AF5A0BF11519A43900A6B3A9 /* KeychainItemWrapper.m in Sources */,
 				AF5A0BF51519B15100A6B3A9 /* SecureData.m in Sources */,
 				AF5A0BFA1519B52900A6B3A9 /* LoginInfoViewController.m in Sources */,
 				AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */,
-				AF7A5ADB15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
 				AF643A9A153BC1EE0041B7D1 /* AddressBookContainer.m in Sources */,
 				AF643ABE153E27950041B7D1 /* PersonDataSource.m in Sources */,
 				AF643ACD153E32C20041B7D1 /* ContactsDataSource.m in Sources */,
 				AF643AD0153E32E50041B7D1 /* ContactsBaseDataSource.m in Sources */,
 				AF643AD6153E3B950041B7D1 /* FavoritePhoneContainer.m in Sources */,
 				AF01ADD5154B296E00802DFC /* UserDefaultsContainer.m in Sources */,
+				AF01ADE9154F1C5000802DFC /* LoginInfoViewDataSource.m in Sources */,
+				AF01ADF0154F408A00802DFC /* DialerBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +524,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */,
-				AF7A5ADC15328EEC000FBDDB /* DialContactDelegate.m in Sources */,
 				AF643AA0153CA5AC0041B7D1 /* PersonContainerTests.m in Sources */,
 				AF643AA3153CA6280041B7D1 /* UnitTestDataFactory.m in Sources */,
 				AF643AA6153CA7950041B7D1 /* UnitTestConstants.m in Sources */,
@@ -535,6 +534,7 @@
 				AF01ADAD1543332A00802DFC /* ContactBaseContainerTests.m in Sources */,
 				AF01ADAF1543598400802DFC /* ContactDataSourceTests.m in Sources */,
 				AF01ADDA154B384400802DFC /* UserDefaultsContainerTests.m in Sources */,
+				AF01ADDC154F01C500802DFC /* SecureDataTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +587,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -604,7 +604,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

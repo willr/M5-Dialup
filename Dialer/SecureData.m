@@ -8,16 +8,44 @@
 
 #import "SecureData.h"
 
+#import "Constants.h"
+
 static SecureData *sharedSecureData = nil;
 
 @implementation SecureData
 
 @synthesize keychain = _keychain;
 
+
+- (void) setUserNameValue:(NSString *)userName
+{
+    [self.keychain setObject:kSecAttrAccount forKey:userName];
+}
+
+- (NSString *) userNameValue
+{
+    return [self.keychain objectForKey:kSecAttrAccount];
+}
+
+- (void) setPasswordValue:(NSString *)password
+{
+    [self.keychain setObject:kSecValueData forKey:password];
+}
+- (NSString *) passwordValue
+{
+    return [self.keychain objectForKey:kSecValueData];
+}
+
+// Initializes and resets the default generic keychain item data.
+- (void)reset
+{
+    [self.keychain resetKeychainItem];
+}
+
 #pragma mark -
 #pragma mark Singleton Methods
 
-+ (id)currentSecureData
++ (SecureData *)current
 {
     @synchronized(self) {
         if(sharedSecureData == nil) {
@@ -29,7 +57,7 @@ static SecureData *sharedSecureData = nil;
 
 + (id)allocWithZone:(NSZone *)zone
 {
-    return [[self currentSecureData] retain];
+    return [[self current] retain];
 }
 
 - (id)copyWithZone:(NSZone *)zone 
@@ -64,7 +92,7 @@ static SecureData *sharedSecureData = nil;
         // add object init stuff here
 
         // Create instance of keychain wrapper
-        _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.codespantech.dialer" accessGroup:nil];
+        _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainUserPasswordIdentifier accessGroup:nil];
     }
     return self;
 }

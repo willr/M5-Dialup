@@ -137,6 +137,7 @@
     assertThat(title, equalTo(phoneTypeName));
 }
 
+/*
 - (void) testAccessoryButtonTappedToCallNumber
 {
     NSUInteger indexes[2] = { 1, 3 };
@@ -150,6 +151,7 @@
     
     [self.personContainerMock verify];
 }
+*/
 
 - (void) testCreateCellForRowAtIndexPathReturnContactListContact
 {

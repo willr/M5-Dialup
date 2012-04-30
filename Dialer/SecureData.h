@@ -16,6 +16,15 @@
 
 @property (nonatomic, retain) KeychainItemWrapper *keychain;
 
-+ (id)currentSecureData;
++ (id)current;
+
+- (void) setUserNameValue:(NSString *)userName;
+- (NSString *) userNameValue;
+
+- (void) setPasswordValue:(NSString *)password;
+- (NSString *) passwordValue;
+
+// Initializes and resets the default generic keychain item data.
+- (void)reset;
 
 @end

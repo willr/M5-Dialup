@@ -12,23 +12,23 @@
 
 #import "CallButtonDelegate.h"
 #import "FavoritePhoneContainer.h"
+#import "DialerBaseViewController.h"
+#import "DialingViewDelegate.h"
 
-#import "DialContactDelegate.h"
 
-
-@interface ContactsViewController : UIViewController <UITableViewDelegate, CallButtonDelegate>
+@interface ContactsViewController : DialerBaseViewController <UITableViewDelegate, CallButtonDelegate>
 {
     ContactsDataSource *_contacts;
     
     UITableView *_tableView;
     
-    id<DialContactDelegate> _dialerDelegate;
+    id<DialingViewDelegate> _dialerDelegate;
 }
 
 @property (retain, nonatomic) ContactsDataSource        *contacts;
 
 @property (assign, nonatomic) UITableView               *tableView;
-@property (retain, nonatomic) id<DialContactDelegate>   dialerDelegate;
+@property (retain, nonatomic) id<DialingViewDelegate>   dialerDelegate;
 
 
 @end

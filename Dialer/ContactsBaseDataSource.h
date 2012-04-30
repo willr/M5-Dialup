@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "CallButtonDelegate.h"
+#import "DialingViewDelegate.h"
 
 @interface ContactsBaseDataSource : NSObject
 {
@@ -17,12 +19,8 @@
 // use assign and not retain, as we dont want to increase the ref count
 @property (assign, nonatomic) id<CallButtonDelegate> callButtonDelegate;
 
-- (UIButton *)configureCallButton:(id<CallButtonDelegate>)callButtonDelegate;
+- (UIButton *) configureCallButton:(id<CallButtonDelegate>)callButtonDelegate;
 
 - (UIButton *) createFavoriteButton;
-
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
-
-- (void)checkButtonTapped:(id)sender event:(id)event tableView:(UITableView *)tableView;
 
 @end

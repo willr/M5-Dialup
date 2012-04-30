@@ -227,6 +227,8 @@ Keychain API expects as a validly constructed container class.
     NSString *passwordString = [dictionaryToConvert objectForKey:(id)kSecValueData];
     [returnDictionary setObject:[passwordString dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
     
+    NSLog(@"secItemDictionary: %@", returnDictionary);
+    
     return returnDictionary;
 }
 
