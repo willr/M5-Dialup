@@ -28,15 +28,20 @@
     [super dealloc];
 }
 
+// set phoneInfo for call based on dictionary parameter
 - (void) setPhoneInfo:(NSDictionary *)phoneInfo
 {
     self.nameToCall = [phoneInfo objectForKey:PersonName];
     self.phoneToCall = [phoneInfo objectForKey:PersonPhoneNumber];
     self.phoneTypeToCall = [phoneInfo objectForKey:PersonPhoneLabel];
     
+    // default to waiting to connect.  This should probably auto connect atsome point.
+    // I assume based on an async call, that will update this as it goes along
+    //      this is not yet implemented
     self.status = kWaitingToConnect;
 }
 
+// convert the ConnectionStatus enum to string representation
 - (NSString *) convertConnectionStatus:(ConnectionStatus)status
 {
     NSString *connectionStatus = nil;
@@ -66,6 +71,7 @@
     return connectionStatus;
 }
 
+// title for each section
 - (NSString *) titleForHeaderSection:(NSInteger)section
 {
     NSString *title = nil;
@@ -76,6 +82,7 @@
         case kPhoneNumberCalling:
             title = PhoneNumberCalling;
             break;
+        // dont this we use this now
         case kRetryConnection:
             title = @"";
             break;
@@ -92,7 +99,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tv
 {
-    // 4 sections, Name to call, phone number called with phoneType, progress indicator
+    // 3 sections, Name to call, phone number called with phoneType, progress indicator
+    
+    // only 3 sections for now, we are skipping the kRetryConnection as we are just putting the button in the footer of ProgressIndicator
     return 3;
 }
 
@@ -110,6 +119,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+    // hmm guess I should make constants... 
     static NSString *kCallingNameIdentifier =	@"CallingNameCell";
 	static NSString *kPhoneNumberCallingIdentifier =	@"PhoneNumberCallingCell";
 	static NSString *kBlankIdentifier =	@"BlankCell";
@@ -126,6 +136,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCallingNameIdentifier] autorelease];
 			}
 			
+            // just set the contact name we are calling
             cell.textLabel.text = self.nameToCall;
             
             break;
@@ -138,6 +149,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPhoneNumberCallingIdentifier] autorelease];
 			}
 			
+            // set a formatted phone number with phone type
             NSString *textValue = [NSString stringWithFormat:@"[%@] %@", self.phoneTypeToCall, self.phoneToCall];
             cell.textLabel.text = textValue;
             
@@ -145,7 +157,7 @@
         }
         case kRetryConnection:
         {
-            
+            // all this is ignored for now, as we setup the button in the footer.  delete in the future
             cell = [aTableView dequeueReusableCellWithIdentifier:kBlankIdentifier];
 			if (cell == nil)
 			{
@@ -191,6 +203,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kProgressIndictorIdentifier] autorelease];
 			}
             
+            // translate the status enum into string representation
             cell.textLabel.text = [self convertConnectionStatus:self.status];
             _statusModified = false;
             
@@ -198,6 +211,7 @@
         }
     }
     
+    // dont show the blue cell selected value
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

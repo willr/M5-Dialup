@@ -77,6 +77,8 @@
     
     self.title = InitialWindowTitle;
     
+    // since the view is loaded, tell the datasource to load the contacts
+    // this should be an async operation, as we dont want to impact the UI thread, by this processing, which can be intesive
     [self.contacts collectAddressBookInfo];
     
     // cause the table to load
@@ -92,6 +94,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // if the favorites have been modified by the dataSource then reload the table to reflect those changes
     if ([self.contacts favoritesModified]) {
         [self.tableView reloadData];
     }
@@ -112,29 +115,44 @@
     // cause the cell to deselect animated, nicely when released
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
+    // we are creating the viewController, dataSource, and containers externally.
+    // this is where we do it.
+    
+    // this is the person selected by the indexPath, we are going to display in PersonView
     PersonContainer *person = [[PersonContainer alloc] init];
     person.person = [self.contacts personAtIndexPath:indexPath];
     
+    // dataSource for the tableView
     PersonDataSource *personDS = [[PersonDataSource alloc] init];
     personDS.person = person;
+    // have to include the favorites, as the dataSource is responsible for "favorite/un-favorite" phone numbers
     personDS.favorites = self.contacts.favorites;
+    // releas cause it was added to dataSource
     [person release];
     
+    // create view and add dataSource
     PersonViewController *personController = [[PersonViewController alloc] init];
     personController.person = personDS;
 
     // this is assign only, a "weak" reference as we use it to build the button
     personDS.callButtonDelegate = personController;
-
+    
+    // release dataSource as it is held by viewController
+    [personDS release];
+    
     // NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
     
+    // bring view to front and release, retained controller
     [self.navigationController pushViewController:personController animated:YES];
     
     [personController release];
 }
 
+// this method is really only called from checkButtonTapped, as we have a buttonView on accessoryView
+// when there is an accessoryView, this method is not called by UITableView
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    // get the name and phone number for the row where the button was pressed
     NSDictionary *personNamePhone = [self.contacts nameAndPhoneNumberAtIndexPath:indexPath];
     /*
     NSString *personName = [personNamePhone objectForKey:PersonName];
@@ -142,11 +160,13 @@
     NSLog(@"call Person: %@ at %@", personName, phoneNumber);
     */
     
+    // call the common method to handle starting the phone call
     [self connectWithContact:personNamePhone delegate:self];
 }
 
 #pragma mark - CallButtonDelegate
 
+// this method handles all button Presses for the call button
 - (void)checkButtonTapped:(id)sender event:(id)event
 {
     NSIndexPath *indexPath = [self indexPathForButtonTapped:sender event:event tableView:self.tableView];

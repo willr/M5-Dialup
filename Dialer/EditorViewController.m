@@ -12,9 +12,7 @@
 
 @synthesize textValue = _textValue;
 @synthesize placeHolder = _placeHolder;
-@synthesize secureTextEntry = _secureTextEntry;
 @synthesize textControl = _textControl;
-// @synthesize secureData = _secureData;
 
 - (id)init
 {
@@ -32,13 +30,14 @@
     self.placeHolder = nil;
     self.textControl = nil;
     
+    // we set the var via method, so manually release and nil
     [_secureData release];
     _secureData = nil;
-    // self.secureData = nil;
     
     [super dealloc];
 }
 
+// set the block we are going to use to update the value
 - (void) setSecureDataUpdater:(SecureDataForKey)updater
 {
     _secureData = [updater copy];
@@ -79,24 +78,27 @@
     self.textControl.placeholder = self.placeHolder;
 }
 
+// cancel target for button
 - (void) cancel:(id)sender
 {
     // cancel edits
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+// save target for button
 - (void) save:(id)sender
 {
     // save edits
-    // [self.secureData setObject:[self.textControl text] forKey:self.editedFieldKey];
     NSString *text = [self.textControl text];
     _secureData(text);
     
+    // pop the view back to login, after we have saved
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    // cause the keyboard to appear, when the page is loaded, and set the value
     [self.textControl becomeFirstResponder];
     [self.textControl setText:self.textValue];
 }

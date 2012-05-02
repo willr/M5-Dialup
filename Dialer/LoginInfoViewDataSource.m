@@ -21,12 +21,12 @@
 
 - (void) dealloc
 {
+    self.controller = nil;
     
-    // release allocated resources
-    // self.tableView = nil;
     [super dealloc];
 }
 
+// call the correct SecureData method for the section being displayed
 - (NSString *)valueForSection:(NSInteger)section
 {
     NSString *textValue = nil;
@@ -42,6 +42,7 @@
     return textValue;
 }
 
+// title for each section being displayed
 - (NSString *)titleForSection:(NSInteger)section
 {
     NSString *title = nil;
@@ -57,6 +58,7 @@
     return title;
 }
 
+/*
 - (id) secAttrForSection:(NSInteger)section
 {
     id secAttr = nil;
@@ -72,6 +74,7 @@
     }
     return secAttr;
 }
+*/
 
 #pragma mark -
 #pragma mark <UITableViewDataSource> Methods
@@ -119,6 +122,7 @@
 	
 	UITableViewCell *cell = nil;	
 	
+    // based on section number, create the correct TableViewCell
 	switch (indexPath.section)
 	{
 		case kUsernameSection:
@@ -129,7 +133,8 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kUsernameCellIdentifier] autorelease];
 			}
 			
-            cell.textLabel.text = [[SecureData current] userNameValue];
+            // set userName to be displayed
+            cell.textLabel.text = [self valueForSection:indexPath.section];
 			cell.accessoryType = (_editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
              
 			break;
@@ -139,7 +144,7 @@
 		case kSourcePhoneNumberSection:
 		{
 			UITextField *textField = nil;
-			
+			// create a textField to for the cells, contentView, and enable secureText (bullets)
 			cell = [aTableView dequeueReusableCellWithIdentifier:kPasswordCellIdentifier];
 			if (cell == nil)
 			{
@@ -161,7 +166,8 @@
 			else {
 				textField = (UITextField *) [cell.contentView viewWithTag:kPasswordTag];
 			}
-			
+            
+			// set the current value
             cell.accessoryType = (_editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
             textField.text = [self valueForSection:indexPath.section];
             
@@ -173,6 +179,7 @@
 			cell = [aTableView dequeueReusableCellWithIdentifier:kSwitchCellIdentifier];
 			if (cell == nil)
 			{
+                // create and add a Switch for enable clear text display on the secureFields
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSwitchCellIdentifier] autorelease];
 				
 				cell.textLabel.text = NSLocalizedString(@"Show Cleartext", @"");

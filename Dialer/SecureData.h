@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "KeychainItemWrapper.h"
 
+// this is a singleton, which wraps access to the various information we are storing
+//
 @interface SecureData : NSObject
 {
     KeychainItemWrapper *_userNamePasswordKeychain;

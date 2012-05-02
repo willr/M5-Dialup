@@ -10,6 +10,8 @@
 
 #import "DialingViewController.h"
 
+// base ViewController to house some common methods that need to be shared
+//
 @interface DialerBaseViewController : UIViewController<DialingViewDelegate>
 
 - (NSIndexPath *) indexPathForButtonTapped:(id)sender event:(id)event tableView:(UITableView *)tableView ;

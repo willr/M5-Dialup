@@ -14,7 +14,6 @@
 
 @synthesize person = _person;
 @synthesize tableView = _tableView;
-// @synthesize personDataSource = _personDataSource;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,6 +22,14 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void) dealloc
+{
+    self.person = nil;
+    self.tableView = nil;
+    
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,6 +73,7 @@
 {
     [super viewDidLoad];
     
+    // set the title to be name of the person's information we are showing
     self.title = self.person.person.name;
     
     // cause the table to load
@@ -83,6 +91,9 @@
 {
     [super viewWillDisappear:animated];
     
+    // if favorites were modified, then persist the favorites as a file for later
+    // we do this now, so we dont have to keep track of it
+    // this should be an async operation
     if (self.person.favoritesModified) {
         [self.person.favorites saveFavorites];
     }
@@ -104,8 +115,11 @@
 
 }
 
+// this method is really only called from checkButtonTapped, as we have a buttonView on accessoryView
+// when there is an accessoryView, this method is not called by UITableView
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    // get the name and phone number for the row where the button was pressed
     NSDictionary *personNamePhone = [self.person nameAndPhoneNumberAtIndexPath:indexPath];
     
     /*
@@ -118,6 +132,8 @@
 }
 
 #pragma mark - CallButtonDelegate
+
+// this method handles all button Presses for the call button
 - (void)checkButtonTapped:(id)sender event:(id)event
 {
     NSIndexPath *indexPath = [self indexPathForButtonTapped:sender event:event tableView:self.tableView];

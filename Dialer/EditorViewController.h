@@ -16,7 +16,6 @@ typedef void (^SecureDataForKey)(NSString *);
 {
     NSString            *_textValue;
     NSString            *_placeHolder;
-    BOOL                _secureTextEntry;
     
     UITextField         *_textControl;
     SecureDataForKey    _secureData;
@@ -24,9 +23,7 @@ typedef void (^SecureDataForKey)(NSString *);
 
 @property (nonatomic, retain) NSString          *textValue;
 @property (nonatomic, retain) NSString          *placeHolder;
-@property (nonatomic, assign) BOOL              secureTextEntry;
 @property (nonatomic, retain) UITextField       *textControl;
-// @property (nonatomic, retain) SecureDataForKey  secureData;
 
 - (void) cancel:(id)sender;
 

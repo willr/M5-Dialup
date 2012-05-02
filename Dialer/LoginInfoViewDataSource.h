@@ -26,7 +26,7 @@
 
 - (NSString *)titleForSection:(NSInteger)section;
 
-- (id) secAttrForSection:(NSInteger)section;
+// - (id) secAttrForSection:(NSInteger)section;
    
 @end
 

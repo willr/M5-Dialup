@@ -17,7 +17,6 @@ static SecureData *sharedSecureData = nil;
 @synthesize userNamePasswordKeychain = _userNamePasswordKeychain;
 @synthesize sourcePhoneNumberKeychain = _sourcePhoneNumberKeychain;
 
-
 - (void) setUserNameValue:(NSString *)userName
 {
     [self.userNamePasswordKeychain setObject:userName forKey:kSecAttrAccount];
@@ -105,6 +104,9 @@ static SecureData *sharedSecureData = nil;
         // add object init stuff here
 
         // Create instance of keychain wrapper
+        
+        // need two instances of the keychain wrappers, one for the username/password combo, other for phoneNumber.
+        // if more needed in the future, then new keychain wrapper will have to be created for each new iten needed.
         _userNamePasswordKeychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainUserPasswordIdentifier accessGroup:nil];
         _sourcePhoneNumberKeychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainPhoneNumberIdendifier accessGroup:nil];
     }

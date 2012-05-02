@@ -35,10 +35,11 @@
 
 - (void) dealloc
 {
-    self.retryConnect = nil;
+    self.delegate = nil;
     self.dialingDS = nil;
     self.tableView = nil;
-    self.delegate = nil;
+    self.retryConnect = nil;
+    self.retryView = nil;
     
     [super dealloc];
 }
@@ -47,6 +48,7 @@
 {
     // NSLog(@"Invalid Login Info, confirming with User.");
     
+    // load the loginViewController, pushing onto the NavController stack
     LoginInfoViewController *loginController = [[LoginInfoViewController alloc] init];
     loginController.loginDelegate = self;
     
@@ -64,7 +66,9 @@
     UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];
     table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
+    // set the UITableViewDelegate
     table.delegate = self;
+    // set the tableView dataSource delegate
     table.dataSource = self.dialingDS;
     
     // save the tableView variable, cause we will need it
@@ -82,7 +86,7 @@
                                                                                    action:@selector(cancelButtonPressed:event:)] autorelease]; 
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    // add Cancel button
+    // add edit button
     UIBarButtonItem *editButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
                                                                                  target:self 
                                                                                  action:@selector(editButtonPressed:event:)] autorelease]; 
@@ -124,6 +128,7 @@
 {
     [super viewDidAppear:animated];
     
+    // default cancelled to false, when view appears
     _cancelled = false;
 }
 
@@ -134,37 +139,45 @@
 
 - (void) cancelConnection
 {
+    // set cancelled status, reload table
     self.dialingDS.status = kCancelledConnection;
     [self.tableView reloadData];
 }
 
 - (void) startConnection
 {
+    // set connection status, reload table
     self.dialingDS.status = kConnectingConnection;
     [self.tableView reloadData];
 }
 
 - (void) cancelButtonPressed:(id)sender event:(id)event
 {
+    // call cancelled method, to handle all actions when this occures
     [self cancelConnection];
     _cancelled = true;
     
+    // notify parent view Controller
     [self.delegate callRequestCancelled];
 }
 
 - (void) editButtonPressed:(id)sender event:(id)event
 {
+    // call cancelled method, to handle all actions when this occures
     [self cancelConnection];
     
+    // load the loginInfo view to set parameters
     [self loadLoginInfoView];
 }
 
 - (void) retryButtonPressed:(id)sender event:(id)event
 {
+    // start the call 
     [self startConnection];
     
 }
 
+// create the retry button that appears in the footer
 - (UIButton *) createRetryButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -174,7 +187,6 @@
     [button setTitle:@"Retry Connection" forState:UIControlStateNormal];
     button.frame = CGRectMake(80.0, 40.0, 160.0, 42.0);
     button.tintColor = [UIColor blueColor];
-    // button.showsTouchWhenHighlighted = YES;
     
     return button;
 }
@@ -205,23 +217,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    // add enough height for the button below
     return (section == kProgressIndictor) ? 82.0 : 0.0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+    // not sure this is right, but the important thing, is dont add a view unless it is the progressIndicator sections
     if (section != kProgressIndictor) {
         return [self.tableView tableFooterView];
     }
     
+    // create the retryView if we have not been here before
     if (self.retryView == nil) {
         UIButton *retryButton = [self createRetryButton];
+        // create a view to house the button, without this, it only seemed to default to full width of screen
         UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(80.0, 40.0, 160.0, 42.0)];
         [buttonView addSubview:retryButton];
         
+        // save for later, or next pass through heres
         self.retryConnect = retryButton;
         self.retryView = buttonView;
         
+        // release as we have already retained in prop, button is autoReleased, I think
         [buttonView release];
     }
     
