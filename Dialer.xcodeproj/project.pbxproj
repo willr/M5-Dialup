@@ -16,6 +16,8 @@
 		AF01ADDC154F01C500802DFC /* SecureDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADDB154F01C500802DFC /* SecureDataTests.m */; };
 		AF01ADE9154F1C5000802DFC /* LoginInfoViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADE8154F1C5000802DFC /* LoginInfoViewDataSource.m */; };
 		AF01ADF0154F408A00802DFC /* DialerBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADEF154F408900802DFC /* DialerBaseViewController.m */; };
+		AF01ADF415502DFE00802DFC /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADF315502DFD00802DFC /* EditorViewController.m */; };
+		AF01ADFB1550951400802DFC /* DialingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF01ADFA1550951400802DFC /* DialingDataSource.m */; };
 		AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D114ECD4350033A7C3 /* UIKit.framework */; };
 		AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D314ECD4350033A7C3 /* Foundation.framework */; };
 		AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */; };
@@ -87,6 +89,10 @@
 		AF01ADEE154F408800802DFC /* DialerBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerBaseViewController.h; sourceTree = "<group>"; };
 		AF01ADEF154F408900802DFC /* DialerBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialerBaseViewController.m; sourceTree = "<group>"; };
 		AF01ADF1154F505C00802DFC /* LoginViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewDelegate.h; sourceTree = "<group>"; };
+		AF01ADF215502DFD00802DFC /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
+		AF01ADF315502DFD00802DFC /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
+		AF01ADF91550951400802DFC /* DialingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingDataSource.h; sourceTree = "<group>"; };
+		AF01ADFA1550951400802DFC /* DialingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingDataSource.m; sourceTree = "<group>"; };
 		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -228,7 +234,6 @@
 			children = (
 				AF643ABB153E27590041B7D1 /* Controls */,
 				AF643ABA153E27430041B7D1 /* Controllers */,
-				AF472EE1151EAA920058E7A5 /* Communication */,
 				AF5A0BF71519B4C400A6B3A9 /* Security */,
 				AF8D29C214EEDD56006FF1C9 /* Containers */,
 				AF8D29C114EEDD2A006FF1C9 /* Delegates */,
@@ -287,15 +292,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AF472EE1151EAA920058E7A5 /* Communication */ = {
-			isa = PBXGroup;
-			children = (
-				AF472EE3151EAC980058E7A5 /* DialingViewController.h */,
-				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
-			);
-			name = Communication;
-			sourceTree = "<group>";
-		};
 		AF5A0BF71519B4C400A6B3A9 /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +303,8 @@
 				AF5A0BF91519B52900A6B3A9 /* LoginInfoViewController.m */,
 				AF01ADE7154F1C5000802DFC /* LoginInfoViewDataSource.h */,
 				AF01ADE8154F1C5000802DFC /* LoginInfoViewDataSource.m */,
+				AF01ADF215502DFD00802DFC /* EditorViewController.h */,
+				AF01ADF315502DFD00802DFC /* EditorViewController.m */,
 			);
 			name = Security;
 			sourceTree = "<group>";
@@ -328,6 +326,10 @@
 				AF643AC3153E28FB0041B7D1 /* PersonDataSource+PrivateMethods.h */,
 				AF01ADEE154F408800802DFC /* DialerBaseViewController.h */,
 				AF01ADEF154F408900802DFC /* DialerBaseViewController.m */,
+				AF472EE3151EAC980058E7A5 /* DialingViewController.h */,
+				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
+				AF01ADF91550951400802DFC /* DialingDataSource.h */,
+				AF01ADFA1550951400802DFC /* DialingDataSource.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -516,6 +518,8 @@
 				AF01ADD5154B296E00802DFC /* UserDefaultsContainer.m in Sources */,
 				AF01ADE9154F1C5000802DFC /* LoginInfoViewDataSource.m in Sources */,
 				AF01ADF0154F408A00802DFC /* DialerBaseViewController.m in Sources */,
+				AF01ADF415502DFE00802DFC /* EditorViewController.m in Sources */,
+				AF01ADFB1550951400802DFC /* DialingDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

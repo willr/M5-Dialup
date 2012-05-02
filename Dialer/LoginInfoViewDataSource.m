@@ -13,21 +13,34 @@
 // Defined UI Constants
 
 // tag table view cells that contain a text field to support secure text entry
-static NSInteger kPasswordTag = 2;
 
 
 @implementation LoginInfoViewDataSource
 
-@synthesize tableView = _tableView;
+@synthesize controller = _controller;
 
 - (void) dealloc
 {
     
     // release allocated resources
-    self.tableView = nil;
+    // self.tableView = nil;
     [super dealloc];
 }
 
+- (NSString *)valueForSection:(NSInteger)section
+{
+    NSString *textValue = nil;
+    switch (section)
+    {
+        case kUsernameSection: textValue = [[SecureData current] userNameValue];
+            break;
+        case kPasswordSection: textValue = [[SecureData current] passwordValue];
+            break;
+        case kSourcePhoneNumberSection: textValue = [[SecureData current] sourcePhoneNumberValue];
+            break;
+    }
+    return textValue;
+}
 
 - (NSString *)titleForSection:(NSInteger)section
 {
@@ -35,8 +48,11 @@ static NSInteger kPasswordTag = 2;
     switch (section)
     {
         case kUsernameSection: title = UserNameName;
+            break;
         case kPasswordSection: title = PasswordName;
-        case kAccountNumberSection: title = CallbackNumberName;
+            break;
+        case kSourcePhoneNumberSection: title = CallbackNumberName;
+            break;
     }
     return title;
 }
@@ -48,14 +64,17 @@ static NSInteger kPasswordTag = 2;
     switch (section)
     {
         case kUsernameSection: secAttr = (id)kSecAttrAccount;
+            break;
         case kPasswordSection: secAttr = (id)kSecValueData;
-        case kAccountNumberSection: secAttr = (id)kSecValueData;
+            break;
+        case kSourcePhoneNumberSection: secAttr = (id)kSecValueData;
+            break;
     }
     return secAttr;
 }
 
 #pragma mark -
-#pragma mark <UITableViewDelegate, UITableViewDataSource> Methods
+#pragma mark <UITableViewDataSource> Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tv
 {
@@ -71,7 +90,7 @@ static NSInteger kPasswordTag = 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-	return (section == kAccountNumberSection) ? 48.0 : 0.0;
+	return (section == kSourcePhoneNumberSection) ? 48.0 : 0.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -82,14 +101,12 @@ static NSInteger kPasswordTag = 2;
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     NSString *title = nil;
-	
-    /*
-	if (section == kAccountNumberSection)
+	/*
+	if (section == kSourcePhoneNumberSection)
 	{
-		title = @"AccountNumberShared", @"");
+		title = @"AccountNumberShared";
 	}
-	*/
-    
+    */
 	return title;
 }
 
@@ -112,16 +129,14 @@ static NSInteger kPasswordTag = 2;
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kUsernameCellIdentifier] autorelease];
 			}
 			
-            /*
-			cell.textLabel.text = [passwordItem objectForKey:[DetailViewController secAttrForSection:indexPath.section]];
-			cell.accessoryType = (self.editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-			*/
+            cell.textLabel.text = [[SecureData current] userNameValue];
+			cell.accessoryType = (_editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
              
 			break;
 		}
 			
 		case kPasswordSection:
-		case kAccountNumberSection:
+		case kSourcePhoneNumberSection:
 		{
 			UITextField *textField = nil;
 			
@@ -147,11 +162,9 @@ static NSInteger kPasswordTag = 2;
 				textField = (UITextField *) [cell.contentView viewWithTag:kPasswordTag];
 			}
 			
-            /*
-			KeychainItemWrapper *wrapper = (indexPath.section == kPasswordSection) ? passwordItem : accountNumberItem;
-			textField.text = [wrapper objectForKey:[DetailViewController secAttrForSection:indexPath.section]];
-			cell.accessoryType = (self.editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-            */
+            cell.accessoryType = (_editing) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+            textField.text = [self valueForSection:indexPath.section];
+            
 			break;
 		}
             
@@ -166,7 +179,7 @@ static NSInteger kPasswordTag = 2;
 				cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
 				UISwitch *switchCtl = [[[UISwitch alloc] initWithFrame:CGRectMake(194, 8, 94, 27)] autorelease];
-				[switchCtl addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+				[switchCtl addTarget:self.controller action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
 				[cell.contentView addSubview:switchCtl];
 			}
 			

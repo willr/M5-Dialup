@@ -39,14 +39,8 @@
 - (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index
 {
     NSMutableDictionary *phoneEntry = [self phoneEntryAtIndex:index];
-    NSString *phoneTxt = [phoneEntry objectForKey:PersonPhoneNumber];
     
-    NSDictionary *copy = [[[NSDictionary alloc] initWithObjectsAndKeys:
-                           [self name], PersonName, 
-                           phoneTxt, PersonPhoneNumber, 
-                           nil] autorelease];
-    
-    return copy;
+    return [self namePhoneNumberAndType:phoneEntry name:[self name] phoneType:[self phoneTypeAtIndex:index]];
 }
 
 - (NSMutableDictionary *)phoneEntryAtIndex:(NSUInteger)entryPos

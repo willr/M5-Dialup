@@ -8,7 +8,8 @@
 
 #import "LoginInfoViewController.h"
 #import "Constants.h"
-
+#import "EditorViewController.h"
+#import "LoginInfoViewDataSource.h"
 
 @interface LoginInfoViewController ()
 
@@ -18,6 +19,7 @@
 
 @synthesize loginDataSource = _loginDataSource;
 @synthesize tableView = _tableView;
+@synthesize loginDelegate = _loginDelegate;
 
 - (void)loadView
 {
@@ -29,69 +31,24 @@
     table.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
     table.delegate = self;
-    LoginInfoViewDataSource *loginInfoDS = [[LoginInfoViewDataSource alloc] init];
-    table.dataSource = loginInfoDS;
-    [loginInfoDS release];
+    _loginDataSource = [[LoginInfoViewDataSource alloc] init];
+    table.dataSource = self.loginDataSource;
     
     // save the tableView variable, cause we will need it
     self.tableView = table;
-    
-    // cause the table to load
-    [table reloadData];
     
     // set the table as the view
     self.view = table;
     
     // release the tableView as it is now being held as the View
-    [table release];}
+    [table release];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    /*
-    // Create instance of keychain wrapper
-	secureData = [SecureData current];
-    
-    username = [[UITextField alloc] initWithFrame:CGRectMake(40, 30, 240, 30)];
-    [username setBorderStyle:UITextBorderStyleRoundedRect];
-    [username setPlaceholder:@"Username"];
-    [username setDelegate:self];
-    [username setEnablesReturnKeyAutomatically: TRUE];
-    [username setReturnKeyType:UIReturnKeyDone];
-	[username setAdjustsFontSizeToFitWidth:YES];  
-    [[self view] addSubview:username];  
-    
-	// Get username from keychain (if it exists)
-	[username setText:[secureData userNameValue]];
-    NSLog(@"username: %@", [username text]);
-    
-    password = [[UITextField alloc] initWithFrame:CGRectMake(40, 75, 240, 30)];
-    [password setBorderStyle:UITextBorderStyleRoundedRect];
-    [password setPlaceholder:@"Password"];
-    [password setSecureTextEntry:YES];
-    [password setDelegate:self];
-    [password setEnablesReturnKeyAutomatically: TRUE];
-    [password setReturnKeyType:UIReturnKeyDone];
-	[password setAdjustsFontSizeToFitWidth:YES];  
-    [[self view] addSubview:password];  
-    
-	// Get password from keychain (if it exists)  
-	[password setText:[secureData passwordValue]];
-    NSLog(@"password: %@", [password text]);
-    
-    testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [testButton setFrame:CGRectMake(80, 130, 160, 40)];
-	[testButton setTitle:@"Save to Keychain" forState:UIControlStateNormal];
-    [testButton addTarget:self action:@selector(buttonPressed:) forControlEvents: UIControlEventTouchUpInside];        
-    [[self view] addSubview:testButton];
-    
-    resetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [resetButton setFrame:CGRectMake(80, 185, 160, 40)];
-    [resetButton setTitle:@"Reset Keychain" forState:UIControlStateNormal];
-    [resetButton addTarget:self action:@selector(resetPressed:) forControlEvents: UIControlEventTouchUpInside];        
-    [[self view] addSubview:resetButton];
-     */
+
 }
 
 - (void)viewDidUnload
@@ -100,9 +57,40 @@
     // Release any retained subviews of the main view.
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)switchAction:(id)sender
+{
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:
+							 [NSIndexPath indexPathForRow:0 inSection:kPasswordSection]];
+	UITextField *textField = (UITextField *) [cell.contentView viewWithTag:kPasswordTag];
+	textField.secureTextEntry = ![sender isOn];
+	
+	cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:kSourcePhoneNumberSection]];
+	textField = (UITextField *) [cell.contentView viewWithTag:kPasswordTag];
+	textField.secureTextEntry = ![sender isOn];
+}
+
+#pragma mark - UIActionSheetDelegate
+// Action sheet delegate method.
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // the user clicked one of the OK/Cancel buttons
+    if (buttonIndex == 0)
+    {
+        [[SecureData current] reset];
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -113,25 +101,40 @@
 	{
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
-		// id secAttr = [self.loginDataSource secAttrForSection:indexPath.section];
+        SecureDataForKey setSecureData = nil;
+        NSString *textValue = nil;
+        SecureData *secureData = [SecureData current];
+        switch (indexPath.section)
+        {
+            case kUsernameSection:
+                setSecureData = ^(NSString *txtValue) {
+                    [secureData setUserNameValue:txtValue];
+                };
+                textValue = [secureData userNameValue];
+                break;
+            case kPasswordSection:
+                setSecureData = ^(NSString *txtValue) {
+                    [secureData setPasswordValue:txtValue];
+                };
+                textValue = [secureData passwordValue];
+                break;
+            case kSourcePhoneNumberSection:
+                setSecureData = ^(NSString *txtValue) {
+                    [secureData setSourcePhoneNumberValue:txtValue];
+                };
+                textValue = [secureData sourcePhoneNumberValue];
+                break;
+        }
         
-        /*
-		[textFieldController.textControl setPlaceholder:[self titleForSection:indexPath.section]];
-		[textFieldController.textControl setSecureTextEntry:(indexPath.section == kPasswordSection || indexPath.section == kAccountNumberSection)];
-		if (indexPath.section == kUsernameSection || indexPath.section == kPasswordSection)
-		{
-			textFieldController.keychainItemWrapper = passwordItem;
-		}
-		else {
-			textFieldController.keychainItemWrapper = accountNumberItem;
-		}
-		textFieldController.textValue = [textFieldController.keychainItemWrapper objectForKey:secAttr];
-		textFieldController.editedFieldKey = secAttr;
-		textFieldController.title = [DetailViewController titleForSection:indexPath.section];
-		
-		[self.navigationController pushViewController:textFieldController animated:YES];
-         
-         */
+        EditorViewController *editor = [[EditorViewController alloc] init];
+        editor.placeHolder = [self.loginDataSource titleForSection:indexPath.section];
+        editor.secureTextEntry = (indexPath.section == kPasswordSection || indexPath.section == kSourcePhoneNumberSection);
+        [editor setSecureDataUpdater:setSecureData];
+        editor.textValue = textValue;
+        editor.title = [self.loginDataSource titleForSection:indexPath.section];
+        
+        [self.navigationController pushViewController:editor animated:YES];
+        [editor release];
 	}
 }
 

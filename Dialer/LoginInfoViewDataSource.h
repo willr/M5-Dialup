@@ -8,12 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LoginInfoViewController.h"
+
+@class LoginInfoViewController;
+
 @interface LoginInfoViewDataSource : NSObject <UITableViewDataSource>
 {
-    UITableView *_tableView;
+    LoginInfoViewController *_controller;
+    
+    BOOL                    _editing;
 }
 
-@property (nonatomic, retain) UITableView *tableView;
+// this will be a weak reference back to the controller, so we can set the selector on the action sheet
+@property (nonatomic, assign) LoginInfoViewController *controller;
+
+- (NSString *)valueForSection:(NSInteger)section;
 
 - (NSString *)titleForSection:(NSInteger)section;
 

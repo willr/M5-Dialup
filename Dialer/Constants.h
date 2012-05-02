@@ -38,6 +38,8 @@ extern NSString * const PersonPhoneNumber;
 // just the digits of the phone number entry for that person
 extern NSString * const PersonPhoneNumberDigits;
 
+extern NSString * const PersonPhoneLabel;
+
 // reference to the person object inside a favorite (for unfavoriting)
 extern NSString * const FavoritePersonRefName;
 
@@ -87,18 +89,50 @@ extern NSString * const M5UrlEndPointName;
 extern NSString * const M5UserAccountName;
 extern NSString * const M5UserAccountPassword;
 extern NSString * const KeychainUserPasswordIdentifier;
+extern NSString * const KeychainPhoneNumberIdendifier;
 
 // LoginInfo Headers
 extern NSString * const UserNameName;
 extern NSString * const PasswordName;
 extern NSString * const CallbackNumberName;
 
+// loginInfoView tag for secure field
+extern NSInteger const kPasswordTag;
+
+// table view section numbers
 enum {
     kUsernameSection = 0,
     kPasswordSection,
-    kAccountNumberSection,
+    kSourcePhoneNumberSection,
     kShowCleartextSection
 };
+
+enum {
+    kCallingName = 0,
+    kPhoneNumberCalling,
+    kProgressIndictor,
+    kRetryConnection
+};
+
+typedef enum {
+    kWaitingToConnect = 1,
+    kConnectingConnection,
+    kCompletedConnection,
+    kCancelledConnection,
+    kErroredConnection
+} ConnectionStatus;
+
+// DialingView Headers
+extern NSString * const CallingName;
+extern NSString * const PhoneNumberCalling;
+extern NSString * const ProgressIndicator;
+
+// Connection Statuses
+extern NSString * const WaitingToConnect;
+extern NSString * const ConnectingConnection;
+extern NSString * const CompletedConnection;
+extern NSString * const CancelledConnection;
+extern NSString * const ErroredConnection;
 
 
 

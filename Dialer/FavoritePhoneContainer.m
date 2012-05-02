@@ -133,11 +133,11 @@
 - (NSDictionary *) nameAndPhoneNumberAtIndex:(NSUInteger)pos;
 {
     NSDictionary *person = [self personAtIndex:pos];
-    
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSString *phoneNumber = [[[phoneList allValues] objectAtIndex:0] objectForKey:PersonPhoneNumber];
+    NSString *phoneType = [[phoneList allKeys] objectAtIndex:0];
+    NSDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:0];
     
-    return [[[NSDictionary alloc] initWithObjectsAndKeys:[person objectForKey:PersonName], PersonName, phoneNumber, PersonPhoneNumber, nil] autorelease];
+    return [self namePhoneNumberAndType:phoneEntry name:[person objectForKey:PersonName] phoneType:[self getPhoneLabelForDisplay:phoneType]];
     
 }
 

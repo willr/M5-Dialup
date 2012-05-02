@@ -38,6 +38,8 @@ NSString * const PersonPhoneNumber = @"phoneNumber";
 // just the digits of the phone number entry for that person
 NSString * const PersonPhoneNumberDigits = @"phoneDigits";
 
+NSString * const PersonPhoneLabel = @"phoneLabel";
+
 // reference to the person object inside a favorite (for unfavoriting)
 NSString * const FavoritePersonRefName = @"personRef";
 
@@ -86,19 +88,27 @@ NSString * const M5UrlEndPointName = @"M5UrlEndPoint";
 // KeyChainItem Keys
 NSString * const M5UserAccountName = @"M5UserAccountName";
 NSString * const M5UserAccountPassword = @"M5UserAccountPassword";
-NSString * const KeychainUserPasswordIdentifier = @"UserNamePassword";
-
+NSString * const KeychainUserPasswordIdentifier = @"UserNamePassword.com.codespantech.dialer";
+NSString * const KeychainPhoneNumberIdendifier = @"PhoneNumber.com.codespantech.dialer";
 
 // LoginInfo Headers
 NSString * const UserNameName =@"Username";
 NSString * const PasswordName = @"Password";
 NSString * const CallbackNumberName = @"Callback Phone Number";
 
+NSInteger const kPasswordTag = 2;
 
+// DialingView Headers
+NSString * const CallingName = @"Calling";
+NSString * const PhoneNumberCalling = @"Phone Number";
+NSString * const ProgressIndicator = @"Progress";
 
-
-
-
+// Connection Statuses
+NSString * const WaitingToConnect =@"Waiting to Connect";
+NSString * const ConnectingConnection = @"Connecting";
+NSString * const CompletedConnection = @"Completed Communication";
+NSString * const CancelledConnection = @"Connection Cancelled";
+NSString * const ErroredConnection = @"Connection Errored";
 
 
 //

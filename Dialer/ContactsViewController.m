@@ -141,7 +141,7 @@
     NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
     NSLog(@"call Person: %@ at %@", personName, phoneNumber);
     
-    [self connectWithContact:personName phoneNumber:phoneNumber delegate:self];
+    [self connectWithContact:personNamePhone delegate:self];
 }
 
 #pragma mark - CallButtonDelegate

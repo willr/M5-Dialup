@@ -53,6 +53,7 @@
 - (void)collectAddressBookInfo
 {
     [self.contacts collectAddressBookInfo];
+    [self.favorites loadSavedFavorites:self.contacts.contactLookup];
 }
 
 - (NSDictionary *)nameAndPhoneNumberAtIndexPath:(NSIndexPath *)indexPath

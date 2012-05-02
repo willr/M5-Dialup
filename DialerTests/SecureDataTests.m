@@ -53,7 +53,7 @@
     secureData = nil;
     
     secureData = [SecureData current];
-    NSString *foundUserNameString = [secureData passwordValue];
+    NSString *foundUserNameString = [secureData userNameValue];
     
     assertThat(foundUserNameString, equalTo(myTestUserName));
     
@@ -66,6 +66,19 @@
     NSString *foundPasswordString = [secureData passwordValue];
     
     assertThat(foundPasswordString, equalTo(myTestPassword));
+    
+    // test phoneNumber
+    [secureData setSourcePhoneNumberValue:@"123"];
+    
+    secureData = nil;
+    
+    secureData = [SecureData current];
+    NSString *foundPhoneString = [secureData sourcePhoneNumberValue];
+    
+    assertThat(foundPhoneString, equalTo(@"123"));
+    
+    [secureData reset];
+
 }
 
 

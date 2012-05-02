@@ -8,6 +8,7 @@
 
 #import "DialerBaseViewController.h"
 #import "DialingViewController.h"
+#import "Constants.h"
 
 @implementation DialerBaseViewController
 
@@ -21,16 +22,20 @@
     return indexPath;
 }
 
-- (void)connectWithContact:(NSString *)contactName phoneNumber:(NSString *)phoneNumber delegate:(id<DialingViewDelegate>)delegate
+- (void)connectWithContact:(NSDictionary *)callInfo  delegate:(id<DialingViewDelegate>)delegate
 {
+    
     DialingViewController *dialing = [[DialingViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dialing];
     
-    // add Cancel button
-    
+    NSLog(@"callInfo: %@", callInfo);
     dialing.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     dialing.delegate = delegate;
+    [dialing.dialingDS setPhoneInfo:callInfo];
+    
     [self presentViewController:nav animated:YES completion:nil];
+    
+    [nav release];
     
 }
 

@@ -272,7 +272,7 @@ Keychain API expects as a validly constructed container class.
     NSDictionary *attributes = NULL;
     NSMutableDictionary *updateItem = NULL;
 	OSStatus result;
-    
+
     if (SecItemCopyMatching((CFDictionaryRef)_genericPasswordQuery, (CFTypeRef *)&attributes) == noErr)
     {
         // First we need the attributes from the Keychain.

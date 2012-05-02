@@ -24,4 +24,8 @@
           storedPhoneList:(NSMutableDictionary *)storedPhoneList 
            newPhoneDigits:(NSString *)newPhoneDigits;
 
+- (NSDictionary *)namePhoneNumberAndType:(NSDictionary *)phoneEntry 
+                                    name:(NSString *)name
+                               phoneType:(NSString *)phoneType;
+
 @end

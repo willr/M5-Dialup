@@ -14,6 +14,6 @@
 
 - (NSIndexPath *) indexPathForButtonTapped:(id)sender event:(id)event tableView:(UITableView *)tableView ;
 
-- (void)connectWithContact:(NSString *)contactName phoneNumber:(NSString *)phoneNumber delegate:(id<DialingViewDelegate>)delegate;
+- (void)connectWithContact:(NSDictionary *)callInfo delegate:(id<DialingViewDelegate>)delegate;
 
 @end

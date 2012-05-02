@@ -79,6 +79,15 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.person.favoritesModified) {
+        [self.person.favorites saveFavorites];
+    }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -103,7 +112,7 @@
     NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
     NSLog(@"call Person: %@ at %@", personName, phoneNumber);
     
-    [self connectWithContact:personName phoneNumber:phoneNumber delegate:self];
+    [self connectWithContact:personNamePhone delegate:self];
 }
 
 #pragma mark - CallButtonDelegate

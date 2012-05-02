@@ -139,4 +139,23 @@
     }
 }
 
+- (NSDictionary *)namePhoneNumberAndType:(NSDictionary *)phoneEntry name:(NSString *)name phoneType:(NSString *)phoneType
+{
+    NSString *phoneNumber = [phoneEntry objectForKey:PersonPhoneNumber];
+    
+    return [[[NSDictionary alloc] initWithObjectsAndKeys:name, PersonName, 
+             phoneNumber, PersonPhoneNumber, 
+             phoneType, PersonPhoneLabel,
+             nil] autorelease];
+}
+
 @end
+
+
+
+
+
+
+
+
+

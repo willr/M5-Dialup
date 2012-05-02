@@ -14,32 +14,45 @@ static SecureData *sharedSecureData = nil;
 
 @implementation SecureData
 
-@synthesize keychain = _keychain;
+@synthesize userNamePasswordKeychain = _userNamePasswordKeychain;
+@synthesize sourcePhoneNumberKeychain = _sourcePhoneNumberKeychain;
 
 
 - (void) setUserNameValue:(NSString *)userName
 {
-    [self.keychain setObject:kSecAttrAccount forKey:userName];
+    [self.userNamePasswordKeychain setObject:userName forKey:kSecAttrAccount];
 }
 
 - (NSString *) userNameValue
 {
-    return [self.keychain objectForKey:kSecAttrAccount];
+    return [self.userNamePasswordKeychain objectForKey:kSecAttrAccount];
 }
 
 - (void) setPasswordValue:(NSString *)password
 {
-    [self.keychain setObject:kSecValueData forKey:password];
+    [self.userNamePasswordKeychain setObject:password forKey:kSecValueData];
 }
+
 - (NSString *) passwordValue
 {
-    return [self.keychain objectForKey:kSecValueData];
+    return [self.userNamePasswordKeychain objectForKey:kSecValueData];
+}
+
+- (void) setSourcePhoneNumberValue:(NSString *)phoneNumber
+{
+    [self.sourcePhoneNumberKeychain setObject:phoneNumber forKey:kSecValueData];
+}
+
+- (NSString *) sourcePhoneNumberValue
+{
+    return [self.sourcePhoneNumberKeychain objectForKey:kSecValueData];
 }
 
 // Initializes and resets the default generic keychain item data.
 - (void)reset
 {
-    [self.keychain resetKeychainItem];
+    [self.sourcePhoneNumberKeychain resetKeychainItem];
+    [self.userNamePasswordKeychain resetKeychainItem];
 }
 
 #pragma mark -
@@ -92,7 +105,8 @@ static SecureData *sharedSecureData = nil;
         // add object init stuff here
 
         // Create instance of keychain wrapper
-        _keychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainUserPasswordIdentifier accessGroup:nil];
+        _userNamePasswordKeychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainUserPasswordIdentifier accessGroup:nil];
+        _sourcePhoneNumberKeychain = [[KeychainItemWrapper alloc] initWithIdentifier:KeychainPhoneNumberIdendifier accessGroup:nil];
     }
     return self;
 }

@@ -10,15 +10,20 @@
 
 #import "SecureData.h"
 #import "LoginInfoViewDataSource.h"
+#import "LoginViewDelegate.h"
+
+@class LoginInfoViewDataSource;
 
 @interface LoginInfoViewController : UIViewController <UIActionSheetDelegate, UITableViewDelegate>
 {
     LoginInfoViewDataSource *_loginDataSource;
     
-    UITableView *_tableView;
+    id<LoginViewDelegate>   _loginDelegate;
+    UITableView             *_tableView;
 }
 
-@property (nonatomic, retain) LoginInfoViewDataSource *loginDataSource;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) LoginInfoViewDataSource   *loginDataSource;
+@property (nonatomic, retain) id<LoginViewDelegate>     loginDelegate;
+@property (nonatomic, retain) IBOutlet UITableView      *tableView;
 
 @end
