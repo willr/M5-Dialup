@@ -152,7 +152,7 @@
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kBlankIdentifier] autorelease];
 			}
 
-            NSLog(@"tag: %d", cell.tag);
+            // NSLog(@"tag: %d", cell.tag);
             if (cell.tag == self.status) {
                 return cell;
             }

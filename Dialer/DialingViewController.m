@@ -45,7 +45,7 @@
 
 - (void) loadLoginInfoView
 {
-    NSLog(@"Invalid Login Info, confirming with User.");
+    // NSLog(@"Invalid Login Info, confirming with User.");
     
     LoginInfoViewController *loginController = [[LoginInfoViewController alloc] init];
     loginController.loginDelegate = self;
@@ -99,11 +99,11 @@
     
     // Get username from keychain (if it exists)
 	NSString *userName = [secureData userNameValue];
-    NSLog(@"username: %@", userName);
+    // NSLog(@"username: %@", userName);
     
     // Get password from keychain (if it exists)  
 	NSString *password = [secureData passwordValue];
-    NSLog(@"password: %@", password);
+    // NSLog(@"password: %@", password);
     
     if (userName  == nil || [userName isEqualToString:@""] || password == nil || [password isEqualToString:@""] ) {
         [self loadLoginInfoView];

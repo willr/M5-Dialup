@@ -134,10 +134,10 @@
         }
         
         NSMutableDictionary *phoneList = [NSMutableDictionary dictionary];
-        NSLog(@"Num PhoneNums: %ld", phonesCount);
+        // NSLog(@"Num PhoneNums: %ld", phonesCount);
         for(CFIndex i = 0; i < phonesCount; i++) {
             NSString *phoneLabel = [self.abContainer copyMultiValueLabelAtIndex:phones index:i];
-            NSLog(@"label: %@", phoneLabel);
+            // NSLog(@"label: %@", phoneLabel);
             [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:*phoneId];
             (*phoneId)++;
             [phoneLabel release];
@@ -184,7 +184,7 @@
     
     [self sortListByPersonName:self.contactList];
     
-    NSLog(@"array is %@", self.contactList);
+    // NSLog(@"array is %@", self.contactList);
     
     CFRelease(allPeople);
     // CFRelease(addressBook);

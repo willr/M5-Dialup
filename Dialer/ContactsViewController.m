@@ -126,7 +126,7 @@
     // this is assign only, a "weak" reference as we use it to build the button
     personDS.callButtonDelegate = personController;
 
-    NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
+    // NSLog(@"Name: %@", [person.person objectForKey:PersonName]);
     
     [self.navigationController pushViewController:personController animated:YES];
     
@@ -136,10 +136,11 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *personNamePhone = [self.contacts nameAndPhoneNumberAtIndexPath:indexPath];
-    
+    /*
     NSString *personName = [personNamePhone objectForKey:PersonName];
     NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
     NSLog(@"call Person: %@ at %@", personName, phoneNumber);
+    */
     
     [self connectWithContact:personNamePhone delegate:self];
 }

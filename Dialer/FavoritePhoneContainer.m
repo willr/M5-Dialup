@@ -328,12 +328,12 @@
 {
     NSString *filePath = [self favoritesFilePath];
 
-    if (filePath == nil) {
+    NSData *favoritesData = [NSData dataWithContentsOfFile:filePath];
+    if (favoritesData == nil) {
         // just exit since there is no file to load
         return;
     }
-
-    NSData *favoritesData = [NSData dataWithContentsOfFile:filePath];
+    
     NSPropertyListFormat *format = NULL;
     NSError *error = nil;
     NSArray *serializedContactList = [NSPropertyListSerialization propertyListWithData:favoritesData 

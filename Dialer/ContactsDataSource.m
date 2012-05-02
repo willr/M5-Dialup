@@ -30,7 +30,7 @@
 {
     NSDictionary *person;
     
-    NSLog(@"Section: %d, Row: %d", indexPath.section, indexPath.row);
+    // NSLog(@"Section: %d, Row: %d", indexPath.section, indexPath.row);
     switch (indexPath.section) {
         case 0:
             person = [self.favorites personAtIndex:indexPath.row];
@@ -139,7 +139,7 @@
     NSDictionary *phones = [person objectForKey:PersonPhoneList];
     [phones enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
     {
-         NSLog(@"%@ has number %@", key, obj);
+         // NSLog(@"%@ has number %@", key, obj);
          NSString *phoneNum = [obj objectForKey:PersonPhoneNumber];
          cell.detailTextLabel.text = [NSString stringWithFormat:PhoneNumberDisplayFormat, 
                                       [self.contacts getPhoneLabelForDisplay:key], phoneNum];

@@ -108,9 +108,11 @@
 {
     NSDictionary *personNamePhone = [self.person nameAndPhoneNumberAtIndexPath:indexPath];
     
+    /*
     NSString *personName = [personNamePhone objectForKey:PersonName];
     NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
     NSLog(@"call Person: %@ at %@", personName, phoneNumber);
+    */
     
     [self connectWithContact:personNamePhone delegate:self];
 }

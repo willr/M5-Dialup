@@ -286,7 +286,7 @@
     NSNumber *userBPhoneId = [userBPhoneEntry objectForKey:PersonPhoneId];
     
     NSArray *test = [[NSArray alloc] initWithObjects:userA, userB, nil];
-    NSLog(@"Hmm: %@", test);
+    // NSLog(@"Hmm: %@", test);
     [test release];
     
     [self.favoriteContainer addFavorite:userA phoneId:userAPhoneId];
