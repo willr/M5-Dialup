@@ -34,9 +34,12 @@
 
 - (NSUInteger)count;
 
+- (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person;
+
 - (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;
 
-- (BOOL) validateFavorite:(NSDictionary *)favorite asContact:(NSDictionary *)contact;
+- (NSNumber *) returnPhoneIdForValidatedFavorite:(NSDictionary *)favorite 
+                                       asContact:(NSDictionary *)contact;
 
 - (void) loadSavedFavorites:(NSDictionary *)contactLookup;
 

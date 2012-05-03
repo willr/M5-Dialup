@@ -30,12 +30,11 @@
 
 - (void) dealloc
 {
-    [super dealloc];
     if (_addressBookRef != nil) {
         CFRelease(_addressBookRef);
         _addressBookRef = nil;
     }
-    
+    [super dealloc];
 }
 
 - (void) addressBookCreate
@@ -45,7 +44,12 @@
     return;
 }
 
-- (NSString *) copyRecordValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
+- (NSString *) copyRecordValueAsString:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
+{
+    return ABRecordCopyValue(ref, propertyId);
+}
+
+- (NSNumber *) copyRecordValueAsNumber:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId
 {
     return ABRecordCopyValue(ref, propertyId);
 }
@@ -53,6 +57,16 @@
 - (NSArray *) copyAddressBookArrayOfAllPeople
 {
     return (NSArray *)ABAddressBookCopyArrayOfAllPeople(_addressBookRef);
+}
+
+- (NSArray *) copyAddressBookArrayOfAllSources
+{
+    return (NSArray *)ABAddressBookCopyArrayOfAllSources(_addressBookRef);
+}
+
+- (NSArray *) copyAddressBookArrayOfAllPeopleInSource:(ABRecordRef)source
+{
+    return (NSArray *)ABAddressBookCopyArrayOfAllPeopleInSource(_addressBookRef, source);
 }
 
 - (CFIndex) addressBookGetPersonCount

@@ -40,6 +40,7 @@
 
 // common method to retrieve person at the specified row, will 
 //      delegate to respective container for actual person data
+// we should return the actual full contact entry and not the truncated favorite entry
 - (NSDictionary *)personAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *person;
@@ -47,8 +48,13 @@
     // NSLog(@"Section: %d, Row: %d", indexPath.section, indexPath.row);
     switch (indexPath.section) {
         case 0:
-            person = [self.favorites personAtIndex:indexPath.row];
+        {
+            // we should return the actual full contact entry and not the truncated favorite entry
+            NSDictionary *favPerson = [self.favorites personAtIndex:indexPath.row];
+            NSNumber *phoneId = [self.favorites getFirstFoundPhoneId:favPerson];
+            person = [self.contacts personForName:[favPerson objectForKey:PersonName] andPhoneId:phoneId];
             break;
+        }
         case 1:
             person = [self.contacts personAtIndex:indexPath.row];
             break;

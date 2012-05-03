@@ -28,4 +28,7 @@
                                     name:(NSString *)name
                                phoneType:(NSString *)phoneType;
 
+- (NSMutableDictionary*) findPhoneEntryFromPerson:(NSDictionary*)person 
+                                       forPhoneId:(NSNumber*)phoneId ;
+
 @end

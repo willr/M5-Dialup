@@ -61,7 +61,10 @@
 {
     NSDictionary *userA = [UnitTestDataFactory createUserA];
     NSUInteger userARow = 3;
+    NSNumber *phoneId = [NSNumber numberWithInt:-3];
     [[[self.favoriteContainer expect] andReturn:userA] personAtIndex:userARow];
+    [[[self.favoriteContainer expect] andReturn:phoneId] getFirstFoundPhoneId:userA];
+    [[[self.contactListContainer expect] andReturn:userA] personForName:UserAName andPhoneId:phoneId];
     
     // row 4 in section 0 (favorites)
     NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:userARow inSection:0];

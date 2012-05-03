@@ -26,6 +26,8 @@
 
 - (void)collectAddressBookInfo;
 
+- (NSDictionary *) personForName:(NSString *)name andPhoneId:(NSNumber *)phoneId;
+
 - (NSDictionary *) personAtIndex:(NSUInteger)index;
 
 - (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index;

@@ -15,9 +15,15 @@
 
 - (NSArray *) copyAddressBookArrayOfAllPeople;
 
+- (NSArray *) copyAddressBookArrayOfAllSources;
+
+- (NSArray *) copyAddressBookArrayOfAllPeopleInSource:(ABRecordRef)source;
+
 - (CFIndex) addressBookGetPersonCount;
 
-- (NSString *) copyRecordValue:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
+- (NSString *) copyRecordValueAsString:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
+
+- (NSNumber *) copyRecordValueAsNumber:(ABRecordRef)ref propertyId:(ABPropertyID)propertyId;
 
 - (CFIndex) multiValueGetCount:(ABMultiValueRef)phones;
 

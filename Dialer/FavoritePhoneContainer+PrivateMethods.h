@@ -29,11 +29,7 @@
 
 - (NSMutableDictionary *) getPhoneEntryFromList:(NSArray *)list forPhoneId:(NSNumber *)phoneId;
 
-- (NSMutableDictionary *)findPhoneEntryFromPerson:(NSDictionary *)person forPhoneId:(NSNumber *)phoneId;
-
 - (BOOL)isFavorite:(NSNumber *) favoriteId withList:(NSArray *)list;
-
-- (NSNumber *)getFirstFoundPhoneId:(NSDictionary *)person;
 
 - (NSString *)favoritesFilePath;
 

@@ -31,11 +31,20 @@
     return self;
 }
 
+- (void) dealloc
+{
+    self.person = nil;
+    
+    [super dealloc];
+}
+
+// person name
 - (NSString *)name
 {
     return [self.person objectForKey:PersonName];
 }
 
+// build the name and phone entry dictionary for callling out and display in table cell, based on the position in the contact list
 - (NSDictionary *)nameAndPhoneNumberAtIndex:(NSUInteger)index
 {
     NSMutableDictionary *phoneEntry = [self phoneEntryAtIndex:index];
@@ -43,6 +52,7 @@
     return [self namePhoneNumberAndType:phoneEntry name:[self name] phoneType:[self phoneTypeAtIndex:index]];
 }
 
+// phone entry for phone number in that section number
 - (NSMutableDictionary *)phoneEntryAtIndex:(NSUInteger)entryPos
 {
     NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
@@ -52,6 +62,7 @@
     return phoneEntry;
 }
 
+// total number of phone numbers a person has
 - (NSUInteger) count
 {
     NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
@@ -59,6 +70,7 @@
     return [phoneList count];
 }
 
+// phone type at phone number position
 - (NSString *) phoneTypeAtIndex:(NSUInteger)index
 {
     NSDictionary *phoneList = [self.person objectForKey:PersonPhoneList];
@@ -66,6 +78,7 @@
     return [self getPhoneLabelForDisplay:[[phoneList allKeys] objectAtIndex:index]];
 }
 
+// phoneId at phone number position
 - (NSNumber *) phoneIdAtIndex:(NSUInteger)index
 {
     NSDictionary *phoneEntry = [self phoneEntryAtIndex:index];

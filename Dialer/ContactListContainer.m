@@ -25,23 +25,37 @@
     self = [super init];
     if (self != nil) {
         // Custom initialization
-        self.contactList = [[[NSMutableArray alloc] init] autorelease];
-        self.contactLookup = [[[NSMutableDictionary alloc] init] autorelease];
-        self.abContainer = [[[AddressBookContainer alloc] init] autorelease];
+        
+        // add all the raw data containers we are going to use
+        _contactList = [[NSMutableArray alloc] init];
+        _contactLookup = [[NSMutableDictionary alloc] init];
+        _abContainer = [[AddressBookContainer alloc] init];
     }
     return self;
 }
 
+- (void) dealloc
+{
+    self.contactList = nil;
+    self.contactLookup = nil;
+    self.abContainer = nil;
+    
+    [super dealloc];
+}
+
+// all the users in the contact list
 - (NSUInteger)count
 {
     return [self.contactList count];
 }
 
+// get be the person at <index> position in the contact list
 - (NSDictionary *) personAtIndex:(NSUInteger)index
 {
     return [self.contactList objectAtIndex:index];
 }
 
+// build the name and phone entry dictionary for callling out and display in table cell, based on the position in the contact list
 - (NSDictionary *) nameAndPhoneNumberAtIndex:(NSUInteger)pos
 {
     NSDictionary *person = [self personAtIndex:pos];
@@ -52,36 +66,63 @@
     return [self namePhoneNumberAndType:phoneEntry name:[person objectForKey:PersonName] phoneType:[self getPhoneLabelForDisplay:phoneType]];
 }
 
+// retreive the person for the specified name and phoneId
+- (NSDictionary *) personForName:(NSString *)name andPhoneId:(NSNumber *)phoneId
+{
+    // find the user by name
+    NSDictionary *foundPerson = [self.contactLookup objectForKey:name];
+    // verify it is the correct user, by checking via phoneId
+    NSDictionary *phoneEntry = [self findPhoneEntryFromPerson:foundPerson forPhoneId:phoneId];
+    
+    // if we did not find a phoneEntry by matching phoneId nil our result, so we return nil for false
+    if (phoneEntry == nil) {
+        foundPerson = nil;
+    }
+    return foundPerson;
+}
+
 #pragma mark - AddressBook collection methods
 
+// get a copy of the value from the addressbook entity specified by the <key> at <index> and place it into a collection with 
+//      a <phoneId> attribute as specified 
 - (void)getCopyFrom:(ABMultiValueRef)phones 
             withKey:(const CFStringRef)key 
             atIndex:(CFIndex)index 
           placeInto:(NSMutableDictionary *)dict 
       havingPhoneId:(int)phoneId
 {
-    
+    // allocated dictionary (phone entry) to stored the phone information into, 
+    //      all phone entry attributes will be stored in the this dictionary
     NSString * phoneLabel = (NSString *)key;
     NSMutableDictionary *phoneAttribs = [[NSMutableDictionary alloc] init];
     
     // NSLog(@"key: %@, index: %ld", phoneLabel, index);
+    // copy the value out of the addressBook ref
     NSString *copy = (NSString*)[self.abContainer copyMultiValueValueAtIndex:phones index:index];
+    // save the phone entry attributes dictionary created above into the passed in dictionary with a custom key, 
+    //      based on retreived phone entry label and index
     [dict setObject:phoneAttribs forKey:[NSString stringWithFormat:UniquePhoneIdentifierFormat, phoneLabel, index]];
+    // save the phone entry attributes in the phone entry dict
     [phoneAttribs setObject:copy forKey:PersonPhoneNumber];
     [phoneAttribs setObject:[NSNumber numberWithInteger:phoneId] forKey:PersonPhoneId];
     
+    // release everything we created, as the collections should have retained the obejcts
     [phoneAttribs release];
     [copy release];
     [phoneLabel release];
 }
 
+// given a dictionary add the contact name to it, copying the values out of the addressbook ref
 - (BOOL)addUserName:(ABRecordRef)ref dOfPerson:(NSMutableDictionary *)dOfPerson
 {
+    // get the firstname and lastname
     NSString *firstName, *lastName;
-    firstName = (NSString *)[self.abContainer copyRecordValue:ref propertyId:kABPersonFirstNameProperty];
-    lastName  = (NSString *)[self.abContainer copyRecordValue:ref propertyId:kABPersonLastNameProperty];
+    firstName = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonFirstNameProperty];
+    lastName  = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonLastNameProperty];
     bool firstEmpty = false;
     bool lastEmpty = false;
+    
+    // check for empty
     if (firstName == nil) {
         firstName = @"";
         firstEmpty = true;
@@ -90,11 +131,13 @@
         lastName = @"";
         lastEmpty = true;
     }
+    // if we have an empty name return false
     if (firstEmpty && lastEmpty) {
         NSLog(@"Empty user");
         return false;
     }
     
+    // add the contact name to the given dictionary, release refs
     [dOfPerson setObject:[NSString stringWithFormat:PersonNameFormat, firstName, lastName] forKey:PersonName];
     CFRelease(firstName);
     CFRelease(lastName);
@@ -102,6 +145,7 @@
     return true;
 }
 
+// sort the contact list by person name
 - (void)sortListByPersonName:(NSMutableArray *)contactList
 {
     // The results are likely to be shown to a user
@@ -114,6 +158,8 @@
     [contactList sortUsingDescriptors:descriptors];
 }
 
+// add the phones of a contact to the contact list we are building up, iterate over all the phones a contact has
+//  skipping them if they dont have any phones
 - (void)addContactPhones:(ABRecordRef)ref 
                dOfPerson:(NSMutableDictionary *)dOfPerson 
                  phoneId:(int *)phoneId
@@ -121,29 +167,37 @@
            contactLookup:(NSMutableDictionary *)contactLookup
 {
     //For username and surname
-    ABMultiValueRef phones = (NSString*)[self.abContainer copyRecordValue:ref propertyId:kABPersonPhoneProperty];
+    ABMultiValueRef phones = (NSString*)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonPhoneProperty];
     
-    //For Phone number
+    //get how many phone entries they have from the address book
     CFIndex phonesCount = [self.abContainer multiValueGetCount:phones];
+    
+    // if they have at least one, then process
     if(phonesCount > 0)
     {
+        // add person's name, unless they dont have one, then skip
         if (! [self addUserName:ref dOfPerson:dOfPerson])
         {
             CFRelease(phones);
             return;
         }
         
+        // create a dictionary to hold all the phone entries a person has
         NSMutableDictionary *phoneList = [NSMutableDictionary dictionary];
         // NSLog(@"Num PhoneNums: %ld", phonesCount);
         for(CFIndex i = 0; i < phonesCount; i++) {
+            // copy the phone label of the address entry based on index, iterating through all phoneEntries
             NSString *phoneLabel = [self.abContainer copyMultiValueLabelAtIndex:phones index:i];
             // NSLog(@"label: %@", phoneLabel);
+            // copy the phone entry info, (the value) portion of abref, and place the result in the phonelist
             [self getCopyFrom:phones withKey:(CFStringRef)phoneLabel atIndex:i placeInto:phoneList havingPhoneId:*phoneId];
+            // iterate the phoneId, since we want phoneIds to be unique
             (*phoneId)++;
             [phoneLabel release];
         }
+        // add the created phoneList to person dictionary
         [dOfPerson setObject:phoneList forKey:PersonPhoneList];
-        
+        // add the distinct phoneEntries to person entries if they already exist, else add the whole person
         [self addDistinctUserToList:contactList 
                              lookup:contactLookup 
                              person:dOfPerson];
@@ -151,43 +205,55 @@
     CFRelease(phones);
 }
 
+// collect all the contact information
+// this currently only works against the local address book, need to make it work against all addressbooks too
 - (void)collectAddressBookInfo
 {
+    // create the addressbook container
     [self.abContainer addressBookCreate];
     
-    CFArrayRef allPeople = (CFArrayRef)[self.abContainer copyAddressBookArrayOfAllPeople];
-    CFIndex nPeople = [self.abContainer addressBookGetPersonCount];
+    // // get an array of all the people, this is based on the default address book, (local)
+    // CFArrayRef allPeople = (CFArrayRef)[self.abContainer copyAddressBookArrayOfAllPeople];
+    // CFIndex nPeople = [self.abContainer addressBookGetPersonCount];
     
-    // id of the phoneNumber for selecting, deselecting as favorite
     int phoneId = 0;
-    phoneId++;
-    int addrCount = nPeople;
-    for (int i=0;i < nPeople;i++) {
-        NSMutableDictionary *dOfPerson = [NSMutableDictionary dictionary];
+    NSArray *allSources = [self.abContainer copyAddressBookArrayOfAllSources];
+    for (int i = 0; i < [allSources count]; i++) {
+        ABRecordRef source = [allSources objectAtIndex:i];
         
-        ABRecordRef ref = CFArrayGetValueAtIndex(allPeople, i);
-        if (nil == ref) {
-            NSLog(@"Empty ref");
-            continue;
+        NSArray *sourcePeople = [self.abContainer copyAddressBookArrayOfAllPeopleInSource:source];
+        // id of the phoneNumber for selecting, deselecting as favorite, is a uniqueId for each phoneEntry
+        
+        phoneId++;
+        int addrCount = [sourcePeople count];
+        for (int i=0;i < addrCount;i++) {
+            NSMutableDictionary *dOfPerson = [NSMutableDictionary dictionary];
+            // get person ref by index
+            ABRecordRef ref = [sourcePeople objectAtIndex:i];
+            if (nil == ref) {
+                NSLog(@"Empty ref");
+                continue;
+            }
+        
+            // add the person and their phoneEntries to the contact list
+            [self addContactPhones:ref 
+                         dOfPerson:dOfPerson 
+                           phoneId:&phoneId 
+                       contactList:self.contactList 
+                     contactLookup:self.contactLookup];
         }
         
-        [self addContactPhones:ref 
-                     dOfPerson:dOfPerson 
-                       phoneId:&phoneId 
-                   contactList:self.contactList 
-                 contactLookup:self.contactLookup];
+        [sourcePeople release]; 
     }
-    NSAssert1(addrCount > 0, @"Failed to find any people in the current address book; Current Count %d", addrCount);
-    // _favoriteList = [[NSMutableArray alloc] init];
-    // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:0 phoneIndex:1]];
-    // [_favoriteList addObject:[self createFavoriteFromContactList:self.contactList contactIndex:1 phoneIndex:0]];
+    [allSources release];
+    // NSAssert1(addrCount > 0, @"Failed to find any people in the current address book; Current Count %d", addrCount);
     
+    // sort the contactList
     [self sortListByPersonName:self.contactList];
     
     // NSLog(@"array is %@", self.contactList);
     
-    CFRelease(allPeople);
-    // CFRelease(addressBook);
+    
 }
 
 @end
