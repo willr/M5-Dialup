@@ -69,6 +69,11 @@
     return (NSArray *)ABAddressBookCopyArrayOfAllPeopleInSource(_addressBookRef, source);
 }
 
+- (ABRecordID) recordGetRecordID:(ABRecordRef)source
+{
+    return ABRecordGetRecordID(source);
+}
+
 - (CFIndex) addressBookGetPersonCount
 {
     return ABAddressBookGetPersonCount(_addressBookRef);

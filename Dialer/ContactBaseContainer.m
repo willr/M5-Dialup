@@ -78,20 +78,22 @@
 }
 
 // match the phone number digits, against a stored phoneEntry, if digits are equal, then return true
-- (BOOL)isPhoneEntryMatchWithKey:(NSString *)storedPhoneEntryKey 
-          storedPhoneList:(NSMutableDictionary *)storedPhoneList 
-           newPhoneDigits:(NSString *)newPhoneDigits
+- (BOOL)isPhoneEntryMatch:(NSMutableDictionary *)storedPhoneEntry
+                  newPhoneDigits:(NSString *)newPhoneDigits
 {
+    /*
     // if list is empty
     if (storedPhoneList == nil || [storedPhoneList count] == 0) {
         return false;
     }
+    
     
     // retrieve the stored phone entry we are going to compare, by the passed in key
     NSMutableDictionary *storedPhoneEntry = [storedPhoneList objectForKey:storedPhoneEntryKey];
     if (storedPhoneEntry == nil || [storedPhoneEntry count] == 0) {
         return false;
     }
+    */
     
     // get the phone number digits for the retrieved phoneEnty
     NSString *storedPhoneDigits = [storedPhoneEntry objectForKey:PersonPhoneNumberDigits];
@@ -108,7 +110,7 @@
 
 // for a given (stored) user, see if the phone entries for that user match a new user.
 //  Add the new phone entries for the new user, to the stored users list
-- (void)addDistinctPhoneNumbers:(NSDictionary *)person foundPerson:(NSDictionary *)foundPerson
+- (void)addDistinctPhoneNumbers:(NSDictionary *)person storedPerson:(NSDictionary *)storedPerson
 {
     // for each phone entry in a person's phone list, compare the phone digits, and add the missing ones to the stored (found) set
     BOOL found = false;
@@ -123,18 +125,39 @@
         NSString *newPhoneDigits = [self getPhoneNumberDigitsRegex:newPhoneNum];
         
         // get the stored (existing) persons phone list
-        NSMutableDictionary *storedPhoneList = [foundPerson objectForKey:PersonPhoneList];
+        NSMutableDictionary *storedPhoneList = [storedPerson objectForKey:PersonPhoneList];
         for (NSString *storedPhoneEntryKey in storedPhoneList) {
             // for each stored person phone entries, found by interation over the keys in the dictionary
             //  check if the new persons digits match the stored (existing) persons digits
-            found = [self isPhoneEntryMatchWithKey:storedPhoneEntryKey 
-                                   storedPhoneList:storedPhoneList 
-                                    newPhoneDigits:newPhoneDigits];
+            NSMutableDictionary *storedPhoneEntry = [storedPhoneList objectForKey:storedPhoneEntryKey];
+            found = [self isPhoneEntryMatch:storedPhoneEntry 
+                             newPhoneDigits:newPhoneDigits];
+            
+            // to be considered distinct the phoneLable (phoneType) has to match as well
+            if (found) {
+                NSString *newPhoneType = [self getPhoneLabelForDisplay:phoneEntryKey];
+                NSString *storedPhoneType = [self getPhoneLabelForDisplay:storedPhoneEntryKey];
+                if ([newPhoneType isEqualToString:storedPhoneType]) {
+                    break;
+                } else {
+                    found = NO;
+                }
+            }
         }
         
         // after searching all the stored (existing) persons phone entries, if not found then add
         if (!found) {
-            [storedPhoneList setObject:[phoneList objectForKey:phoneEntryKey] forKey:phoneEntryKey];
+            // check to see if we see a value at the one we are about to overwrite
+            NSDictionary *savedPhoneEntry = [storedPhoneList objectForKey:phoneEntryKey];
+            if (savedPhoneEntry != nil) {
+                // if yes then make them distinct by adding the phoneId
+                NSString *moddedKey = [NSString stringWithFormat:@"%@+%@", phoneEntryKey, 
+                                       [[phoneList objectForKey:phoneEntryKey] objectForKey:PersonPhoneId]];
+                [storedPhoneList setObject:[phoneList objectForKey:phoneEntryKey] forKey:moddedKey];
+            } else {
+                // if no then save
+                [storedPhoneList setObject:[phoneList objectForKey:phoneEntryKey] forKey:phoneEntryKey];
+            }
         }
     }
 }
@@ -152,13 +175,13 @@
     if (nil == foundPerson) {
         [list addObject:person];
         [hashedList setObject:person forKey:name];
-        
+        NSLog(@"Distinct Person: %@", person);
         // TODO: filter out multiple copies here too... 
         
     } else {
+        NSLog(@"foundPerson %@", person);
         // ok we found a matching name, check all the phoneNumbers for this contact, and add if not exist
-        [self addDistinctPhoneNumbers:person foundPerson:foundPerson];
-        // NSLog(@"foundPerson %@", foundPerson);
+        [self addDistinctPhoneNumbers:person storedPerson:foundPerson];
     }
 }
 

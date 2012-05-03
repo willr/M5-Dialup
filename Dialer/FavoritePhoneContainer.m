@@ -69,7 +69,7 @@
         return;
     }
     
-    NSLog(@"addFavorite: %@", person);
+    // NSLog(@"addFavorite: %@", person);
     
     // get teh position of the phoneEntry we are favoriting
     NSInteger foundPhoneIndex = [self withPerson:person getPhoneIndexForPhoneId:phoneId];
@@ -245,7 +245,7 @@
     
     // set phoneEntry set by index in the phoneList
     NSDictionary *phoneList = [person objectForKey:PersonPhoneList];
-    NSLog(@"personPhoneList: %@", phoneList);
+    // NSLog(@"personPhoneList: %@", phoneList);
     [favPhoneList setObject:[[phoneList allValues] objectAtIndex:phoneIndex]                     
                      forKey:[[phoneList allKeys] objectAtIndex:phoneIndex]];
     
@@ -357,13 +357,19 @@
         NSString *favoritePhoneDigits = [self getPhoneNumberDigitsRegex:favoritePhoneNum];
         
         // check to see if we find the phone digits in the contact phone entry list
-        BOOL found = [self isPhoneEntryMatchWithKey:key 
-                               storedPhoneList:contactPhoneList 
-                                newPhoneDigits:favoritePhoneDigits];
-        // if found return
-        if (found) {
-            NSDictionary *phoneEntry = [contactPhoneList objectForKey:key];
-            matchingPhoneId = [phoneEntry objectForKey:PersonPhoneId];
+        for (NSString *contactPhoneEntryKey in contactPhoneList) {
+            // for each stored person phone entries, found by interation over the keys in the dictionary
+            //  check if the new persons digits match the stored (existing) persons digits
+            NSMutableDictionary *contactPhoneEntry = [contactPhoneList objectForKey:contactPhoneEntryKey];
+            BOOL found = [self isPhoneEntryMatch:contactPhoneEntry 
+                             newPhoneDigits:favoritePhoneDigits];
+        
+            // if found return
+            if (found) {
+                NSDictionary *phoneEntry = [contactPhoneList objectForKey:key];
+                matchingPhoneId = [phoneEntry objectForKey:PersonPhoneId];
+                break;
+            }
         }
     }
     

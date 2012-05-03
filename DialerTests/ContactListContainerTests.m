@@ -202,6 +202,11 @@
     
     [[[self.abContainer expect] andReturn:sourcesArrayRef] copyAddressBookArrayOfAllSources];
     [[[self.abContainer expect] andReturn:recordArrayRef] copyAddressBookArrayOfAllPeopleInSource:source1];
+    ABRecordID recId = (ABRecordID) 1;
+    [[[self.abContainer expect] andReturnValue:OCMOCK_VALUE(recId)] recordGetRecordID:source1];
+    
+    [[[self.abContainer expect] andReturn:[NSNumber numberWithInt:1]] copyRecordValueAsNumber:source1 propertyId:kABSourceTypeProperty];
+    [[[self.abContainer expect] andReturn:@"sourceName"] copyRecordValueAsString:source1 propertyId:kABSourceNameProperty];
     
     // addContactPhones method start
     [[[self.abContainer expect] andReturn:phones] copyRecordValueAsString:record1 propertyId:kABPersonPhoneProperty];

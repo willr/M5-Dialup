@@ -118,7 +118,10 @@
     // get the firstname and lastname
     NSString *firstName, *lastName;
     firstName = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonFirstNameProperty];
+    firstName = [firstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     lastName  = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonLastNameProperty];
+    lastName = [lastName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     bool firstEmpty = false;
     bool lastEmpty = false;
     
@@ -138,7 +141,16 @@
     }
     
     // add the contact name to the given dictionary, release refs
-    [dOfPerson setObject:[NSString stringWithFormat:PersonNameFormat, firstName, lastName] forKey:PersonName];
+    if ([firstName length] != 0 && [lastName length] != 0) {
+        [dOfPerson setObject:[NSString stringWithFormat:PersonNameFormat, firstName, lastName] forKey:PersonName];
+    } else if ([firstName length] != 0 && [lastName length] == 0) {
+        [dOfPerson setObject:[NSString stringWithFormat:@"%@", firstName] forKey:PersonName];
+    } else {
+        [dOfPerson setObject:[NSString stringWithFormat:@"%@", lastName] forKey:PersonName];
+    }
+    
+    
+    
     CFRelease(firstName);
     CFRelease(lastName);
     
@@ -221,6 +233,13 @@
     for (int i = 0; i < [allSources count]; i++) {
         ABRecordRef source = [allSources objectAtIndex:i];
         
+        ABRecordID sourceID = [self.abContainer recordGetRecordID:source];
+        CFNumberRef sourceType = (CFNumberRef)[self.abContainer copyRecordValueAsNumber:source propertyId:kABSourceTypeProperty];
+        CFStringRef sourceName = (CFStringRef)[self.abContainer copyRecordValueAsString:source propertyId:kABSourceNameProperty];
+        NSLog(@"source id=%d type=%d name=%@", sourceID, [(NSNumber *)sourceType intValue], sourceName);
+        CFRelease(sourceType);
+        if (sourceName != NULL) CFRelease(sourceName); // some source names are NULL
+        
         NSArray *sourcePeople = [self.abContainer copyAddressBookArrayOfAllPeopleInSource:source];
         // id of the phoneNumber for selecting, deselecting as favorite, is a uniqueId for each phoneEntry
         
@@ -251,7 +270,7 @@
     // sort the contactList
     [self sortListByPersonName:self.contactList];
     
-    // NSLog(@"array is %@", self.contactList);
+    NSLog(@"array is %@", self.contactList);
     
     
 }
