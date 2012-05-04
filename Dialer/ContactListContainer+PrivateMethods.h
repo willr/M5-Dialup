@@ -24,4 +24,7 @@
              contactList:(NSMutableArray *)contactList
            contactLookup:(NSMutableDictionary *)contactLookup;
 
+- (void)collectAddressBookInfo:(NSMutableArray *)contactList
+                 contactLookup:(NSMutableDictionary *)contactLookup;
+
 @end

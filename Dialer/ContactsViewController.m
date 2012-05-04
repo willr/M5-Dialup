@@ -18,14 +18,43 @@
 @synthesize contacts = _contacts;
 @synthesize tableView = _tableView;
 @synthesize dialerDelegate = _dialerDelegate;
+@synthesize tableDataModified = _tableDataModified;
+@synthesize halfLoad = _halfLoad;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self != nil) {
         // Custom initialization
+        
+        // add self as an observer for ContactsReloaded and FavoritesReloaded
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadDisplay:)
+                                                     name:ContactsReloaded
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadDisplay:)
+                                                     name:FavoritesReloaded
+                                                   object:nil];
+        
+        _halfLoad = false;
     }
     return self;
+}
+
+- (void) dealloc
+{
+    self.contacts = nil;
+    self.tableView = nil;
+    self.dialerDelegate = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // hmm should I do to remove x2
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,6 +63,13 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)reloadDisplay:(NSNotification*)notification
+{
+    NSLog(@"reloadDisplay:: %@", notification.name);
+    
+    [self reloadTableView];
 }
 
 #pragma mark - View lifecycle
@@ -95,8 +131,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // if the favorites have been modified by the dataSource then reload the table to reflect those changes
-    if ([self.contacts favoritesModified]) {
-        [self.tableView reloadData];
+    if ([self.contacts favoritesModified] || self.tableDataModified) {
+        [self reloadTableView];
     }
     
     [super viewWillAppear:animated];
@@ -106,6 +142,29 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) reloadTableView
+{
+    /*
+    if (self.halfLoad) {
+        self.halfLoad = true;
+    }
+     */
+    
+    [self.tableView reloadData];
+    
+    self.tableDataModified = false;
+    
+    /*
+    NSLog(@"releadTableView: Bang!");
+    
+    NSInteger contactCount = [self.contacts.contacts count];
+    NSInteger favoriteCount = [self.contacts.favorites count];
+    
+    NSLog(@"Contacts:: %d", contactCount);
+    NSLog(@"Favorites:: %d", favoriteCount);
+     */
 }
 
 #pragma mark - TableViewDelegate

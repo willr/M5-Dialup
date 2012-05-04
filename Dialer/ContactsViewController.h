@@ -18,17 +18,18 @@
 
 @interface ContactsViewController : DialerBaseViewController <UITableViewDelegate, CallButtonDelegate>
 {
-    ContactsDataSource *_contacts;
-    
-    UITableView *_tableView;
-    
+    ContactsDataSource      *_contacts;
+    BOOL                    _tableDataModified;
+    BOOL                    _halfLoad;
+    UITableView             *_tableView;
+
     id<DialingViewDelegate> _dialerDelegate;
 }
 
 @property (retain, nonatomic) ContactsDataSource        *contacts;
-
+@property (assign, nonatomic) BOOL                      tableDataModified;
+@property (assign, nonatomic) BOOL                      halfLoad;
 @property (assign, nonatomic) UITableView               *tableView;
 @property (retain, nonatomic) id<DialingViewDelegate>   dialerDelegate;
-
 
 @end

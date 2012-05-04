@@ -175,11 +175,11 @@
     if (nil == foundPerson) {
         [list addObject:person];
         [hashedList setObject:person forKey:name];
-        NSLog(@"Distinct Person: %@", person);
+        // NSLog(@"Distinct Person: %@", person);
         // TODO: filter out multiple copies here too... 
         
     } else {
-        NSLog(@"foundPerson %@", person);
+        // NSLog(@"foundPerson %@", person);
         // ok we found a matching name, check all the phoneNumbers for this contact, and add if not exist
         [self addDistinctPhoneNumbers:person storedPerson:foundPerson];
     }

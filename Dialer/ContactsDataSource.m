@@ -26,6 +26,11 @@
         // favorites is only those selected as "favorite"
         self.contacts = [[[ContactListContainer alloc] init] autorelease];
         self.favorites = [[[FavoritePhoneContainer alloc] init] autorelease];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contactsReloaded:)
+                                                     name:ContactsReloaded
+                                                   object:nil];
     }
     return self;
 }
@@ -35,7 +40,16 @@
     self.contacts = nil;
     self.favorites = nil;
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [super dealloc];
+}
+
+- (void)contactsReloaded:(NSNotification*)notification
+{
+    // load saved favorites, we need to pass in the current dictionary of contacts, as we only display as favorites those
+    //      names and numbers that are still valid contacts
+    [self.favorites loadSavedFavorites:self.contacts.contactLookup];
 }
 
 // common method to retrieve person at the specified row, will 
@@ -76,10 +90,6 @@
 {
     // load contacts
     [self.contacts collectAddressBookInfo];
-    
-    // load saved favorites, we need to pass in the current dictionary of contacts, as we only display as favorites those
-    //      names and numbers that are still valid contacts
-    [self.favorites loadSavedFavorites:self.contacts.contactLookup];
 }
 
 // common method to retrieve the name and phoneEntry info for actually placing a call with the system
@@ -105,6 +115,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // NSLog(@"numberOfSectionsInTableView");
+    
     // return the number of sections
     return 2;
 }
@@ -114,19 +126,25 @@
     // section 0: Favorites
     // section 1: Contacts list
     
+    NSInteger myCount = -1;
+    
     // will return the number of rows per section
     switch (section) {
 		case 0:
-			return [self.favorites count];
+			myCount = [self.favorites count];
 			break;
 		case 1:
-			return [self.contacts count];
+			myCount = [self.contacts count];
             // return 2;
 			break;
 		default:
 			return 0;
 			break;
 	}
+    
+    // NSLog(@"numberOfRowsInSection: %d, %d", section, myCount);
+    
+    return myCount;
 }
 
 // these are cells which are the general contacts, meaning they will be displayed just as the contact name
@@ -187,6 +205,7 @@
 // UITableViewDataSource delegate common method for getting the cell for an indexPath
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     // set Favorites to notModified, as we are going display all current favorites nows
     self.favorites.favoritesModified = false;
     
@@ -204,12 +223,16 @@
             break;
     }
     
+    // NSLog(@"getTableCellfor indexPath: %@, cell: %@", indexPath, cell);
+    
     return cell;
 }
 
 // get the header titles for each of the two sections
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    // NSLog(@"titleForHeaderInSection: %d", section);
+    
     // section 0: Favorites
     // section 1: Contacts list
     

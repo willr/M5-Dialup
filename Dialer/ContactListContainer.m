@@ -221,6 +221,42 @@
 // this currently only works against the local address book, need to make it work against all addressbooks too
 - (void)collectAddressBookInfo
 {
+    NSMutableArray *newContactList = [[NSMutableArray alloc] init];
+    NSMutableDictionary *newContactLookup = [[NSMutableDictionary alloc] init];
+    
+    // dispatch this to a background thread, to handle the heavy load of processing the contacts
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // NSLog(@"collectAddressBookInfo::On async thread");
+        
+        [self collectAddressBookInfo:newContactList contactLookup:newContactLookup];
+        
+        // NSLog(@"-- self.contactList: async: %d", [newContactList count]);
+        
+        // dispatch back to the mainUI thread to handle the replacing of the containers
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // NSLog(@"collectAddressBookInfo::On main thread");
+            
+            // replace the old array and dictionary
+            self.contactList = newContactList;
+            self.contactLookup = newContactLookup;
+            
+            // NSLog(@"-- self.contactList: main: %d", [newContactList count]);
+            
+            // hmm how to get the tableView to redraw, must have a sticky bit..
+            // ok push the notification via NSNotificationCenter.. 
+            [[NSNotificationCenter defaultCenter] postNotificationName:ContactsReloaded
+                                                                object:self
+                                                              userInfo:nil];
+        });
+    });
+}
+
+// collect all the contact information, this is the method that will be execed async
+// this currently only works against the local address book, need to make it work against all addressbooks too
+- (void)collectAddressBookInfo:(NSMutableArray *)contactList
+                 contactLookup:(NSMutableDictionary *)contactLookup
+{
     // create the addressbook container
     [self.abContainer addressBookCreate];
     
@@ -258,8 +294,8 @@
             [self addContactPhones:ref 
                          dOfPerson:dOfPerson 
                            phoneId:&phoneId 
-                       contactList:self.contactList 
-                     contactLookup:self.contactLookup];
+                       contactList:contactList 
+                     contactLookup:contactLookup];
         }
         
         [sourcePeople release]; 
@@ -268,9 +304,9 @@
     // NSAssert1(addrCount > 0, @"Failed to find any people in the current address book; Current Count %d", addrCount);
     
     // sort the contactList
-    [self sortListByPersonName:self.contactList];
+    [self sortListByPersonName:contactList];
     
-    NSLog(@"array is %@", self.contactList);
+    // NSLog(@"array is %@", self.contactList);
     
     
 }

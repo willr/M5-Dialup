@@ -134,6 +134,18 @@ extern NSString * const CompletedConnection;
 extern NSString * const CancelledConnection;
 extern NSString * const ErroredConnection;
 
+// NSNotificationCenter Notification Names
+extern NSString * const ContactsReloaded;
+extern NSString * const FavoritesReloaded;
+
+
+
+
+
+
+
+
+
 
 
 //

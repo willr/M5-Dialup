@@ -30,6 +30,7 @@
         // this should be a list of contacts, referenced from the contact list, that are favorites.
         //      this encapsulates the favoritesContainer unfavoriting a person from the contact list, when they are removed from the favoritesList
         self.contactRef = [[[NSMutableDictionary alloc] init] autorelease];
+        
     }
     return self;
 }
@@ -65,7 +66,14 @@
 // add a favorite to the favoritesList. Will store a reference to the person passed in so as to be able to "un-favorite" then if needed
 - (void)addFavorite:(NSDictionary *)person phoneId:(NSNumber *)phoneId
 {
-    if ([self isFavorite:phoneId]) {
+    [self internalAddFavorite:person phoneId:phoneId favorites:self.favorites];
+}
+
+// internal to be accessed only my other methods in class, for reloading, or whatever
+// add a favorite to the favoritesList. Will store a reference to the person passed in so as to be able to "un-favorite" then if needed
+- (void)internalAddFavorite:(NSDictionary *)person phoneId:(NSNumber *)phoneId favorites:(NSMutableArray *)favorites
+{
+    if ([self isFavorite:phoneId withList:favorites]) {
         return;
     }
     
@@ -77,7 +85,8 @@
     NSDictionary *favorite = [self createNewFavoriteFromContact:person phoneIndex:foundPhoneIndex];
     
     // add created entry to favorites list
-    [self.favorites addObject:favorite];
+    // [self.favorites addObject:favorite];
+    [favorites addObject:favorite];
     
     // modify passed in person and favorite, favorite status as yes
     [self modifyFavoriteStatusOnPerson:person phoneId:phoneId status:YES];
@@ -362,7 +371,7 @@
             //  check if the new persons digits match the stored (existing) persons digits
             NSMutableDictionary *contactPhoneEntry = [contactPhoneList objectForKey:contactPhoneEntryKey];
             BOOL found = [self isPhoneEntryMatch:contactPhoneEntry 
-                             newPhoneDigits:favoritePhoneDigits];
+                                  newPhoneDigits:favoritePhoneDigits];
         
             // if found return
             if (found) {
@@ -379,6 +388,38 @@
 // load the save favorites from the file
 - (void) loadSavedFavorites:(NSDictionary *)contactLookup
 {
+    // dispatch this to a background thread, to handle the heavy load of processing the contacts
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // NSLog(@"loadSavedFavorites::On async thread");
+        
+        // here actually load the favorites, potientially expensive
+        NSMutableArray *newFavorites = [[NSMutableArray alloc] init];
+        [self internalLoadSavedFavorites:contactLookup favorites:newFavorites];
+        
+        NSLog(@"newFavorites: %d", [newFavorites count]);
+        
+        // dispatch back to the mainUI thread to handle the replacing of the containers
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            // NSLog(@"loadSavedFavorites::On main thread");
+            
+            // set the new favorites Array
+            self.favorites = newFavorites;
+            _favoritesModified = true;
+            
+            // hmm how to get the tableView to redraw, must have a sticky bit..
+            // ok push the notification via NSNotificationCenter.. 
+            [[NSNotificationCenter defaultCenter] postNotificationName:FavoritesReloaded
+                                                                object:self
+                                                              userInfo:nil];
+        });
+    });
+}
+
+// load the save favorites from the file
+- (void) internalLoadSavedFavorites:(NSDictionary *)contactLookup favorites:(NSMutableArray *)favorites
+{
     // get the favorite file path
     NSString *filePath = [self favoritesFilePath];
 
@@ -394,9 +435,9 @@
     NSPropertyListFormat *format = NULL;
     NSError *error = nil;
     NSArray *serializedContactList = [NSPropertyListSerialization propertyListWithData:favoritesData 
-                                                                     options:NSPropertyListMutableContainersAndLeaves 
-                                                                      format:format 
-                                                                       error:&error];
+                                                                               options:NSPropertyListMutableContainersAndLeaves 
+                                                                                format:format 
+                                                                                 error:&error];
     
     // validate each serialize favorite actually exists in the list of contacts
     for (NSMutableDictionary *favoritePerson in serializedContactList) {
@@ -409,7 +450,7 @@
             if (contactPhoneId != nil) {
                 // now we know they are the same, both name and phone number digits now match
                 // [self.favorites addObject:favoritePerson];
-                [self addFavorite:contactPerson phoneId:contactPhoneId];
+                [self internalAddFavorite:contactPerson phoneId:contactPhoneId favorites:favorites];
             }
         }
     }
@@ -418,9 +459,21 @@
 // save a serialized representation of the favorites into the favorites file
 - (void) saveFavorites
 {
+    // dispatch this to a background thread, to handle the heavy load of processing the contacts
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // here is where we save the favorites file
+        [self internalSaveFavorites];
+        
+    });
+}
+
+// save a serialized representation of the favorites into the favorites file
+- (void) internalSaveFavorites
+{
     NSString *filePath = [self favoritesFilePath];
     
-    NSLog(@"saveFavorites current Favorites: %@", self.favorites);
+    // NSLog(@"saveFavorites current Favorites: %@", self.favorites);
     
     // save a serialized representation of the favorites into the favorites file as an xml file
     NSError *error = nil;
@@ -439,6 +492,8 @@
              
     [favoritesData writeToFile:filePath atomically:YES];
 }
+
+
 
 @end
 

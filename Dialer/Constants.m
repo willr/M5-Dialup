@@ -110,5 +110,20 @@ NSString * const CompletedConnection = @"Completed Communication";
 NSString * const CancelledConnection = @"Connection Cancelled";
 NSString * const ErroredConnection = @"Connection Errored";
 
+// NSNotificationCenter Notification Names
+NSString * const ContactsReloaded = @"ContactsReloaded";
+NSString * const FavoritesReloaded = @"FavoritesReloaded";
+
+
+
+
+
+
+
+
+
+
+
+
 
 //

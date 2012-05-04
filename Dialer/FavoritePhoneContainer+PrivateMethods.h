@@ -33,4 +33,12 @@
 
 - (NSString *)favoritesFilePath;
 
+- (void) internalSaveFavorites;
+
+- (void) internalLoadSavedFavorites:(NSDictionary *)contactLookup;
+
+- (void)internalAddFavorite:(NSDictionary *)person 
+                    phoneId:(NSNumber *)phoneId 
+                  favorites:(NSMutableArray *)favorites;
+
 @end
