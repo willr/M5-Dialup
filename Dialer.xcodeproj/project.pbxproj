@@ -60,6 +60,8 @@
 		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
 		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
 		AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */; };
+		AFF6F5941556092F00EC790D /* M5NetworkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF6F5931556092F00EC790D /* M5NetworkConnection.m */; };
+		AFF6F59A1556288700EC790D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF6F5991556288700EC790D /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +165,11 @@
 		AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WithCheckMark.png; sourceTree = "<group>"; };
 		AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleDelegate.h; sourceTree = "<group>"; };
 		AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListDelegate.h; sourceTree = "<group>"; };
+		AFF6F5921556092F00EC790D /* M5NetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M5NetworkConnection.h; sourceTree = "<group>"; };
+		AFF6F5931556092F00EC790D /* M5NetworkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M5NetworkConnection.m; sourceTree = "<group>"; };
+		AFF6F5951556105E00EC790D /* DialingNetConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialingNetConnectionDelegate.h; sourceTree = "<group>"; };
+		AFF6F596155620BC00EC790D /* M5NetworkConnection+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "M5NetworkConnection+PrivateMethods.h"; sourceTree = "<group>"; };
+		AFF6F5991556288700EC790D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF6F59A1556288700EC790D /* CFNetwork.framework in Frameworks */,
 				AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */,
 				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
@@ -217,6 +225,7 @@
 		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFF6F5991556288700EC790D /* CFNetwork.framework */,
 				AF643A96153BAC620041B7D1 /* libOCMock.a */,
 				AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */,
 				AF5A0BED1519A04400A6B3A9 /* Security.framework */,
@@ -234,6 +243,7 @@
 			children = (
 				AF643ABB153E27590041B7D1 /* Controls */,
 				AF643ABA153E27430041B7D1 /* Controllers */,
+				AFF6F5911556090500EC790D /* Networking */,
 				AF5A0BF71519B4C400A6B3A9 /* Security */,
 				AF8D29C214EEDD56006FF1C9 /* Containers */,
 				AF8D29C114EEDD2A006FF1C9 /* Delegates */,
@@ -360,6 +370,7 @@
 				AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */,
 				AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */,
 				AF01ADF1154F505C00802DFC /* LoginViewDelegate.h */,
+				AFF6F5951556105E00EC790D /* DialingNetConnectionDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -385,6 +396,16 @@
 				AF01ADD6154B2E3C00802DFC /* UserDefaultsContainer+PrivateMethods.h */,
 			);
 			name = Containers;
+			sourceTree = "<group>";
+		};
+		AFF6F5911556090500EC790D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AFF6F5921556092F00EC790D /* M5NetworkConnection.h */,
+				AFF6F5931556092F00EC790D /* M5NetworkConnection.m */,
+				AFF6F596155620BC00EC790D /* M5NetworkConnection+PrivateMethods.h */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +541,7 @@
 				AF01ADF0154F408A00802DFC /* DialerBaseViewController.m in Sources */,
 				AF01ADF415502DFE00802DFC /* EditorViewController.m in Sources */,
 				AF01ADFB1550951400802DFC /* DialingDataSource.m in Sources */,
+				AFF6F5941556092F00EC790D /* M5NetworkConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

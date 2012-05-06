@@ -62,7 +62,17 @@ static UserDefaultsContainer *userDefaultsContainer = nil;
 
 - (void) setupUserDefaults
 {
-    [self.appDefaults setValue:@"http://www.ChittyChittyBangBang" forKey:M5UrlEndPointName];
+    /*
+     NSString * const M5DialCmd = @"M5DialCmd";
+     NSString * const M5AnswerCmd = @"M5AnswerCmd";
+     NSString * const M5IgnoreCmd = @"M5IgnoreCmd";
+     NSString * const M5ReleaseCmd = @"M5ReleaseCmd";
+     NSString * const M5HoldCmd = @"M5HoldCmd";
+     NSString * const M5ListCallsCmd = @"M5ListCallsCmd";
+     NSString * const M5ResumeCmd = @"M5ResumeCmd";
+     */
+    
+    // [self.appDefaults setValue:dialCmd forKey:M5DialCmd];
 }
 
 #pragma mark -

@@ -8,6 +8,7 @@
 
 #import "FavoritePhoneContainer.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @interface FavoritePhoneContainer ()
 
@@ -439,6 +440,18 @@
                                                                                 format:format 
                                                                                  error:&error];
     
+    if (serializedContactList == nil && error) {
+        NSLog(@"Error Descr %@",error.localizedDescription);
+        NSLog(@"Error Code %@",error.code);    
+        NSLog(@"Error Domain %@",error.domain);
+        
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error Reading Saved Contacts" 
+                                                                          additionalInfo:@"Try Again" 
+                                                                               withError:error];
+                                                                             
+        return;
+    }
+    
     // validate each serialize favorite actually exists in the list of contacts
     for (NSMutableDictionary *favoritePerson in serializedContactList) {
         NSString *serializedPersonName = [favoritePerson objectForKey:PersonName];
@@ -481,10 +494,14 @@
                                                                        format:NSPropertyListXMLFormat_v1_0 
                                                                       options:0 
                                                                         error:&error];
-    if (error) {
+    if (favoritesData == nil && error) {
         NSLog(@"Error Descr %@",error.localizedDescription);
         NSLog(@"Error Code %@",error.code);    
         NSLog(@"Error Domain %@",error.domain);
+        
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error Saving Contacts" 
+                                                                          additionalInfo:@"Try again" 
+                                                                               withError:error];
         return;
     }
     

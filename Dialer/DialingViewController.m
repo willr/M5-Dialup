@@ -9,6 +9,7 @@
 #import "DialingViewController.h"
 #import "LoginInfoViewController.h"
 #import "Constants.h"
+#import "M5NetworkConnection.h"
 
 @interface DialingViewController ()
 
@@ -21,6 +22,7 @@
 @synthesize tableView = _tableView;
 @synthesize retryConnect = _retryConnect;
 @synthesize retryView = _retryView;
+@synthesize m5Connect = _m5Connect;
 
 - (id)init
 {
@@ -40,6 +42,7 @@
     self.tableView = nil;
     self.retryConnect = nil;
     self.retryView = nil;
+    self.m5Connect = nil;
     
     [super dealloc];
 }
@@ -102,14 +105,14 @@
 	secureData = [SecureData current];
     
     // Get username from keychain (if it exists)
-	NSString *userName = [secureData userNameValue];
+	NSString *sourcePhone = [secureData sourcePhoneNumberValue];
     // NSLog(@"username: %@", userName);
     
     // Get password from keychain (if it exists)  
 	NSString *password = [secureData passwordValue];
     // NSLog(@"password: %@", password);
     
-    if (userName  == nil || [userName isEqualToString:@""] || password == nil || [password isEqualToString:@""] ) {
+    if ([sourcePhone length] == 0 || [password length] == 0 ) {
         [self loadLoginInfoView];
     }
     
@@ -149,6 +152,18 @@
     // set connection status, reload table
     self.dialingDS.status = kConnectingConnection;
     [self.tableView reloadData];
+    
+    [self networkConnectionDial];
+}
+
+- (void) networkConnectionDial
+{
+    // start the network connection and dial the call
+    _m5Connect = [[M5NetworkConnection alloc] init];
+    
+    self.m5Connect.connDelegate = self;
+    
+    [self.m5Connect dialPhoneNumber:self.dialingDS.phoneToCall];
 }
 
 - (void) cancelButtonPressed:(id)sender event:(id)event
@@ -189,6 +204,15 @@
     button.tintColor = [UIColor blueColor];
     
     return button;
+}
+
+#pragma mark - DialingNetConnectionDelegate
+
+- (void) updateDialingStatus:(ConnectionStatus)status forNumber:(NSString *)destPhone
+{
+    // set connection status, reload table
+    self.dialingDS.status = status;
+    [self.tableView reloadData];
 }
 
 #pragma mark - LoginViewDelegate

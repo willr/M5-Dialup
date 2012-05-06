@@ -8,6 +8,7 @@
 
 #import "ContactBaseContainer.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @implementation ContactBaseContainer
 
@@ -51,6 +52,12 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:PhoneNumberDigitsPattern 
                                                                            options:NSRegularExpressionCaseInsensitive 
                                                                              error:&error];
+    
+    if (regex == nil && error) {
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error parsing Contact info" 
+                                                                          additionalInfo:nil 
+                                                                               withError:error];
+    }
     
     // get the result of the regEx
     NSArray *results = [regex matchesInString:phoneNumber options:0 range:NSMakeRange(0, [phoneNumber length])];

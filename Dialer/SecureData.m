@@ -39,6 +39,7 @@ static SecureData *sharedSecureData = nil;
 
 - (void) setSourcePhoneNumberValue:(NSString *)phoneNumber
 {
+    [self.sourcePhoneNumberKeychain setObject:@"M5Dialer::phoneNumber" forKey:kSecAttrAccount];
     [self.sourcePhoneNumberKeychain setObject:phoneNumber forKey:kSecValueData];
 }
 

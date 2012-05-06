@@ -83,7 +83,13 @@ extern NSString * const BoxWithCheckmarkImageTitle;
 extern NSString * const FavoritesFileName;
 
 // UserDefaults Keys
-extern NSString * const M5UrlEndPointName;
+extern NSString * const M5DialCmd;
+extern NSString * const M5AnswerCmd;
+extern NSString * const M5IgnoreCmd;
+extern NSString * const M5ReleaseCmd;
+extern NSString * const M5HoldCmd;
+extern NSString * const M5ListCallsCmd;
+extern NSString * const M5ResumeCmd;
 
 // KeyChainItem Keys
 extern NSString * const M5UserAccountName;
@@ -101,10 +107,10 @@ extern NSInteger const kPasswordTag;
 
 // table view section numbers
 enum {
-    kUsernameSection = 0,
-    kPasswordSection,
+    kPasswordSection = 0,
     kSourcePhoneNumberSection,
-    kShowCleartextSection
+    kShowCleartextSection,
+    kUsernameSection = 99,
 };
 
 enum {
@@ -138,7 +144,17 @@ extern NSString * const ErroredConnection;
 extern NSString * const ContactsReloaded;
 extern NSString * const FavoritesReloaded;
 
+// M5 get commands https strings
+extern NSString * const M5HostAddress;
+extern NSString * const M5HostPath;
 
+extern NSString * const M5DialCmdFormat;
+extern NSString * const M5AnswerCmdFormat;
+extern NSString * const M5IgnoreCmdFormat;
+extern NSString * const M5ReleaseCmdFormat;
+extern NSString * const M5ListCallsCmdFormat;
+extern NSString * const M5HoldCmdFormat;
+extern NSString * const M5ResumeCmdFormat;
 
 
 

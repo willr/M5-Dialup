@@ -13,8 +13,10 @@
 #import "LoginViewDelegate.h"
 #import "LoginInfoViewController.h"
 #import "DialingDataSource.h"
+#import "M5NetworkConnection.h"
+#import "DialingNetConnectionDelegate.h"
 
-@interface DialingViewController : UIViewController <LoginViewDelegate, UITableViewDelegate>
+@interface DialingViewController : UIViewController <LoginViewDelegate, UITableViewDelegate, DialingNetConnectionDelegate>
 {
     SecureData              *secureData;
     BOOL                    _cancelled;
@@ -25,6 +27,8 @@
     UITableView             *_tableView;
     UIButton                *_retryConnect;
     UIView                  *_retryView;
+    
+    M5NetworkConnection     *_m5Connect;
 }
 
 @property (nonatomic, retain) id<DialingViewDelegate>   delegate;
@@ -32,6 +36,7 @@
 @property (nonatomic, retain) UITableView               *tableView;
 @property (nonatomic, retain) UIButton                  *retryConnect;
 @property (nonatomic, retain) UIView                    *retryView;
+@property (nonatomic, retain) M5NetworkConnection       *m5Connect;
 
 - (void) cancelConnection;
 

@@ -81,8 +81,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tv
 {
-    // 4 sections, one for each property and one for the switch
-    return 4;
+    // 4 sections, one for each property and one for the switch, (password, source phoneNumber, switch)
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section

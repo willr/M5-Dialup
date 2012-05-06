@@ -22,4 +22,6 @@
 
 void onUncaughtException(NSException* exception);
 
+- (void) displayErrorMessage:(NSString *)title additionalInfo:(NSString *)addInfo withError:(NSError *)error;
+
 @end

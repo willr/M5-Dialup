@@ -93,4 +93,19 @@ void onUncaughtException(NSException* exception)
     NSSetUncaughtExceptionHandler(&onUncaughtException);
 }
 
+- (void) displayErrorMessage:(NSString *)title additionalInfo:(NSString *)addInfo withError:(NSError *)error
+{
+    NSString *titleString = title;
+    NSString *messageString = [error localizedDescription];
+    NSString *moreString = [error localizedFailureReason] ? [error localizedFailureReason] : addInfo;
+    // NSLocalizedString(@"Try typing the URL again.", nil);
+    messageString = [NSString stringWithFormat:@"%@. %@", messageString, moreString];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:titleString
+                                                        message:messageString delegate:self
+                                              cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
+}
+
 @end

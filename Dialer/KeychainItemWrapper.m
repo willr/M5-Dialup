@@ -301,6 +301,21 @@ Keychain API expects as a validly constructed container class.
         
         // An implicit assumption is that you can only update a single item at a time.
 		
+        
+        // enum
+        // {
+        //     errSecSuccess                = 0,       /* No error. */
+        //     errSecUnimplemented          = -4,      /* Function or operation not implemented. */
+        //     errSecParam                  = -50,     /* One or more parameters passed to a function where not valid. */
+        //     errSecAllocate               = -108,    /* Failed to allocate memory. */
+        //     errSecNotAvailable           = -25291,	/* No keychain is available. You may need to restart your computer. */
+        //     errSecDuplicateItem          = -25299,	/* The specified item already exists in the keychain. */
+        //     errSecItemNotFound           = -25300,	/* The specified item could not be found in the keychain. */
+        //     errSecInteractionNotAllowed  = -25308,	/* User interaction is not allowed. */
+        //     errSecDecode                 = -26275,  /* Unable to decode the provided data. */
+        //     errSecAuthFailed             = -25293,	/* The user name or passphrase you entered is not correct. */
+        // };
+         
         result = SecItemUpdate((CFDictionaryRef)updateItem, (CFDictionaryRef)tempCheck);
 		NSAssert( result == noErr, @"Couldn't update the Keychain Item." );
     }
