@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "AddressBookContainer.h"
 #import "PersonDataSource.h"
+#import "TestFlight.h"
 
 @implementation ContactsViewController
 
@@ -72,12 +73,31 @@
     [self reloadTableView];
 }
 
+- (UIBarButtonItem *) feedbackButtonCopy
+{
+    UIBarButtonItem *feedback = [[UIBarButtonItem alloc] initWithTitle:@"Beta Feedback" 
+                                                                      style:UIBarButtonItemStylePlain 
+                                                                     target:self 
+                                                                    action:@selector(launchFeedback:)]; 
+
+    return feedback;
+}
+
+- (void) launchFeedback:(id)source
+{
+    NSLog(@"Launching Beta Feedback");
+    
+    [TestFlight openFeedbackView];
+}
+
 #pragma mark - View lifecycle
 
 - (void)loadView
 {
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
+    
+    self.navigationItem.rightBarButtonItem = [self feedbackButtonCopy];
     
     // create the table view to show the Contacts stored on the device.
     UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];
@@ -213,11 +233,11 @@
 {
     // get the name and phone number for the row where the button was pressed
     NSDictionary *personNamePhone = [self.contacts nameAndPhoneNumberAtIndexPath:indexPath];
-    /*
-    NSString *personName = [personNamePhone objectForKey:PersonName];
-    NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
-    NSLog(@"call Person: %@ at %@", personName, phoneNumber);
-    */
+
+    // NSString *personName = [personNamePhone objectForKey:PersonName];
+    // NSString *phoneNumber = [personNamePhone objectForKey:PersonPhoneNumber];
+    // NSLog(@"call Person: %@", personNamePhone);
+
     
     // call the common method to handle starting the phone call
     [self connectWithContact:personNamePhone delegate:self];

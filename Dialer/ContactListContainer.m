@@ -63,7 +63,16 @@
     NSString *phoneType = [[phoneList allKeys] objectAtIndex:0];
     NSDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:0];
     
-    return [self namePhoneNumberAndType:phoneEntry name:[person objectForKey:PersonName] phoneType:[self getPhoneLabelForDisplay:phoneType]];
+    NSString *phoneNumberDigits = [phoneEntry objectForKey:PersonPhoneNumberDigits];
+    if (phoneNumberDigits == nil) {
+        phoneNumberDigits = [self getPhoneNumberDigitsRegex:[phoneEntry objectForKey:PersonPhoneNumber]];
+        [phoneEntry setValue:phoneNumberDigits forKey:PersonPhoneNumberDigits];
+    }
+    
+    return [self namePhoneNumberAndType:phoneEntry 
+                                   name:[person objectForKey:PersonName] 
+                              phoneType:[self getPhoneLabelForDisplay:phoneType] 
+                            phoneDigits:phoneNumberDigits];
 }
 
 // retreive the person for the specified name and phoneId

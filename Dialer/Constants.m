@@ -123,10 +123,12 @@ NSString * const FavoritesReloaded = @"FavoritesReloaded";
 // M5 get commands https strings
 // real hostAddress = https://hostedconnect.m5net.com
 // real hostPath = /bobl/bobl?
-NSString * const M5HostAddress = @"http://127.0.0.1:8000/";
-NSString * const M5HostPath = @"m5";
+NSString * const M5HostAddress = @"https://hostedconnect.m5net.com";
+NSString * const M5HostPath = @"/bobl/bobl?";
+// NSString * const M5HostAddress = @"http://127.0.0.1:8000/";
+// NSString * const M5HostPath = @"m5";
 
-NSString * const M5DialCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.dial&user=%@&password=%@&args=%@";
+NSString * const M5DialCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.dial&user=%@&password=%@&args=%@&args=";
 NSString * const M5AnswerCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.answer&user=%@&password=%@";
 NSString * const M5IgnoreCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.ignore&user=%@&password=%@";
 NSString * const M5ReleaseCmdFormat = @"￼%@%@name=org.m5.apps.v1.cti.ClickToDial.release&user=%@&password=%@";

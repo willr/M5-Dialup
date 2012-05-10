@@ -31,6 +31,9 @@
 		AF1878FD14ECD4350033A7C3 /* DialerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1878FC14ECD4350033A7C3 /* DialerTests.m */; };
 		AF18790914ECD4EE0033A7C3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */; };
 		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
+		AF20B953155B1A28008FEAE9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B952155B1A28008FEAE9 /* libTestFlight.a */; };
+		AF20B955155B1A3A008FEAE9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B954155B1A3A008FEAE9 /* libz.dylib */; };
+		AF20B95B155B421C008FEAE9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B957155B421C008FEAE9 /* libTestFlight.a */; };
 		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
 		AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF472EE4151EAC980058E7A5 /* DialingViewController.m */; };
 		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
@@ -114,6 +117,12 @@
 		AF18790614ECD4EE0033A7C3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		AF18790714ECD4EE0033A7C3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		AF18792114ECE8AB0033A7C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		AF20B952155B1A28008FEAE9 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightSDK1.0/libTestFlight.a; sourceTree = "<group>"; };
+		AF20B954155B1A3A008FEAE9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AF20B957155B421C008FEAE9 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		AF20B958155B421C008FEAE9 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		AF20B959155B421C008FEAE9 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		AF20B95A155B421C008FEAE9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		AF2EC0C514EE180D00E21302 /* PersonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonContainer.h; sourceTree = "<group>"; };
 		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
 		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
@@ -177,12 +186,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF20B955155B1A3A008FEAE9 /* libz.dylib in Frameworks */,
+				AF20B953155B1A28008FEAE9 /* libTestFlight.a in Frameworks */,
 				AFF6F59A1556288700EC790D /* CFNetwork.framework in Frameworks */,
 				AF5A0BEE1519A04400A6B3A9 /* Security.framework in Frameworks */,
 				AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */,
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
 				AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */,
 				AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */,
+				AF20B95B155B421C008FEAE9 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +218,7 @@
 		AF1878C214ECD4350033A7C3 = {
 			isa = PBXGroup;
 			children = (
+				AF20B956155B421C008FEAE9 /* TestFlightSDK1.0 */,
 				AF1878D714ECD4350033A7C3 /* Dialer */,
 				AF1878F514ECD4350033A7C3 /* DialerTests */,
 				AF1878D014ECD4350033A7C3 /* Frameworks */,
@@ -225,6 +238,8 @@
 		AF1878D014ECD4350033A7C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF20B954155B1A3A008FEAE9 /* libz.dylib */,
+				AF20B952155B1A28008FEAE9 /* libTestFlight.a */,
 				AFF6F5991556288700EC790D /* CFNetwork.framework */,
 				AF643A96153BAC620041B7D1 /* libOCMock.a */,
 				AF643A93153BAC350041B7D1 /* OCHamcrestIOS.framework */,
@@ -300,6 +315,17 @@
 				AF643AB8153CF5B00041B7D1 /* TestContactListContents.txt */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF20B956155B421C008FEAE9 /* TestFlightSDK1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				AF20B957155B421C008FEAE9 /* libTestFlight.a */,
+				AF20B958155B421C008FEAE9 /* README.txt */,
+				AF20B959155B421C008FEAE9 /* release_notes.txt */,
+				AF20B95A155B421C008FEAE9 /* TestFlight.h */,
+			);
+			path = TestFlightSDK1.0;
 			sourceTree = "<group>";
 		};
 		AF5A0BF71519B4C400A6B3A9 /* Security */ = {
@@ -651,6 +677,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -661,6 +688,7 @@
 		AF18790214ECD4350033A7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -672,6 +700,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

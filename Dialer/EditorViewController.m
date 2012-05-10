@@ -7,6 +7,7 @@
 //
 
 #import "EditorViewController.h"
+#import "TestFlight.h"
 
 @implementation EditorViewController
 
@@ -91,6 +92,8 @@
     // save edits
     NSString *text = [self.textControl text];
     _secureData(text);
+    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Editor Saved: %@", self.placeHolder]];
     
     // pop the view back to login, after we have saved
     [self.navigationController popViewControllerAnimated:YES];

@@ -9,6 +9,7 @@
 #import "ContactBaseContainer.h"
 #import "Constants.h"
 #import "AppDelegate.h"
+#import "TestFlight.h"
 
 @implementation ContactBaseContainer
 
@@ -54,6 +55,12 @@
                                                                              error:&error];
     
     if (regex == nil && error) {
+        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", 
+               PhoneNumberDigitsPattern, 
+               error.localizedDescription, 
+               error.code, 
+               error.domain);
+        
         [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error parsing Contact info" 
                                                                           additionalInfo:nil 
                                                                                withError:error];
@@ -193,7 +200,7 @@
 }
 
 // create a NSDictionary based on name and phone entry for calling out and display in table cell
-- (NSDictionary *)namePhoneNumberAndType:(NSDictionary *)phoneEntry name:(NSString *)name phoneType:(NSString *)phoneType
+- (NSDictionary *)namePhoneNumberAndType:(NSDictionary *)phoneEntry name:(NSString *)name phoneType:(NSString *)phoneType phoneDigits:(NSString *)digits
 {
     NSString *phoneNumber = [phoneEntry objectForKey:PersonPhoneNumber];
     
@@ -201,6 +208,7 @@
     return [[[NSDictionary alloc] initWithObjectsAndKeys:name, PersonName, 
              phoneNumber, PersonPhoneNumber, 
              phoneType, PersonPhoneLabel,
+             digits, PersonPhoneNumberDigits,
              nil] autorelease];
 }
 

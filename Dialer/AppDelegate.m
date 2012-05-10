@@ -10,6 +10,7 @@
 
 #import "ContactsViewController.h"
 #import "UserDefaultsContainer.h"
+#import "TestFlight.h"
 
 @implementation AppDelegate
 
@@ -27,6 +28,14 @@
 {
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // TestFlight info
+    [TestFlight takeOff:@"9889dd1ddd138bcad1babc7b017ca191_ODg4MjIyMDEyLTA1LTA5IDIwOjQyOjE1LjUzMDAxOA"];
+    
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif 
     
     // setup the application defaults the application.
     // _appDefaults = [[UserDefaultsContainer alloc] init];
@@ -86,11 +95,6 @@
 void onUncaughtException(NSException* exception)
 {
     NSLog(@"uncaught exception: %@", exception.description);
-}
-
--(void) applicationDidFinishLaunching:(UIApplication*)application
-{
-    NSSetUncaughtExceptionHandler(&onUncaughtException);
 }
 
 - (void) displayErrorMessage:(NSString *)title additionalInfo:(NSString *)addInfo withError:(NSError *)error

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// remote TestFlight log
+#define RTFLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
 // extern NSString * const MyFirstConstant; 
 
 // phone number label from contact list

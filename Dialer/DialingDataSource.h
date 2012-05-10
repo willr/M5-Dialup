@@ -13,6 +13,7 @@
 {
     NSString            *_nameToCall;
     NSString            *_phoneToCall;
+    NSString            *_phoneNumberDigits;
     NSString            *_phoneTypeToCall;
     ConnectionStatus    _status;
     NSString            *_connectionStatus;
@@ -23,6 +24,7 @@
 
 @property (nonatomic, retain) NSString          *nameToCall;
 @property (nonatomic, retain) NSString          *phoneToCall;
+@property (nonatomic, retain) NSString          *phoneNumberDigits;
 @property (nonatomic, retain) NSString          *phoneTypeToCall;
 @property (nonatomic, assign) ConnectionStatus  status;
 

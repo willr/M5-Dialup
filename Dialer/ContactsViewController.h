@@ -32,4 +32,6 @@
 @property (assign, nonatomic) UITableView               *tableView;
 @property (retain, nonatomic) id<DialingViewDelegate>   dialerDelegate;
 
+- (void) launchFeedback:(id)source;
+
 @end

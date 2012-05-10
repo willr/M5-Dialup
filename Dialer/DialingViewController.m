@@ -163,7 +163,7 @@
     
     self.m5Connect.connDelegate = self;
     
-    [self.m5Connect dialPhoneNumber:self.dialingDS.phoneToCall];
+    [self.m5Connect dialPhoneNumber:self.dialingDS.phoneNumberDigits];
 }
 
 - (void) cancelButtonPressed:(id)sender event:(id)event

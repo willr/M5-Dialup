@@ -49,7 +49,16 @@
 {
     NSMutableDictionary *phoneEntry = [self phoneEntryAtIndex:index];
     
-    return [self namePhoneNumberAndType:phoneEntry name:[self name] phoneType:[self phoneTypeAtIndex:index]];
+    NSString *phoneNumberDigits = [phoneEntry objectForKey:PersonPhoneNumberDigits];
+    if (phoneNumberDigits == nil) {
+        phoneNumberDigits = [self getPhoneNumberDigitsRegex:[phoneEntry objectForKey:PersonPhoneNumber]];
+        [phoneEntry setValue:phoneNumberDigits forKey:PersonPhoneNumberDigits];
+    }
+    
+    return [self namePhoneNumberAndType:phoneEntry 
+                                   name:[self name] 
+                              phoneType:[self phoneTypeAtIndex:index] 
+                            phoneDigits:phoneNumberDigits];
 }
 
 // phone entry for phone number in that section number

@@ -15,6 +15,7 @@
 
 @synthesize nameToCall = _nameToCall;
 @synthesize phoneToCall = _phoneToCall;
+@synthesize phoneNumberDigits = _phoneNumberDigits;
 @synthesize phoneTypeToCall = _phoneTypeToCall;
 
 @synthesize status = _status;
@@ -23,6 +24,7 @@
 {
     self.nameToCall = nil;
     self.phoneToCall = nil;
+    self.phoneNumberDigits = nil;
     self.phoneTypeToCall = nil;
     
     [super dealloc];
@@ -33,6 +35,7 @@
 {
     self.nameToCall = [phoneInfo objectForKey:PersonName];
     self.phoneToCall = [phoneInfo objectForKey:PersonPhoneNumber];
+    self.phoneNumberDigits = [phoneInfo objectForKey:PersonPhoneNumberDigits];
     self.phoneTypeToCall = [phoneInfo objectForKey:PersonPhoneLabel];
     
     // default to waiting to connect.  This should probably auto connect atsome point.

@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "SecureData.h"
 #import "AppDelegate.h"
+#import "TestFlight.h"
 
 @implementation M5NetworkConnection
 
@@ -70,6 +71,53 @@
     return result;
 }
 
+- (NSString *)getPhoneNumberDigitsRegex:(NSString *)phoneNumber
+{
+    // Setup an NSError object to catch any failures
+	NSError *error = NULL;
+    
+    // create the NSRegularExpression object and initialize it with a pattern
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:PhoneNumberDigitsPattern 
+                                                                           options:NSRegularExpressionCaseInsensitive 
+                                                                             error:&error];
+    
+    if (regex == nil && error) {
+        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", PhoneNumberDigitsPattern, 
+               error.localizedDescription, 
+               error.code, 
+               error.domain);
+
+        
+        [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error parsing Contact info" 
+                                                                          additionalInfo:nil 
+                                                                               withError:error];
+    }
+    
+    // get the result of the regEx
+    NSArray *results = [regex matchesInString:phoneNumber options:0 range:NSMakeRange(0, [phoneNumber length])];
+    
+    NSString *digits = @"";
+    if (results != nil) {
+        // iterate through the results, we pull each contiguous substring range out one at a time
+        for (NSTextCheckingResult *result in results) {
+            NSRange range = [result rangeAtIndex:0];
+            /*
+             NSLog(@"%d,%d group #%d %@", range.location, range.length, 0,
+             (range.length == 0 ? @"--" : [phoneNumber substringWithRange:range]));
+             */
+            if (range.length == 0) {
+                continue;
+            }
+            
+            // with the given range, append to the string we are building
+            digits = [digits stringByAppendingString:[phoneNumber substringWithRange:range]];
+        }
+    }
+    
+    // NSLog(@"digits: %@", digits);
+    return digits;
+}
+
 // dial a phone number and notify the delegate at each point in the call
 - (void) dialPhoneNumber:(NSString *)destPhoneNumber
 {
@@ -78,10 +126,12 @@
     
     // create the URL for the GET request
     SecureData *secure = [SecureData current];
+    NSString *secureSourcePhoneNumberDigits = [self getPhoneNumberDigitsRegex:[secure sourcePhoneNumberValue]];
+    
     NSString *dialCmd = [NSString stringWithFormat:M5DialCmdFormat, 
                          M5HostAddress, 
                          M5HostPath, 
-                         [secure sourcePhoneNumberValue], 
+                         secureSourcePhoneNumberDigits, 
                          [secure passwordValue], 
                          destPhoneNumber];
     
@@ -131,10 +181,16 @@
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     // update the connDelegate of the connectionComplete status
-    [self.connDelegate updateDialingStatus:kCompletedConnection forNumber:self.currentPhoneNumber];
+    [self.connDelegate updateDialingStatus:kErroredConnection forNumber:self.currentPhoneNumber];
     
     // dispatch back to the mainUI thread to handle the displaying of the error message
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        RTFLog(@"connectionDidFailWithError ERROR:: phoneNumber: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", 
+               self.currentPhoneNumber, 
+               error.localizedDescription, 
+               error.code, 
+               error.domain);
         
         [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error connecting to URL for phone call" 
                                                                           additionalInfo:@"Try again" 
@@ -179,7 +235,14 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     // do something with the data
-    NSLog(@"Succeeded! Received %d bytes of data",[self.receivedData length]);
+    // NSLog(@"Succeeded! Received %d bytes of data",[self.receivedData length]);
+    
+    /*
+    NSString* newStr = [[[NSString alloc] initWithData:self.receivedData
+                                              encoding:NSUTF8StringEncoding] autorelease];
+    */
+    
+    // NSLog(@"output: %@", newStr);
     
     // release the connection, and the data object
     self.connection = nil;
@@ -187,57 +250,6 @@
     
     // update the connDelegate of the connectionComplete status
     [self.connDelegate updateDialingStatus:kCompletedConnection forNumber:self.currentPhoneNumber];
-}
-
-#pragma mark - junk
-
-// this is an inital trial implementation, will be ignored.
-- (void) oldNetworkRequestTo:(CFStringRef)urlString
-{
-    // urlString = (CFStringRef)@"http://www.apple.com";
-    
-    CFStringRef url = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, urlString, NULL, NULL, kCFStringEncodingUTF8);
-    // log for now, later delete
-    NSLog(@"Connecting with dialCmd: %@", url);
-    CFURLRef connUrl = CFURLCreateWithString(kCFAllocatorDefault, url, NULL);
-    CFStringRef getVerb = CFSTR("GET");
-    CFHTTPMessageRef request = CFHTTPMessageCreateRequest(kCFAllocatorDefault, getVerb, connUrl, kCFHTTPVersion1_1);
-
-    CFReadStreamRef readStream = CFReadStreamCreateForHTTPRequest(kCFAllocatorDefault, request);
-    CFReadStreamOpen(readStream);
-    
-    CFIndex bytes;
-    int bufSize = 1024;
-    UInt8 buf[bufSize];
-    
-    do {
-        bytes = CFReadStreamRead(readStream, buf, sizeof(buf));
-        if( bytes > 0 ){
-            // NSString *responseString = [[NSString alloc] initWithBytes:buf length:bytes encoding:NSUTF8StringEncoding];
-            // NSLog(responseString); 
-        } else if( bytes < 0 ) {
-            // CFStreamError error = CFReadStreamGetError(readStream);
-            // int ii = 0;
-        }
-    } while( bytes > 0 );
-    
-    CFHTTPMessageRef response = (CFHTTPMessageRef)CFReadStreamCopyProperty(readStream, kCFStreamPropertyHTTPResponseHeader);
-    
-    CFStringRef statusLine = CFHTTPMessageCopyResponseStatusLine(response);
-    UInt32 errorCode = CFHTTPMessageGetResponseStatusCode(response);
-    
-    NSLog(@"Response: %@ -- ErrorCode: %lu", statusLine, errorCode);
-    
-    
-    if(connUrl != nil) CFRelease(connUrl);
-    if(request != nil) CFRelease(request);
-    if(response != nil) CFRelease(response);
-    if(statusLine != nil) CFRelease(statusLine);
-    
-    if(readStream != nil) CFRelease(readStream);
-    
-    request = NULL;
-    
 }
 
 @end

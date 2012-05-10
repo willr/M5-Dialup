@@ -14,4 +14,6 @@
 
 - (void) updateConnectionStatus:(ConnectionStatus)status forNumber:(NSString *)destPhoneNumber;
 
+- (NSURL *) smartURLForString:(NSString *)str;
+
 @end

@@ -9,6 +9,7 @@
 #import "FavoritePhoneContainer.h"
 #import "Constants.h"
 #import "AppDelegate.h"
+#import "TestFlight.h"
 
 @interface FavoritePhoneContainer ()
 
@@ -183,7 +184,18 @@
     NSString *phoneType = [[phoneList allKeys] objectAtIndex:0];
     NSDictionary *phoneEntry = [[phoneList allValues] objectAtIndex:0];
     
-    return [self namePhoneNumberAndType:phoneEntry name:[person objectForKey:PersonName] phoneType:[self getPhoneLabelForDisplay:phoneType]];
+    NSString *phoneNumberDigits = [phoneEntry objectForKey:PersonPhoneNumberDigits];
+    if (phoneNumberDigits == nil) {
+        phoneNumberDigits = [self getPhoneNumberDigitsRegex:[phoneEntry objectForKey:PersonPhoneNumber]];
+        [phoneEntry setValue:phoneNumberDigits forKey:PersonPhoneNumberDigits];
+    }
+    
+    // NSLog(@"phoneEntry: %@", phoneEntry);
+    
+    return [self namePhoneNumberAndType:phoneEntry 
+                                   name:[person objectForKey:PersonName] 
+                              phoneType:[self getPhoneLabelForDisplay:phoneType]
+                            phoneDigits:phoneNumberDigits];
     
 }
 
@@ -445,6 +457,15 @@
         NSLog(@"Error Code %@",error.code);    
         NSLog(@"Error Domain %@",error.domain);
         
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+        
+        RTFLog(@"LoadSavedFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %@, Error Domain: %@", 
+               filePath,
+               fileExists,
+               error.localizedDescription, 
+               error.code, 
+               error.domain);
+        
         [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error Reading Saved Contacts" 
                                                                           additionalInfo:@"Try Again" 
                                                                                withError:error];
@@ -499,13 +520,22 @@
         NSLog(@"Error Code %@",error.code);    
         NSLog(@"Error Domain %@",error.domain);
         
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+        
+        RTFLog(@"SaveFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %@, Error Domain: %@", 
+               filePath,
+               fileExists,
+               error.localizedDescription, 
+               error.code, 
+               error.domain);
+        
         [((AppDelegate *)[UIApplication sharedApplication].delegate) displayErrorMessage:@"Error Saving Contacts" 
                                                                           additionalInfo:@"Try again" 
                                                                                withError:error];
         return;
     }
     
-    NSAssert([favoritesData length] != 0, @"serialization result is empty");
+    // NSAssert([favoritesData length] != 0, @"serialization result is empty");
              
     [favoritesData writeToFile:filePath atomically:YES];
 }

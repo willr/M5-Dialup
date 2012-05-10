@@ -25,7 +25,8 @@
 
 - (NSDictionary *)namePhoneNumberAndType:(NSDictionary *)phoneEntry 
                                     name:(NSString *)name
-                               phoneType:(NSString *)phoneType;
+                               phoneType:(NSString *)phoneType
+                             phoneDigits:(NSString *)digits;
 
 - (NSMutableDictionary*) findPhoneEntryFromPerson:(NSDictionary*)person 
                                        forPhoneId:(NSNumber*)phoneId ;
