@@ -133,6 +133,8 @@
     
     // default cancelled to false, when view appears
     _cancelled = false;
+    
+    self.retryConnect.titleLabel.text = @"Call Phone Number";
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -142,6 +144,8 @@
 
 - (void) cancelConnection
 {
+    self.retryConnect.titleLabel.text = @"Retry Phone Number";
+    
     // set cancelled status, reload table
     self.dialingDS.status = kCancelledConnection;
     [self.tableView reloadData];
@@ -199,7 +203,7 @@
     [button addTarget:self 
                action:@selector(retryButtonPressed:event:)
      forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Retry Connection" forState:UIControlStateNormal];
+    [button setTitle:@"Call Phone Number" forState:UIControlStateNormal];
     button.frame = CGRectMake(80.0, 40.0, 160.0, 42.0);
     button.tintColor = [UIColor blueColor];
     
