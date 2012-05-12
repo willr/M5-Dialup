@@ -135,6 +135,18 @@
                          [secure passwordValue], 
                          destPhoneNumber];
     
+    
+    #define TESTING 1
+    #ifdef TESTING
+    NSString *dialNoPassCmd = [NSString stringWithFormat:M5DialCmdFormat, 
+                               M5HostAddress, 
+                               M5HostPath, 
+                               secureSourcePhoneNumberDigits, 
+                               destPhoneNumber];
+    
+    RTFLog(@"M5 DialCmd: %@", dialNoPassCmd);
+    #endif 
+    
     [self networkRequestTo:dialCmd];
 
 }

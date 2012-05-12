@@ -33,7 +33,12 @@
 		AF18792214ECE8AB0033A7C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF18792114ECE8AB0033A7C3 /* AddressBook.framework */; };
 		AF20B953155B1A28008FEAE9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B952155B1A28008FEAE9 /* libTestFlight.a */; };
 		AF20B955155B1A3A008FEAE9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B954155B1A3A008FEAE9 /* libz.dylib */; };
-		AF20B95B155B421C008FEAE9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF20B957155B421C008FEAE9 /* libTestFlight.a */; };
+		AF20B9D8155DEBB6008FEAE9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9D0155DE793008FEAE9 /* Default.png */; };
+		AF20B9D9155DEBBB008FEAE9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9D2155DE79B008FEAE9 /* Default@2x.png */; };
+		AF20B9DB155DF162008FEAE9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9D6155DEAE8008FEAE9 /* Icon@2x.png */; };
+		AF20B9DC155DF18A008FEAE9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9D4155DEAD7008FEAE9 /* Icon.png */; };
+		AF20B9DF155DF9F7008FEAE9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9DE155DF9F7008FEAE9 /* Icon-72.png */; };
+		AF20B9E1155DF9FB008FEAE9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9E0155DF9FA008FEAE9 /* Icon-72@2x.png */; };
 		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
 		AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF472EE4151EAC980058E7A5 /* DialingViewController.m */; };
 		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
@@ -98,7 +103,7 @@
 		AF01ADF315502DFD00802DFC /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		AF01ADF91550951400802DFC /* DialingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingDataSource.h; sourceTree = "<group>"; };
 		AF01ADFA1550951400802DFC /* DialingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingDataSource.m; sourceTree = "<group>"; };
-		AF1878CD14ECD4350033A7C3 /* Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dialer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF1878CD14ECD4350033A7C3 /* M5 Dialer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "M5 Dialer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1878D114ECD4350033A7C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AF1878D314ECD4350033A7C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AF1878D514ECD4350033A7C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +128,14 @@
 		AF20B958155B421C008FEAE9 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		AF20B959155B421C008FEAE9 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		AF20B95A155B421C008FEAE9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		AF20B9CF155DD7B3008FEAE9 /* Dialer copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Dialer copy-Info.plist"; path = "/Users/willr/Development/objc/Dialer/Dialer copy-Info.plist"; sourceTree = "<absolute>"; };
+		AF20B9D0155DE793008FEAE9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		AF20B9D2155DE79B008FEAE9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		AF20B9D4155DEAD7008FEAE9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		AF20B9D6155DEAE8008FEAE9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		AF20B9DD155DF2F1008FEAE9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		AF20B9DE155DF9F7008FEAE9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
+		AF20B9E0155DF9FA008FEAE9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
 		AF2EC0C514EE180D00E21302 /* PersonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonContainer.h; sourceTree = "<group>"; };
 		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
 		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
@@ -194,7 +207,6 @@
 				AF1878D214ECD4350033A7C3 /* UIKit.framework in Frameworks */,
 				AF1878D414ECD4350033A7C3 /* Foundation.framework in Frameworks */,
 				AF1878D614ECD4350033A7C3 /* CoreGraphics.framework in Frameworks */,
-				AF20B95B155B421C008FEAE9 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,13 +235,14 @@
 				AF1878F514ECD4350033A7C3 /* DialerTests */,
 				AF1878D014ECD4350033A7C3 /* Frameworks */,
 				AF1878CE14ECD4350033A7C3 /* Products */,
+				AF20B9CF155DD7B3008FEAE9 /* Dialer copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		AF1878CE14ECD4350033A7C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF1878CD14ECD4350033A7C3 /* Dialer.app */,
+				AF1878CD14ECD4350033A7C3 /* M5 Dialer.app */,
 				AF1878EE14ECD4350033A7C3 /* DialerTests.octest */,
 			);
 			name = Products;
@@ -262,7 +275,7 @@
 				AF5A0BF71519B4C400A6B3A9 /* Security */,
 				AF8D29C214EEDD56006FF1C9 /* Containers */,
 				AF8D29C114EEDD2A006FF1C9 /* Delegates */,
-				AF8D29B414EE59D6006FF1C9 /* images */,
+				AF20B9E2155DFD89008FEAE9 /* Images */,
 				AF1878E014ECD4350033A7C3 /* AppDelegate.h */,
 				AF1878E114ECD4350033A7C3 /* AppDelegate.m */,
 				AF5A0B911516B48000A6B3A9 /* Constants.h */,
@@ -275,6 +288,7 @@
 		AF1878D814ECD4350033A7C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AF20B9DD155DF2F1008FEAE9 /* TestFlight.h */,
 				AF1878D914ECD4350033A7C3 /* Dialer-Info.plist */,
 				AF1878DA14ECD4350033A7C3 /* InfoPlist.strings */,
 				AF1878DD14ECD4350033A7C3 /* main.m */,
@@ -328,6 +342,21 @@
 			path = TestFlightSDK1.0;
 			sourceTree = "<group>";
 		};
+		AF20B9E2155DFD89008FEAE9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AF20B9D6155DEAE8008FEAE9 /* Icon@2x.png */,
+				AF20B9D4155DEAD7008FEAE9 /* Icon.png */,
+				AF20B9D2155DE79B008FEAE9 /* Default@2x.png */,
+				AF20B9D0155DE793008FEAE9 /* Default.png */,
+				AF20B9E0155DF9FA008FEAE9 /* Icon-72@2x.png */,
+				AF20B9DE155DF9F7008FEAE9 /* Icon-72.png */,
+				AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */,
+				AF8D29B514EE59E7006FF1C9 /* box.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		AF5A0BF71519B4C400A6B3A9 /* Security */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,15 +408,6 @@
 			name = Controls;
 			sourceTree = "<group>";
 		};
-		AF8D29B414EE59D6006FF1C9 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */,
-				AF8D29B514EE59E7006FF1C9 /* box.png */,
-			);
-			name = images;
-			sourceTree = "<group>";
-		};
 		AF8D29C114EEDD2A006FF1C9 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,9 +457,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF1878CC14ECD4350033A7C3 /* Dialer */ = {
+		AF1878CC14ECD4350033A7C3 /* M5 Dialer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "Dialer" */;
+			buildConfigurationList = AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "M5 Dialer" */;
 			buildPhases = (
 				AF1878C914ECD4350033A7C3 /* Sources */,
 				AF1878CA14ECD4350033A7C3 /* Frameworks */,
@@ -449,9 +469,9 @@
 			);
 			dependencies = (
 			);
-			name = Dialer;
+			name = "M5 Dialer";
 			productName = Dialer;
-			productReference = AF1878CD14ECD4350033A7C3 /* Dialer.app */;
+			productReference = AF1878CD14ECD4350033A7C3 /* M5 Dialer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AF1878ED14ECD4350033A7C3 /* DialerTests */ = {
@@ -494,7 +514,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF1878CC14ECD4350033A7C3 /* Dialer */,
+				AF1878CC14ECD4350033A7C3 /* M5 Dialer */,
 				AF1878ED14ECD4350033A7C3 /* DialerTests */,
 			);
 		};
@@ -508,6 +528,12 @@
 				AF1878DC14ECD4350033A7C3 /* InfoPlist.strings in Resources */,
 				AF8D29B714EE59E7006FF1C9 /* box.png in Resources */,
 				AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */,
+				AF20B9D8155DEBB6008FEAE9 /* Default.png in Resources */,
+				AF20B9D9155DEBBB008FEAE9 /* Default@2x.png in Resources */,
+				AF20B9DB155DF162008FEAE9 /* Icon@2x.png in Resources */,
+				AF20B9DC155DF18A008FEAE9 /* Icon.png in Resources */,
+				AF20B9DF155DF9F7008FEAE9 /* Icon-72.png in Resources */,
+				AF20B9E1155DF9FB008FEAE9 /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +621,7 @@
 /* Begin PBXTargetDependency section */
 		AF1878F414ECD4350033A7C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AF1878CC14ECD4350033A7C3 /* Dialer */;
+			target = AF1878CC14ECD4350033A7C3 /* M5 Dialer */;
 			targetProxy = AF1878F314ECD4350033A7C3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -676,6 +702,7 @@
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
@@ -685,6 +712,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8F9A010B-9C7D-4C0D-BFC7-17258F79AEF2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -703,6 +731,7 @@
 				GCC_PREFIX_HEADER = "Dialer/Dialer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Dialer/Dialer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/usr/lib\"",
@@ -710,8 +739,9 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B4E312D4-F943-4C7A-A294-7DF1000F6E7A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B4E312D4-F943-4C7A-A294-7DF1000F6E7A";
+				PROVISIONING_PROFILE = "A8D45420-3296-4BE6-820E-D809EBA35DD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A8D45420-3296-4BE6-820E-D809EBA35DD6";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -788,7 +818,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "Dialer" */ = {
+		AF18790014ECD4350033A7C3 /* Build configuration list for PBXNativeTarget "M5 Dialer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF18790114ECD4350033A7C3 /* Debug */,

@@ -9,37 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Default.png</string>
-		<string>Default@2x.png</string>
-		<string>Default.png</string>
-		<string>Default@2x.png</string>
-		<string>Default.png</string>
-		<string>Default@2x.png</string>
-		<string>Icon@2x.png</string>
-		<string>Icon.png</string>
-		<string>Icon-72.png</string>
-		<string>Icon-72@2x.png</string>
-	</array>
-	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>Default.png</string>
-				<string>Default@2x.png</string>
-				<string>Default.png</string>
-				<string>Default@2x.png</string>
-				<string>Default.png</string>
-				<string>Default@2x.png</string>
-				<string>Icon@2x.png</string>
-				<string>Icon.png</string>
-				<string>Icon-72.png</string>
-				<string>Icon-72@2x.png</string>
-			</array>
-		</dict>
-	</dict>
+	<array/>
 	<key>CFBundleIdentifier</key>
 	<string>com.codespantech.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -49,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.01</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.02</string>
+	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -63,6 +33,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

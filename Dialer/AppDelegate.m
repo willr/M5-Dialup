@@ -30,6 +30,7 @@
     // Override point for customization after application launch.
     
     // TestFlight info
+    //                    9889dd1ddd138bcad1babc7b017ca191_ODg4MjIyMDEyLTA1LTA5IDIwOjQyOjE1LjUzMDAxOA
     [TestFlight takeOff:@"9889dd1ddd138bcad1babc7b017ca191_ODg4MjIyMDEyLTA1LTA5IDIwOjQyOjE1LjUzMDAxOA"];
     
 #define TESTING 1

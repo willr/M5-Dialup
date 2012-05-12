@@ -100,7 +100,7 @@
     // phone number for the favorite in index specified by sections
     // set the data for the cell, phone number as the cell contents, section header as the phoneTypes
     UILabel *txtView = (UILabel *)[cell.contentView viewWithTag:phoneNumberTag];
-    NSDictionary *namePhone = [self.person nameAndPhoneNumberAtIndex:indexPath.section];
+    NSDictionary *namePhone = [self.person nameAndPhoneNumberAtIndex:indexPath.section] ;
     txtView.text = [namePhone objectForKey:PersonPhoneNumber];
     
     // find the toggleImageControl underneath the subview

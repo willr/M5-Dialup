@@ -24,7 +24,7 @@ NSString * const IPhonePhoneLabelSubStringCheck = @"iphone";
 NSString * const CallButtonTitle = @"Call";
 NSString * const FavoriteButtonTitle = @"Favorite";
 
-// person dictionary info
+// person dictionary info 
 // name of person
 NSString * const PersonName = @"name";
 // listing of phones for that person
@@ -129,6 +129,7 @@ NSString * const M5HostPath = @"/bobl/bobl?";
 // NSString * const M5HostPath = @"m5";
 
 NSString * const M5DialCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.dial&user=%@&password=%@&args=%@&args=";
+NSString * const M5DialCmdNoPassFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.dial&user=%@&password=####&args=%@&args=";
 NSString * const M5AnswerCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.answer&user=%@&password=%@";
 NSString * const M5IgnoreCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.ignore&user=%@&password=%@";
 NSString * const M5ReleaseCmdFormat = @"￼%@%@name=org.m5.apps.v1.cti.ClickToDial.release&user=%@&password=%@";

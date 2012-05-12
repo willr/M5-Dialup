@@ -20,7 +20,7 @@ extern NSString * const HomePhoneLabel;
 extern NSString * const HomePhoneLabelSubStringCheck;
 extern NSString * const MobilePhoneLabel;
 extern NSString * const MobilePhoneLabelSubStringCheck;
-extern NSString * const IPhonePhoneLabel;
+extern NSString * const IPhonePhoneLabel; 
 extern NSString * const IPhonePhoneLabelSubStringCheck;
 
 // Button Titles
@@ -152,6 +152,7 @@ extern NSString * const M5HostAddress;
 extern NSString * const M5HostPath;
 
 extern NSString * const M5DialCmdFormat;
+extern NSString * const M5DialCmdNoPassFormat;
 extern NSString * const M5AnswerCmdFormat;
 extern NSString * const M5IgnoreCmdFormat;
 extern NSString * const M5ReleaseCmdFormat;
