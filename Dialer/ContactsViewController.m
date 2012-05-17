@@ -97,7 +97,9 @@
     // Get application frame dimensions (basically screen - status bar)
     CGRect appRect = [[UIScreen mainScreen] applicationFrame];
     
-    self.navigationItem.rightBarButtonItem = [self feedbackButtonCopy];
+    // since TestFlight feedback is not showing up, after talking with them, they say it is a capacity issue
+    // we wont display it as we dont want to people to think they are providing feedback when I dont see it.
+    // self.navigationItem.rightBarButtonItem = [self feedbackButtonCopy];
     
     // create the table view to show the Contacts stored on the device.
     UITableView *table = [[UITableView alloc] initWithFrame:appRect style:UITableViewStyleGrouped];

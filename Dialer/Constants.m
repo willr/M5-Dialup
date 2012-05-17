@@ -108,6 +108,7 @@ NSInteger const kPasswordTag = 2;
 NSString * const CallingName = @"Calling";
 NSString * const PhoneNumberCalling = @"Phone Number";
 NSString * const ProgressIndicator = @"Progress";
+NSString * const StatusMessage = @"Response Message";
 
 // Connection Statuses
 NSString * const WaitingToConnect =@"Waiting to Connect";
@@ -137,8 +138,13 @@ NSString * const M5ListCallsCmdFormat = @"￼￼%@%@name=org.m5.apps.v1.cti.Clic
 NSString * const M5HoldCmdFormat = @"%@%@name=org.m5.apps.v1.cti.ClickToDial.hold&user=%@&password=%@";
 NSString * const M5ResumeCmdFormat = @"￼￼%@%@name=org.m5.apps.v1.cti.ClickToDial.resume&user=%@&password=%@";
 
-
-
+/*
+// M5 return message XML element Names
+NSString * const M5ErrorCountXmlElement = @"ErrorCount";
+NSString * const M5MajorErrorCodeXmlElement = @"MajorErrorCount";
+NSString * const M5MinorErrorCodeXmlElement = @"MinorErrorCount";
+NSString * const M5MessageXmlElement = @"Message";
+*/
 
 
 

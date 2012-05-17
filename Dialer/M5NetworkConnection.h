@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DialingNetConnectionDelegate.h"
+#import "M5ResponseMessage.h"
 
 @interface M5NetworkConnection : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {

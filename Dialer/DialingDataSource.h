@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "Constants.h"
+#import "M5ResponseMessage.h"
 
 @interface DialingDataSource : NSObject <UITableViewDataSource>
 {
@@ -19,7 +21,7 @@
     NSString            *_connectionStatus;
     BOOL                _statusModified;
     
-    
+    M5ResponseMessage  *_responseMessage;
 }
 
 @property (nonatomic, retain) NSString          *nameToCall;
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) NSString          *phoneNumberDigits;
 @property (nonatomic, retain) NSString          *phoneTypeToCall;
 @property (nonatomic, assign) ConnectionStatus  status;
+@property (nonatomic, retain) M5ResponseMessage *responseMessage;
 
 
 

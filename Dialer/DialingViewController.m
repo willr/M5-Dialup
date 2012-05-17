@@ -10,6 +10,7 @@
 #import "LoginInfoViewController.h"
 #import "Constants.h"
 #import "M5NetworkConnection.h"
+#import "DialingDetailsViewController.h"
 
 @interface DialingViewController ()
 
@@ -23,6 +24,7 @@
 @synthesize retryConnect = _retryConnect;
 @synthesize retryView = _retryView;
 @synthesize m5Connect = _m5Connect;
+@synthesize m5Response = _m5Response;
 
 - (id)init
 {
@@ -43,6 +45,7 @@
     self.retryConnect = nil;
     self.retryView = nil;
     self.m5Connect = nil;
+    self.m5Response = nil;
     
     [super dealloc];
 }
@@ -133,6 +136,7 @@
     
     // default cancelled to false, when view appears
     _cancelled = false;
+    self.
     
     self.retryConnect.titleLabel.text = @"Call Phone Number";
 }
@@ -204,19 +208,45 @@
                action:@selector(retryButtonPressed:event:)
      forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Call Phone Number" forState:UIControlStateNormal];
-    button.frame = CGRectMake(80.0, 40.0, 160.0, 42.0);
+    button.frame = CGRectMake(80.0, 15.0, 160.0, 42.0);
     button.tintColor = [UIColor blueColor];
     
     return button;
 }
 
+// show field contents
+- (void) showResponseMessageContents
+{
+    if (self.m5Response == nil) {
+        return;
+    }
+    
+    // load the DailingDetailViewController, pushing onto the NavController stack
+    DialingDetailsViewController *dialingDetails = [[DialingDetailsViewController alloc] init];
+    
+    dialingDetails.textValue = self.m5Response.apiMessage;
+    dialingDetails.headerTxt = @"Response Message";
+    
+    [self.navigationController pushViewController:dialingDetails animated:YES];
+    
+    [dialingDetails release];
+}
+
 #pragma mark - DialingNetConnectionDelegate
 
-- (void) updateDialingStatus:(ConnectionStatus)status forNumber:(NSString *)destPhone
+- (void) updateDialingStatus:(ConnectionStatus)status responseMessage:(M5ResponseMessage *)response forNumber:(NSString *)destPhone
 {
     // set connection status, reload table
     self.dialingDS.status = status;
+    self.dialingDS.responseMessage = response;
+    self.m5Response = response;
+    
     [self.tableView reloadData];
+}
+
+- (void) updateDialingStatus:(ConnectionStatus)status forNumber:(NSString *)destPhone
+{
+    [self updateDialingStatus:status responseMessage:nil forNumber:destPhone];
 }
 
 #pragma mark - LoginViewDelegate
@@ -238,21 +268,35 @@
     // cause the cell to deselect animated, nicely when released
     // [tableView deselectRowAtIndexPath:indexPath animated:YES];
  
+    /*
     if (indexPath.section == kRetryConnection) {
         [self startConnection];
     }
+     */
+    
+    if (indexPath.section == kResponseMessage) {
+        if (self.m5Response == nil) {
+            return;
+        }
+        [self showResponseMessageContents];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     // add enough height for the button below
-    return (section == kProgressIndictor) ? 82.0 : 0.0;
+    return (section == kResponseMessage) ? 42.0 : 0.0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     // not sure this is right, but the important thing, is dont add a view unless it is the progressIndicator sections
-    if (section != kProgressIndictor) {
+    if (section != kResponseMessage) {
         return [self.tableView tableFooterView];
     }
     
@@ -260,7 +304,7 @@
     if (self.retryView == nil) {
         UIButton *retryButton = [self createRetryButton];
         // create a view to house the button, without this, it only seemed to default to full width of screen
-        UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(80.0, 40.0, 160.0, 42.0)];
+        UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(80.0, 15.0, 160.0, 42.0)];
         [buttonView addSubview:retryButton];
         
         // save for later, or next pass through heres

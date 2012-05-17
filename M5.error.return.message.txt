@@ -1,0 +1,13 @@
+ <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<org.m5.api.v1.Response xmlns:m5="http://www.m5net.com/org/m5/data/v2/cti" xmlns:csta="http://www.ecma-international.org/standards/ecma-323/csta/ed5">
+    <ErrorCount>1</ErrorCount>
+    <Errors>
+        <item xsi:type="org.m5.api.v1.Error" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <MajorErrorCode>5</MajorErrorCode>
+            <Message>Authorization or authentication failed</Message>
+            <MinorErrorCode>0</MinorErrorCode>
+        </item>
+    </Errors>
+    <Id>90621</Id>
+</org.m5.api.v1.Response>
+

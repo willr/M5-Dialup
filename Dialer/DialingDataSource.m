@@ -17,6 +17,7 @@
 @synthesize phoneToCall = _phoneToCall;
 @synthesize phoneNumberDigits = _phoneNumberDigits;
 @synthesize phoneTypeToCall = _phoneTypeToCall;
+@synthesize responseMessage = _responseMessage;
 
 @synthesize status = _status;
 
@@ -85,12 +86,17 @@
         case kPhoneNumberCalling:
             title = PhoneNumberCalling;
             break;
+            /*
         // dont this we use this now
         case kRetryConnection:
             title = @"";
             break;
+             */
         case kProgressIndictor:
             title = ProgressIndicator;
+            break;
+        case kResponseMessage:
+            title = StatusMessage;
             break;
     }
     
@@ -105,7 +111,7 @@
     // 3 sections, Name to call, phone number called with phoneType, progress indicator
     
     // only 3 sections for now, we are skipping the kRetryConnection as we are just putting the button in the footer of ProgressIndicator
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section
@@ -125,8 +131,9 @@
     // hmm guess I should make constants... 
     static NSString *kCallingNameIdentifier =	@"CallingNameCell";
 	static NSString *kPhoneNumberCallingIdentifier =	@"PhoneNumberCallingCell";
-	static NSString *kBlankIdentifier =	@"BlankCell";
+	// static NSString *kBlankIdentifier =	@"BlankCell";
     static NSString *kProgressIndictorIdentifier =	@"ProgressCell";
+    static NSString *kResponseMessageIdentifier =	@"ResponseMessageCell";
 	
 	UITableViewCell *cell = nil;	
 	switch (indexPath.section)
@@ -158,6 +165,7 @@
             
             break;
         }
+            /*
         case kRetryConnection:
         {
             // all this is ignored for now, as we setup the button in the footer.  delete in the future
@@ -198,6 +206,7 @@
             
             break;
         }
+             */
         case kProgressIndictor:
         {
             cell = [aTableView dequeueReusableCellWithIdentifier:kProgressIndictorIdentifier];
@@ -208,6 +217,20 @@
             
             // translate the status enum into string representation
             cell.textLabel.text = [self convertConnectionStatus:self.status];
+            _statusModified = false;
+            
+            break;
+        }
+        case kResponseMessage:
+        {
+            cell = [aTableView dequeueReusableCellWithIdentifier:kResponseMessageIdentifier];
+			if (cell == nil)
+			{
+				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResponseMessageIdentifier] autorelease];
+			}
+            
+            // translate the status enum into string representation
+            cell.textLabel.text = self.responseMessage.apiMessage;
             _statusModified = false;
             
             break;

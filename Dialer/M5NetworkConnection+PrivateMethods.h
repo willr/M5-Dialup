@@ -12,7 +12,7 @@
 
 - (void) networkRequestTo:(NSString *)url;
 
-- (void) updateConnectionStatus:(ConnectionStatus)status forNumber:(NSString *)destPhoneNumber;
+- (void) updateConnectionStatus:(ConnectionStatus)status responseMessage:(NSString *)response forNumber:(NSString *)destPhoneNumber;
 
 - (NSURL *) smartURLForString:(NSString *)str;
 

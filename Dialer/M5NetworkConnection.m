@@ -1,4 +1,4 @@
-//
+ //
 //  M5NetworkConnection.m
 //  Dialer
 //
@@ -13,6 +13,7 @@
 #import "SecureData.h"
 #import "AppDelegate.h"
 #import "TestFlight.h"
+#import "M5ResponseMessage.h"
 
 @implementation M5NetworkConnection
 
@@ -82,7 +83,7 @@
                                                                              error:&error];
     
     if (regex == nil && error) {
-        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", PhoneNumberDigitsPattern, 
+        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %d, Error Domain: %@", PhoneNumberDigitsPattern, 
                error.localizedDescription, 
                error.code, 
                error.domain);
@@ -138,7 +139,7 @@
     
     #define TESTING 1
     #ifdef TESTING
-    NSString *dialNoPassCmd = [NSString stringWithFormat:M5DialCmdFormat, 
+    NSString *dialNoPassCmd = [NSString stringWithFormat:M5DialCmdNoPassFormat, 
                                M5HostAddress, 
                                M5HostPath, 
                                secureSourcePhoneNumberDigits, 
@@ -151,13 +152,13 @@
 
 }
 
-- (void) updateConnectionStatus:(ConnectionStatus)status forNumber:destPhoneNumber
+- (void) updateConnectionStatus:(ConnectionStatus)status responseMessage:(M5ResponseMessage *)response forNumber:(NSString *)destPhoneNumber
 {
     // dispatch back to the mainUI thread to handle the updating of the status
     dispatch_async(dispatch_get_main_queue(), ^{
         
         // update the connDelegate of the connecting status
-        [self.connDelegate updateDialingStatus:status forNumber:destPhoneNumber];
+        [self.connDelegate updateDialingStatus:status responseMessage:response forNumber:destPhoneNumber];
         
     });
 }
@@ -175,7 +176,7 @@
                                          timeoutInterval:60.0];
     
     // update the connDelegate of the connecting status
-    [self updateConnectionStatus:kConnectingConnection forNumber:self.currentPhoneNumber];
+    [self updateConnectionStatus:kConnectingConnection responseMessage:nil forNumber:self.currentPhoneNumber];
     
     // create the connection for the request
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -198,7 +199,7 @@
     // dispatch back to the mainUI thread to handle the displaying of the error message
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        RTFLog(@"connectionDidFailWithError ERROR:: phoneNumber: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", 
+        RTFLog(@"connectionDidFailWithError ERROR:: phoneNumber: %@, Error Desc: %@, Error Code: %d, Error Domain: %@", 
                self.currentPhoneNumber, 
                error.localizedDescription, 
                error.code, 
@@ -236,6 +237,12 @@
     
     // update the connDelegate of the connectionComplete status
     [self.connDelegate updateDialingStatus:kConnectingConnection forNumber:self.currentPhoneNumber];
+    
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    NSInteger statusCode = [httpResponse statusCode];
+    
+    NSLog(@"response status code: %d", statusCode);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -247,21 +254,21 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     // do something with the data
-    // NSLog(@"Succeeded! Received %d bytes of data",[self.receivedData length]);
+    NSLog(@"Succeeded! Received %d bytes of data",[self.receivedData length]);
     
-    /*
     NSString* newStr = [[[NSString alloc] initWithData:self.receivedData
                                               encoding:NSUTF8StringEncoding] autorelease];
-    */
     
-    // NSLog(@"output: %@", newStr);
+    NSLog(@"output: %@", newStr);
+    
+    M5ResponseMessage *msg = [M5ResponseMessage parseReturnMessage:self.receivedData];
+    
+    // update the connDelegate of the connectionComplete status
+    [self.connDelegate updateDialingStatus:kCompletedConnection responseMessage:msg forNumber:self.currentPhoneNumber];
     
     // release the connection, and the data object
     self.connection = nil;
     self.receivedData = nil;
-    
-    // update the connDelegate of the connectionComplete status
-    [self.connDelegate updateDialingStatus:kCompletedConnection forNumber:self.currentPhoneNumber];
 }
 
 @end

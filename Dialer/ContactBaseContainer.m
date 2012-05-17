@@ -55,7 +55,7 @@
                                                                              error:&error];
     
     if (regex == nil && error) {
-        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %@, Error Domain: %@", 
+        RTFLog(@"getPhoneNumberDigitsRegex ERROR:: Pattern: %@, Error Desc: %@, Error Code: %d, Error Domain: %@", 
                PhoneNumberDigitsPattern, 
                error.localizedDescription, 
                error.code, 

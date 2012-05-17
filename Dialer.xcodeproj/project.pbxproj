@@ -39,6 +39,7 @@
 		AF20B9DC155DF18A008FEAE9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9D4155DEAD7008FEAE9 /* Icon.png */; };
 		AF20B9DF155DF9F7008FEAE9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9DE155DF9F7008FEAE9 /* Icon-72.png */; };
 		AF20B9E1155DF9FB008FEAE9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF20B9E0155DF9FA008FEAE9 /* Icon-72@2x.png */; };
+		AF20B9E51561A109008FEAE9 /* M5ResponseMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF20B9E41561A109008FEAE9 /* M5ResponseMessage.m */; };
 		AF2EC0C714EE180D00E21302 /* PersonContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2EC0C614EE180D00E21302 /* PersonContainer.m */; };
 		AF472EE5151EAC980058E7A5 /* DialingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF472EE4151EAC980058E7A5 /* DialingViewController.m */; };
 		AF5A0B931516B48000A6B3A9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A0B921516B48000A6B3A9 /* Constants.m */; };
@@ -68,6 +69,7 @@
 		AF8D29B314EE574A006FF1C9 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8D29B014EE574A006FF1C9 /* PersonViewController.m */; };
 		AF8D29B714EE59E7006FF1C9 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B514EE59E7006FF1C9 /* box.png */; };
 		AF8D29BA14EE5A33006FF1C9 /* WithCheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */; };
+		AFAE7E021564816D00AD1BA1 /* DialingDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAE7E011564816D00AD1BA1 /* DialingDetailsViewController.m */; };
 		AFF6F5941556092F00EC790D /* M5NetworkConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF6F5931556092F00EC790D /* M5NetworkConnection.m */; };
 		AFF6F59A1556288700EC790D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF6F5991556288700EC790D /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
@@ -136,6 +138,8 @@
 		AF20B9DD155DF2F1008FEAE9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		AF20B9DE155DF9F7008FEAE9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		AF20B9E0155DF9FA008FEAE9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
+		AF20B9E31561A109008FEAE9 /* M5ResponseMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M5ResponseMessage.h; sourceTree = "<group>"; };
+		AF20B9E41561A109008FEAE9 /* M5ResponseMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M5ResponseMessage.m; sourceTree = "<group>"; };
 		AF2EC0C514EE180D00E21302 /* PersonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonContainer.h; sourceTree = "<group>"; };
 		AF2EC0C614EE180D00E21302 /* PersonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonContainer.m; sourceTree = "<group>"; };
 		AF2EC0CC14EE2CC700E21302 /* CallButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallButtonDelegate.h; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 		AF8D29B914EE5A33006FF1C9 /* WithCheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WithCheckMark.png; sourceTree = "<group>"; };
 		AF8D29BB14EED78C006FF1C9 /* ToggleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleDelegate.h; sourceTree = "<group>"; };
 		AF8D29BE14EEDD17006FF1C9 /* FavoritesListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListDelegate.h; sourceTree = "<group>"; };
+		AFAE7E001564816D00AD1BA1 /* DialingDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialingDetailsViewController.h; sourceTree = "<group>"; };
+		AFAE7E011564816D00AD1BA1 /* DialingDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialingDetailsViewController.m; sourceTree = "<group>"; };
 		AFF6F5921556092F00EC790D /* M5NetworkConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M5NetworkConnection.h; sourceTree = "<group>"; };
 		AFF6F5931556092F00EC790D /* M5NetworkConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M5NetworkConnection.m; sourceTree = "<group>"; };
 		AFF6F5951556105E00EC790D /* DialingNetConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialingNetConnectionDelegate.h; sourceTree = "<group>"; };
@@ -395,6 +401,8 @@
 				AF472EE4151EAC980058E7A5 /* DialingViewController.m */,
 				AF01ADF91550951400802DFC /* DialingDataSource.h */,
 				AF01ADFA1550951400802DFC /* DialingDataSource.m */,
+				AFAE7E001564816D00AD1BA1 /* DialingDetailsViewController.h */,
+				AFAE7E011564816D00AD1BA1 /* DialingDetailsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -450,6 +458,8 @@
 				AFF6F5921556092F00EC790D /* M5NetworkConnection.h */,
 				AFF6F5931556092F00EC790D /* M5NetworkConnection.m */,
 				AFF6F596155620BC00EC790D /* M5NetworkConnection+PrivateMethods.h */,
+				AF20B9E31561A109008FEAE9 /* M5ResponseMessage.h */,
+				AF20B9E41561A109008FEAE9 /* M5ResponseMessage.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -594,6 +604,8 @@
 				AF01ADF415502DFE00802DFC /* EditorViewController.m in Sources */,
 				AF01ADFB1550951400802DFC /* DialingDataSource.m in Sources */,
 				AFF6F5941556092F00EC790D /* M5NetworkConnection.m in Sources */,
+				AF20B9E51561A109008FEAE9 /* M5ResponseMessage.m in Sources */,
+				AFAE7E021564816D00AD1BA1 /* DialingDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

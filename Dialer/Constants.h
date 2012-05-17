@@ -120,7 +120,8 @@ enum {
     kCallingName = 0,
     kPhoneNumberCalling,
     kProgressIndictor,
-    kRetryConnection
+    // kRetryConnection,
+    kResponseMessage
 };
 
 typedef enum {
@@ -135,6 +136,7 @@ typedef enum {
 extern NSString * const CallingName;
 extern NSString * const PhoneNumberCalling;
 extern NSString * const ProgressIndicator;
+extern NSString * const StatusMessage;
 
 // Connection Statuses
 extern NSString * const WaitingToConnect;
@@ -160,9 +162,13 @@ extern NSString * const M5ListCallsCmdFormat;
 extern NSString * const M5HoldCmdFormat;
 extern NSString * const M5ResumeCmdFormat;
 
-
-
-
+/*
+// M5 return message XML element Names
+extern NSString * const M5ErrorCountXmlElement;
+extern NSString * const M5MajorErrorCodeXmlElement;
+extern NSString * const M5MinorErrorCodeXmlElement;
+extern NSString * const M5MessageXmlElement;
+*/
 
 
 

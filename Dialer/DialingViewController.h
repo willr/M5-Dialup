@@ -14,6 +14,7 @@
 #import "LoginInfoViewController.h"
 #import "DialingDataSource.h"
 #import "M5NetworkConnection.h"
+#import "M5ResponseMessage.h"
 #import "DialingNetConnectionDelegate.h"
 
 @interface DialingViewController : UIViewController <LoginViewDelegate, UITableViewDelegate, DialingNetConnectionDelegate>
@@ -29,6 +30,7 @@
     UIView                  *_retryView;
     
     M5NetworkConnection     *_m5Connect;
+    M5ResponseMessage       *_m5Response;
 }
 
 @property (nonatomic, retain) id<DialingViewDelegate>   delegate;
@@ -37,6 +39,7 @@
 @property (nonatomic, retain) UIButton                  *retryConnect;
 @property (nonatomic, retain) UIView                    *retryView;
 @property (nonatomic, retain) M5NetworkConnection       *m5Connect;
+@property (nonatomic, retain) M5ResponseMessage         *m5Response;
 
 - (void) cancelConnection;
 

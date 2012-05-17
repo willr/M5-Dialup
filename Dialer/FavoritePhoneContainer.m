@@ -454,12 +454,12 @@
     
     if (serializedContactList == nil && error) {
         NSLog(@"Error Descr %@",error.localizedDescription);
-        NSLog(@"Error Code %@",error.code);    
+        NSLog(@"Error Code %d",error.code);    
         NSLog(@"Error Domain %@",error.domain);
         
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
         
-        RTFLog(@"LoadSavedFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %@, Error Domain: %@", 
+        RTFLog(@"LoadSavedFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %d, Error Domain: %@", 
                filePath,
                fileExists,
                error.localizedDescription, 
@@ -517,12 +517,12 @@
                                                                         error:&error];
     if (favoritesData == nil && error) {
         NSLog(@"Error Descr %@",error.localizedDescription);
-        NSLog(@"Error Code %@",error.code);    
+        NSLog(@"Error Code %d",error.code);    
         NSLog(@"Error Domain %@",error.domain);
         
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
         
-        RTFLog(@"SaveFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %@, Error Domain: %@", 
+        RTFLog(@"SaveFavorites Path: %@, Exists: %@, ERROR:: Error Desc: %@, Error Code: %d, Error Domain: %@", 
                filePath,
                fileExists,
                error.localizedDescription, 
