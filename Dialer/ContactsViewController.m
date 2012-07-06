@@ -73,6 +73,7 @@
     [self reloadTableView];
 }
 
+/*
 - (UIBarButtonItem *) feedbackButtonCopy
 {
     UIBarButtonItem *feedback = [[UIBarButtonItem alloc] initWithTitle:@"Beta Feedback" 
@@ -82,7 +83,7 @@
 
     return feedback;
 }
-
+*/
 - (void) launchFeedback:(id)source
 {
     NSLog(@"Launching Beta Feedback");

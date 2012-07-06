@@ -407,7 +407,7 @@
         // NSLog(@"loadSavedFavorites::On async thread");
         
         // here actually load the favorites, potientially expensive
-        NSMutableArray *newFavorites = [[NSMutableArray alloc] init];
+        NSMutableArray *newFavorites = [[[NSMutableArray alloc] init] autorelease];
         [self internalLoadSavedFavorites:contactLookup favorites:newFavorites];
         
         NSLog(@"newFavorites: %d", [newFavorites count]);

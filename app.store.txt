@@ -1,0 +1,3 @@
+Requires the customer have a M5 Networks account and configured desk phone.
+
+Allows the user to choose from the contacts on the phone and initiate a call from the configured desk phone to the contact phone number.

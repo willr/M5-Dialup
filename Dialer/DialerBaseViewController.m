@@ -18,7 +18,7 @@
     // get all the touches currently being received
     NSSet *touches = [event allTouches];
     
-    NSIndexPath *indexPath;
+    NSIndexPath *indexPath = NULL;
     // as this is a set, check to see if we only have one touch then handle it
     if ([touches count] < 2) {
         UITouch *touch = [touches anyObject];

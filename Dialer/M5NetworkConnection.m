@@ -52,6 +52,7 @@
             NSString *trimmedNoLocStr = [NSString stringWithFormat:@"http://%@", trimmedStr];
             CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)trimmedNoLocStr, NULL, NULL, kCFStringEncodingUTF8);
             result = [NSURL URLWithString:(NSString *)urlString];
+            CFRelease(urlString);
         } else {
             scheme = [trimmedStr substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
             assert(scheme != nil);
@@ -61,6 +62,7 @@
                 // result = [NSURL URLWithString:trimmedStr];
                 CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)trimmedStr, NULL, NULL, kCFStringEncodingUTF8);
                 result = [NSURL URLWithString:(NSString *)urlString];
+                CFRelease(urlString);
                 
             } else {
                 // It looks like this is some unsupported URL scheme.
@@ -179,7 +181,7 @@
     [self updateConnectionStatus:kConnectingConnection responseMessage:nil forNumber:self.currentPhoneNumber];
     
     // create the connection for the request
-    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    self.connection = [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
     
     if (self.connection != nil) {
         // create the nsdata to hold the receivedData

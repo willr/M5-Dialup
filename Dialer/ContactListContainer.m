@@ -126,9 +126,9 @@
 {
     // get the firstname and lastname
     NSString *firstName, *lastName;
-    firstName = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonFirstNameProperty];
+    firstName = (NSString *)[[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonFirstNameProperty] autorelease];
     firstName = [firstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    lastName  = (NSString *)[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonLastNameProperty];
+    lastName  = (NSString *)[[self.abContainer copyRecordValueAsString:ref propertyId:kABPersonLastNameProperty] autorelease];
     lastName = [lastName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     bool firstEmpty = false;
@@ -160,8 +160,8 @@
     
     
     
-    CFRelease(firstName);
-    CFRelease(lastName);
+    // CFRelease(firstName);
+    // CFRelease(lastName);
     
     return true;
 }

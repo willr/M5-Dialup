@@ -114,7 +114,7 @@ didStartElement:(NSString *)elementName
             self.minorErrorCode = [self.currentContents intValue];
             break;
         case kApiMessage:
-            self.apiMessage = [self.currentContents copy];
+            self.apiMessage = [[self.currentContents copy] autorelease];
             break;
         default:
             NSAssert(@"Invalid Enum value: %@", [[NSNumber numberWithInt:self.currentElement] stringValue]);
@@ -131,7 +131,7 @@ didStartElement:(NSString *)elementName
 {
     if (!self.currentContents) {
         // currentStringValue is an NSMutableString instance variable
-        self.currentContents = [[NSMutableString alloc] initWithCapacity:50];
+        self.currentContents = [[[NSMutableString alloc] initWithCapacity:50] autorelease];
     }
     switch (self.currentElement) {
         case kErrorCount:
